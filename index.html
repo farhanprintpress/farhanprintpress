@@ -1,4 +1,43 @@
-<!DOCTYPE html>
+<script type="text/javascript">
+        var gk_isXlsx = false;
+        var gk_xlsxFileLookup = {};
+        var gk_fileData = {};
+        function filledCell(cell) {
+          return cell !== '' && cell != null;
+        }
+        function loadFileData(filename) {
+        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
+            try {
+                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
+                var firstSheetName = workbook.SheetNames[0];
+                var worksheet = workbook.Sheets[firstSheetName];
+
+                // Convert sheet to JSON to filter blank rows
+                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
+                // Filter out blank rows (rows where all cells are empty, null, or undefined)
+                var filteredData = jsonData.filter(row => row.some(filledCell));
+
+                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
+                var headerRowIndex = filteredData.findIndex((row, index) =>
+                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
+                );
+                // Fallback
+                if (headerRowIndex === -1 || headerRowIndex > 25) {
+                  headerRowIndex = 0;
+                }
+
+                // Convert filtered JSON back to CSV
+                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
+                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
+                return csv;
+            } catch (e) {
+                console.error(e);
+                return "";
+            }
+        }
+        return gk_fileData[filename] || "";
+        }
+        </script><!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -382,57 +421,62 @@
                         <li><strong>Size:</strong> Standard (5 x 7 inches) or custom dimensions</li>
                         <li><strong>Minimum Order:</strong> 50 units</li>
                     </ul>
-                    <p>Select your preferences below, and upload your design file if available. Contact us to finalize your order and get a tailored quote.</p>
-                    <div class="modal-options">
-                        <div class="modal-option">
-                            <label for="paper-quality-wedding">Paper Quality</label>
-                            <select id="paper-quality-wedding">
-                                <option value="matte">300 GSM Matte</option>
-                                <option value="glossy">300 GSM Glossy</option>
-                                <option value="textured">Premium Textured Paper</option>
-                            </select>
+                    <p>Select your preferences below, and upload your design file if available.</p>
+                    <form action="https://formsubmit.co/your-email@example.com" method="POST" enctype="multipart/form-data">
+                        <input type="hidden" name="_subject" value="New Wedding Card Printing Request">
+                        <input type="hidden" name="_next" value="https://yourusername.github.io/farhan-printing-press/thank-you.html">
+                        <input type="hidden" name="service" value="Wedding Card Printing">
+                        <div class="modal-options">
+                            <div class="modal-option">
+                                <label for="paper-quality-wedding">Paper Quality</label>
+                                <select id="paper-quality-wedding" name="paper_quality">
+                                    <option value="matte">300 GSM Matte</option>
+                                    <option value="glossy">300 GSM Glossy</option>
+                                    <option value="textured">Premium Textured Paper</option>
+                                </select>
+                            </div>
+                            <div class="modal-option">
+                                <label for="design-style-wedding">Design Style</label>
+                                <select id="design-style-wedding" name="design_style">
+                                    <option value="traditional">Traditional</option>
+                                    <option value="modern">Modern</option>
+                                    <option value="minimalist">Minimalist</option>
+                                    <option value="custom">Custom Design</option>
+                                </select>
+                            </div>
+                            <div class="modal-option">
+                                <label for="finishing-wedding">Finishing</label>
+                                <select id="finishing-wedding" name="finishing">
+                                    <option value="none">No Finish</option>
+                                    <option value="embossing">Embossing</option>
+                                    <option value="foil">Foil Stamping</option>
+                                    <option value="uv">UV Coating</option>
+                                </select>
+                            </div>
+                            <div class="modal-option">
+                                <label for="orientation-wedding">Orientation</label>
+                                <select id="orientation-wedding" name="orientation">
+                                    <option value="portrait">Portrait</option>
+                                    <option value="landscape">Landscape</option>
+                                </select>
+                            </div>
+                            <div class="modal-option">
+                                <label for="quantity-wedding">Quantity</label>
+                                <select id="quantity-wedding" name="quantity">
+                                    <option value="50">50</option>
+                                    <option value="100">100</option>
+                                    <option value="200">200</option>
+                                    <option value="500">500</option>
+                                </select>
+                            </div>
                         </div>
-                        <div class="modal-option">
-                            <label for="design-style-wedding">Design Style</label>
-                            <select id="design-style-wedding">
-                                <option value="traditional">Traditional</option>
-                                <option value="modern">Modern</option>
-                                <option value="minimalist">Minimalist</option>
-                                <option value="custom">Custom Design</option>
-                            </select>
+                        <div class="upload-section">
+                            <label for="design-upload-wedding">Upload Your Design (Optional)</label>
+                            <input type="file" id="design-upload-wedding" name="design_file" accept=".pdf,.jpg,.png">
+                            <p id="upload-feedback-wedding">No file selected</p>
                         </div>
-                        <div class="modal-option">
-                            <label for="finishing-wedding">Finishing</label>
-                            <select id="finishing-wedding">
-                                <option value="none">No Finish</option>
-                                <option value="embossing">Embossing</option>
-                                <option value="foil">Foil Stamping</option>
-                                <option value="uv">UV Coating</option>
-                            </select>
-                        </div>
-                        <div class="modal-option">
-                            <label for="orientation-wedding">Orientation</label>
-                            <select id="orientation-wedding">
-                                <option value="portrait">Portrait</option>
-                                <option value="landscape">Landscape</option>
-                            </select>
-                        </div>
-                        <div class="modal-option">
-                            <label for="quantity-wedding">Quantity</label>
-                            <select id="quantity-wedding">
-                                <option value="50">50</option>
-                                <option value="100">100</option>
-                                <option value="200">200</option>
-                                <option value="500">500</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="upload-section">
-                        <label for="design-upload-wedding">Upload Your Design (Optional)</label>
-                        <input type="file" id="design-upload-wedding" accept=".pdf,.jpg,.png">
-                        <p id="upload-feedback-wedding">No file selected</p>
-                    </div>
-                    <button class="submit-btn" onclick="submitRequest('wedding')">Submit Request</button>
+                        <button type="submit" class="submit-btn">Submit Request</button>
+                    </form>
                     <div id="confirmation-message-wedding" style="display: none;"></div>
                 `
             },
@@ -444,53 +488,58 @@
                         <li><strong>Size:</strong> 3.5 x 2 inches</li>
                         <li><strong>Minimum Order:</strong> 100 units</li>
                     </ul>
-                    <p>Select your preferences below, and upload your design file if available. Contact us to finalize your order and get a tailored quote.</p>
-                    <div class="modal-options">
-                        <div class="modal-option">
-                            <label for="paper-quality-visiting">Paper Quality</label>
-                            <select id="paper-quality-visiting">
-                                <option value="matte">300 GSM Matte</option>
-                                <option value="glossy">300 GSM Glossy</option>
-                            </select>
+                    <p>Select your preferences below, and upload your design file if available.</p>
+                    <form action="https://formsubmit.co/your-email@example.com" method="POST" enctype="multipart/form-data">
+                        <input type="hidden" name="_subject" value="New Visiting Card Request">
+                        <input type="hidden" name="_next" value="https://yourusername.github.io/farhan-printing-press/thank-you.html">
+                        <input type="hidden" name="service" value="Visiting Card">
+                        <div class="modal-options">
+                            <div class="modal-option">
+                                <label for="paper-quality-visiting">Paper Quality</label>
+                                <select id="paper-quality-visiting" name="paper_quality">
+                                    <option value="matte">300 GSM Matte</option>
+                                    <option value="glossy">300 GSM Glossy</option>
+                                </select>
+                            </div>
+                            <div class="modal-option">
+                                <label for="finishing-visiting">Lamination</label>
+                                <select id="finishing-visiting" name="finishing">
+                                    <option value="none">No Finish</option>
+                                    <option value="matte">Matte Lamination</option>
+                                    <option value="glossy">Glossy Lamination</option>
+                                </select>
+                            </div>
+                            <div class="modal-option">
+                                <label for="orientation-visiting">Orientation</label>
+                                <select id="orientation-visiting" name="orientation">
+                                    <option value="landscape">Landscape</option>
+                                    <option value="portrait">Portrait</option>
+                                </select>
+                            </div>
+                            <div class="modal-option">
+                                <label for="printing-location-visiting">Printing Location</label>
+                                <select id="printing-location-visiting" name="printing_location">
+                                    <option value="front">Front</option>
+                                    <option value="both">Both Sides</option>
+                                </select>
+                            </div>
+                            <div class="modal-option">
+                                <label for="quantity-visiting">Quantity</label>
+                                <select id="quantity-visiting" name="quantity">
+                                    <option value="100">100</option>
+                                    <option value="200">200</option>
+                                    <option value="500">500</option>
+                                    <option value="1000">1000</option>
+                                </select>
+                            </div>
                         </div>
-                        <div class="modal-option">
-                            <label for="finishing-visiting">Lamination</label>
-                            <select id="finishing-visiting">
-                                <option value="none">No Finish</option>
-                                <option value="matte">Matte Lamination</option>
-                                <option value="glossy">Glossy Lamination</option>
-                            </select>
+                        <div class="upload-section">
+                            <label for="design-upload-visiting">Upload Your Design (Optional)</label>
+                            <input type="file" id="design-upload-visiting" name="design_file" accept=".pdf,.jpg,.png">
+                            <p id="upload-feedback-visiting">No file selected</p>
                         </div>
-                        <div class="modal-option">
-                            <label for="orientation-visiting">Orientation</label>
-                            <select id="orientation-visiting">
-                                <option value="landscape">Landscape</option>
-                                <option value="portrait">Portrait</option>
-                            </select>
-                        </div>
-                        <div class="modal-option">
-                            <label for="printing-location-visiting">Printing Location</label>
-                            <select id="printing-location-visiting">
-                                <option value="front">Front</option>
-                                <option value="both">Both Sides</option>
-                            </select>
-                        </div>
-                        <div class="modal-option">
-                            <label for="quantity-visiting">Quantity</label>
-                            <select id="quantity-visiting">
-                                <option value="100">100</option>
-                                <option value="200">200</option>
-                                <option value="500">500</option>
-                                <option value="1000">1000</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="upload-section">
-                        <label for="design-upload-visiting">Upload Your Design (Optional)</label>
-                        <input type="file" id="design-upload-visiting" accept=".pdf,.jpg,.png">
-                        <p id="upload-feedback-visiting">No file selected</p>
-                    </div>
-                    <button class="submit-btn" onclick="submitRequest('visiting')">Submit Request</button>
+                        <button type="submit" class="submit-btn">Submit Request</button>
+                    </form>
                     <div id="confirmation-message-visiting" style="display: none;"></div>
                 `
             },
@@ -502,46 +551,51 @@
                         <li><strong>Size:</strong> Custom dimensions (specify in your request)</li>
                         <li><strong>Minimum Order:</strong> 1 unit</li>
                     </ul>
-                    <p>Select your preferences below, and upload your design file if available. Contact us to finalize your order and get a tailored quote.</p>
-                    <div class="modal-options">
-                        <div class="modal-option">
-                            <label for="material-flex">Material</label>
-                            <select id="material-flex">
-                                <option value="standard">Standard Vinyl</option>
-                                <option value="premium">Premium Vinyl</option>
-                            </select>
+                    <p>Select your preferences below, and upload your design file if available.</p>
+                    <form action="https://formsubmit.co/your-email@example.com" method="POST" enctype="multipart/form-data">
+                        <input type="hidden" name="_subject" value="New Flex Printing Request">
+                        <input type="hidden" name="_next" value="https://yourusername.github.io/farhan-printing-press/thank-you.html">
+                        <input type="hidden" name="service" value="Flex Printing">
+                        <div class="modal-options">
+                            <div class="modal-option">
+                                <label for="material-flex">Material</label>
+                                <select id="material-flex" name="material">
+                                    <option value="standard">Standard Vinyl</option>
+                                    <option value="premium">Premium Vinyl</option>
+                                </select>
+                            </div>
+                            <div class="modal-option">
+                                <label for="finishing-flex">Finishing</label>
+                                <select id="finishing-flex" name="finishing">
+                                    <option value="none">No Finish</option>
+                                    <option value="matte">Matte Lamination</option>
+                                    <option value="glossy">Glossy Lamination</option>
+                                </select>
+                            </div>
+                            <div class="modal-option">
+                                <label for="orientation-flex">Orientation</label>
+                                <select id="orientation-flex" name="orientation">
+                                    <option value="landscape">Landscape</option>
+                                    <option value="portrait">Portrait</option>
+                                </select>
+                            </div>
+                            <div class="modal-option">
+                                <label for="quantity-flex">Quantity</label>
+                                <select id="quantity-flex" name="quantity">
+                                    <option value="1">1</option>
+                                    <option value="5">5</option>
+                                    <option value="10">10</option>
+                                    <option value="20">20</option>
+                                </select>
+                            </div>
                         </div>
-                        <div class="modal-option">
-                            <label for="finishing-flex">Finishing</label>
-                            <select id="finishing-flex">
-                                <option value="none">No Finish</option>
-                                <option value="matte">Matte Lamination</option>
-                                <option value="glossy">Glossy Lamination</option>
-                            </select>
+                        <div class="upload-section">
+                            <label for="design-upload-flex">Upload Your Design (Optional)</label>
+                            <input type="file" id="design-upload-flex" name="design_file" accept=".pdf,.jpg,.png">
+                            <p id="upload-feedback-flex">No file selected</p>
                         </div>
-                        <div class="modal-option">
-                            <label for="orientation-flex">Orientation</label>
-                            <select id="orientation-flex">
-                                <option value="landscape">Landscape</option>
-                                <option value="portrait">Portrait</option>
-                            </select>
-                        </div>
-                        <div class="modal-option">
-                            <label for="quantity-flex">Quantity</label>
-                            <select id="quantity-flex">
-                                <option value="1">1</option>
-                                <option value="5">5</option>
-                                <option value="10">10</option>
-                                <option value="20">20</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="upload-section">
-                        <label for="design-upload-flex">Upload Your Design (Optional)</label>
-                        <input type="file" id="design-upload-flex" accept=".pdf,.jpg,.png">
-                        <p id="upload-feedback-flex">No file selected</p>
-                    </div>
-                    <button class="submit-btn" onclick="submitRequest('flex')">Submit Request</button>
+                        <button type="submit" class="submit-btn">Submit Request</button>
+                    </form>
                     <div id="confirmation-message-flex" style="display: none;"></div>
                 `
             },
@@ -553,54 +607,59 @@
                         <li><strong>Size:</strong> A4, A5, or custom dimensions</li>
                         <li><strong>Minimum Order:</strong> 10 units</li>
                     </ul>
-                    <p>Select your preferences below, and upload your design file if available. Contact us to finalize your order and get a tailored quote.</p>
-                    <div class="modal-options">
-                        <div class="modal-option">
-                            <label for="paper-quality-digital">Paper Quality</label>
-                            <select id="paper-quality-digital">
-                                <option value="matte">80 GSM Matte</option>
-                                <option value="glossy">100 GSM Glossy</option>
-                                <option value="premium">Premium 120 GSM</option>
-                            </select>
+                    <p>Select your preferences below, and upload your design file if available.</p>
+                    <form action="https://formsubmit.co/your-email@example.com" method="POST" enctype="multipart/form-data">
+                        <input type="hidden" name="_subject" value="New Digital Printing Request">
+                        <input type="hidden" name="_next" value="https://yourusername.github.io/farhan-printing-press/thank-you.html">
+                        <input type="hidden" name="service" value="Digital Printing">
+                        <div class="modal-options">
+                            <div class="modal-option">
+                                <label for="paper-quality-digital">Paper Quality</label>
+                                <select id="paper-quality-digital" name="paper_quality">
+                                    <option value="matte">80 GSM Matte</option>
+                                    <option value="glossy">100 GSM Glossy</option>
+                                    <option value="premium">Premium 120 GSM</option>
+                                </select>
+                            </div>
+                            <div class="modal-option">
+                                <label for="finishing-digital">Finishing</label>
+                                <select id="finishing-digital" name="finishing">
+                                    <option value="none">No Finish</option>
+                                    <option value="matte">Matte Lamination</option>
+                                    <option value="glossy">Glossy Lamination</option>
+                                </select>
+                            </div>
+                            <div class="modal-option">
+                                <label for="orientation-digital">Orientation</label>
+                                <select id="orientation-digital" name="orientation">
+                                    <option value="portrait">Portrait</option>
+                                    <option value="landscape">Landscape</option>
+                                </select>
+                            </div>
+                            <div class="modal-option">
+                                <label for="printing-location-digital">Printing Location</label>
+                                <select id="printing-location-digital" name="printing_location">
+                                    <option value="front">Front</option>
+                                    <option value="both">Both Sides</option>
+                                </select>
+                            </div>
+                            <div class="modal-option">
+                                <label for="quantity-digital">Quantity</label>
+                                <select id="quantity-digital" name="quantity">
+                                    <option value="10">10</option>
+                                    <option value="50">50</option>
+                                    <option value="100">100</option>
+                                    <option value="200">200</option>
+                                </select>
+                            </div>
                         </div>
-                        <div class="modal-option">
-                            <label for="finishing-digital">Finishing</label>
-                            <select id="finishing-digital">
-                                <option value="none">No Finish</option>
-                                <option value="matte">Matte Lamination</option>
-                                <option value="glossy">Glossy Lamination</option>
-                            </select>
+                        <div class="upload-section">
+                            <label for="design-upload-digital">Upload Your Design (Optional)</label>
+                            <input type="file" id="design-upload-digital" name="design_file" accept=".pdf,.jpg,.png">
+                            <p id="upload-feedback-digital">No file selected</p>
                         </div>
-                        <div class="modal-option">
-                            <label for="orientation-digital">Orientation</label>
-                            <select id="orientation-digital">
-                                <option value="portrait">Portrait</option>
-                                <option value="landscape">Landscape</option>
-                            </select>
-                        </div>
-                        <div class="modal-option">
-                            <label for="printing-location-digital">Printing Location</label>
-                            <select id="printing-location-digital">
-                                <option value="front">Front</option>
-                                <option value="both">Both Sides</option>
-                            </select>
-                        </div>
-                        <div class="modal-option">
-                            <label for="quantity-digital">Quantity</label>
-                            <select id="quantity-digital">
-                                <option value="10">10</option>
-                                <option value="50">50</option>
-                                <option value="100">100</option>
-                                <option value="200">200</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="upload-section">
-                        <label for="design-upload-digital">Upload Your Design (Optional)</label>
-                        <input type="file" id="design-upload-digital" accept=".pdf,.jpg,.png">
-                        <p id="upload-feedback-digital">No file selected</p>
-                    </div>
-                    <button class="submit-btn" onclick="submitRequest('digital')">Submit Request</button>
+                        <button type="submit" class="submit-btn">Submit Request</button>
+                    </form>
                     <div id="confirmation-message-digital" style="display: none;"></div>
                 `
             },
@@ -612,45 +671,50 @@
                         <li><strong>Size:</strong> A5 or custom dimensions</li>
                         <li><strong>Minimum Order:</strong> 5 books (50 sheets per book)</li>
                     </ul>
-                    <p>Select your preferences below, and upload your design file if available. Contact us to finalize your order and get a tailored quote.</p>
-                    <div class="modal-options">
-                        <div class="modal-option">
-                            <label for="paper-quality-bill">Paper Quality</label>
-                            <select id="paper-quality-bill">
-                                <option value="standard">70 GSM Standard</option>
-                                <option value="premium">80 GSM Premium</option>
-                            </select>
+                    <p>Select your preferences below, and upload your design file if available.</p>
+                    <form action="https://formsubmit.co/your-email@example.com" method="POST" enctype="multipart/form-data">
+                        <input type="hidden" name="_subject" value="New Bill Book Printing Request">
+                        <input type="hidden" name="_next" value="https://yourusername.github.io/farhan-printing-press/thank-you.html">
+                        <input type="hidden" name="service" value="Bill Book Printing">
+                        <div class="modal-options">
+                            <div class="modal-option">
+                                <label for="paper-quality-bill">Paper Quality</label>
+                                <select id="paper-quality-bill" name="paper_quality">
+                                    <option value="standard">70 GSM Standard</option>
+                                    <option value="premium">80 GSM Premium</option>
+                                </select>
+                            </div>
+                            <div class="modal-option">
+                                <label for="binding-bill">Binding</label>
+                                <select id="binding-bill" name="binding">
+                                    <option value="gum">Gum Binding</option>
+                                    <option value="staple">Staple Binding</option>
+                                </select>
+                            </div>
+                            <div class="modal-option">
+                                <label for="orientation-bill">Orientation</label>
+                                <select id="orientation-bill" name="orientation">
+                                    <option value="portrait">Portrait</option>
+                                    <option value="landscape">Landscape</option>
+                                </select>
+                            </div>
+                            <div class="modal-option">
+                                <label for="quantity-bill">Quantity (Books)</label>
+                                <select id="quantity-bill" name="quantity">
+                                    <option value="5">5</option>
+                                    <option value="10">10</option>
+                                    <option value="20">20</option>
+                                    <option value="50">50</option>
+                                </select>
+                            </div>
                         </div>
-                        <div class="modal-option">
-                            <label for="binding-bill">Binding</label>
-                            <select id="binding-bill">
-                                <option value="gum">Gum Binding</option>
-                                <option value="staple">Staple Binding</option>
-                            </select>
+                        <div class="upload-section">
+                            <label for="design-upload-bill">Upload Your Design (Optional)</label>
+                            <input type="file" id="design-upload-bill" name="design_file" accept=".pdf,.jpg,.png">
+                            <p id="upload-feedback-bill">No file selected</p>
                         </div>
-                        <div class="modal-option">
-                            <label for="orientation-bill">Orientation</label>
-                            <select id="orientation-bill">
-                                <option value="portrait">Portrait</option>
-                                <option value="landscape">Landscape</option>
-                            </select>
-                        </div>
-                        <div class="modal-option">
-                            <label for="quantity-bill">Quantity (Books)</label>
-                            <select id="quantity-bill">
-                                <option value="5">5</option>
-                                <option value="10">10</option>
-                                <option value="20">20</option>
-                                <option value="50">50</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="upload-section">
-                        <label for="design-upload-bill">Upload Your Design (Optional)</label>
-                        <input type="file" id="design-upload-bill" accept=".pdf,.jpg,.png">
-                        <p id="upload-feedback-bill">No file selected</p>
-                    </div>
-                    <button class="submit-btn" onclick="submitRequest('bill')">Submit Request</button>
+                        <button type="submit" class="submit-btn">Submit Request</button>
+                    </form>
                     <div id="confirmation-message-bill" style="display: none;"></div>
                 `
             },
@@ -662,45 +726,50 @@
                         <li><strong>Size:</strong> A4 or custom dimensions</li>
                         <li><strong>Minimum Order:</strong> 100 sheets</li>
                     </ul>
-                    <p>Select your preferences below, and upload your design file if available. Contact us to finalize your order and get a tailored quote.</p>
-                    <div class="modal-options">
-                        <div class="modal-option">
-                            <label for="paper-quality-letter">Paper Quality</label>
-                            <select id="paper-quality-letter">
-                                <option value="standard">80 GSM Standard</option>
-                                <option value="premium">100 GSM Premium</option>
-                            </select>
+                    <p>Select your preferences below, and upload your design file if available.</p>
+                    <form action="https://formsubmit.co/your-email@example.com" method="POST" enctype="multipart/form-data">
+                        <input type="hidden" name="_subject" value="New Letter Pad Printing Request">
+                        <input type="hidden" name="_next" value="https://yourusername.github.io/farhan-printing-press/thank-you.html">
+                        <input type="hidden" name="service" value="Letter Pad Printing">
+                        <div class="modal-options">
+                            <div class="modal-option">
+                                <label for="paper-quality-letter">Paper Quality</label>
+                                <select id="paper-quality-letter" name="paper_quality">
+                                    <option value="standard">80 GSM Standard</option>
+                                    <option value="premium">100 GSM Premium</option>
+                                </select>
+                            </div>
+                            <div class="modal-option">
+                                <label for="orientation-letter">Orientation</label>
+                                <select id="orientation-letter" name="orientation">
+                                    <option value="portrait">Portrait</option>
+                                    <option value="landscape">Landscape</option>
+                                </select>
+                            </div>
+                            <div class="modal-option">
+                                <label for="printing-location-letter">Printing Location</label>
+                                <select id="printing-location-letter" name="printing_location">
+                                    <option value="header">Header Only</option>
+                                    <option value="header-footer">Header and Footer</option>
+                                </select>
+                            </div>
+                            <div class="modal-option">
+                                <label for="quantity-letter">Quantity (Sheets)</label>
+                                <select id="quantity-letter" name="quantity">
+                                    <option value="100">100</option>
+                                    <option value="200">200</option>
+                                    <option value="500">500</option>
+                                    <option value="1000">1000</option>
+                                </select>
+                            </div>
                         </div>
-                        <div class="modal-option">
-                            <label for="orientation-letter">Orientation</label>
-                            <select id="orientation-letter">
-                                <option value="portrait">Portrait</option>
-                                <option value="landscape">Landscape</option>
-                            </select>
+                        <div class="upload-section">
+                            <label for="design-upload-letter">Upload Your Design (Optional)</label>
+                            <input type="file" id="design-upload-letter" name="design_file" accept=".pdf,.jpg,.png">
+                            <p id="upload-feedback-letter">No file selected</p>
                         </div>
-                        <div class="modal-option">
-                            <label for="printing-location-letter">Printing Location</label>
-                            <select id="printing-location-letter">
-                                <option value="header">Header Only</option>
-                                <option value="header-footer">Header and Footer</option>
-                            </select>
-                        </div>
-                        <div class="modal-option">
-                            <label for="quantity-letter">Quantity (Sheets)</label>
-                            <select id="quantity-letter">
-                                <option value="100">100</option>
-                                <option value="200">200</option>
-                                <option value="500">500</option>
-                                <option value="1000">1000</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="upload-section">
-                        <label for="design-upload-letter">Upload Your Design (Optional)</label>
-                        <input type="file" id="design-upload-letter" accept=".pdf,.jpg,.png">
-                        <p id="upload-feedback-letter">No file selected</p>
-                    </div>
-                    <button class="submit-btn" onclick="submitRequest('letter')">Submit Request</button>
+                        <button type="submit" class="submit-btn">Submit Request</button>
+                    </form>
                     <div id="confirmation-message-letter" style="display: none;"></div>
                 `
             }
@@ -725,145 +794,16 @@
 
         function closeModal() {
             modal.style.display = 'none';
-            // Reset file input, feedback, and confirmation message for all services
+            // Reset file input and feedback for all services
             const servicesList = ['wedding', 'visiting', 'flex', 'digital', 'bill', 'letter'];
             servicesList.forEach(service => {
                 const fileInput = document.getElementById(`design-upload-${service}`);
                 const uploadFeedback = document.getElementById(`upload-feedback-${service}`);
-                const confirmationMessage = document.getElementById(`confirmation-message-${service}`);
                 if (fileInput && uploadFeedback) {
                     fileInput.value = '';
                     uploadFeedback.textContent = 'No file selected';
                 }
-                if (confirmationMessage) {
-                    confirmationMessage.style.display = 'none';
-                    confirmationMessage.innerHTML = '';
-                }
             });
-        }
-
-        function submitRequest(service) {
-            let selections = {};
-            let labels = {};
-
-            // Define options and labels for each service
-            if (service === 'wedding') {
-                selections = {
-                    paperQuality: document.getElementById(`paper-quality-${service}`).value,
-                    designStyle: document.getElementById(`design-style-${service}`).value,
-                    finishing: document.getElementById(`finishing-${service}`).value,
-                    orientation: document.getElementById(`orientation-${service}`).value,
-                    quantity: document.getElementById(`quantity-${service}`).value
-                };
-                labels = {
-                    paperQuality: 'Paper Quality',
-                    designStyle: 'Design Style',
-                    finishing: 'Finishing',
-                    orientation: 'Orientation',
-                    quantity: 'Quantity'
-                };
-            } else if (service === 'visiting') {
-                selections = {
-                    paperQuality: document.getElementById(`paper-quality-${service}`).value,
-                    finishing: document.getElementById(`finishing-${service}`).value,
-                    orientation: document.getElementById(`orientation-${service}`).value,
-                    printingLocation: document.getElementById(`printing-location-${service}`).value,
-                    quantity: document.getElementById(`quantity-${service}`).value
-                };
-                labels = {
-                    paperQuality: 'Paper Quality',
-                    finishing: 'Lamination',
-                    orientation: 'Orientation',
-                    printingLocation: 'Printing Location',
-                    quantity: 'Quantity'
-                };
-            } else if (service === 'flex') {
-                selections = {
-                    material: document.getElementById(`material-${service}`).value,
-                    finishing: document.getElementById(`finishing-${service}`).value,
-                    orientation: document.getElementById(`orientation-${service}`).value,
-                    quantity: document.getElementById(`quantity-${service}`).value
-                };
-                labels = {
-                    material: 'Material',
-                    finishing: 'Finishing',
-                    orientation: 'Orientation',
-                    quantity: 'Quantity'
-                };
-            } else if (service === 'digital') {
-                selections = {
-                    paperQuality: document.getElementById(`paper-quality-${service}`).value,
-                    finishing: document.getElementById(`finishing-${service}`).value,
-                    orientation: document.getElementById(`orientation-${service}`).value,
-                    printingLocation: document.getElementById(`printing-location-${service}`).value,
-                    quantity: document.getElementById(`quantity-${service}`).value
-                };
-                labels = {
-                    paperQuality: 'Paper Quality',
-                    finishing: 'Finishing',
-                    orientation: 'Orientation',
-                    printingLocation: 'Printing Location',
-                    quantity: 'Quantity'
-                };
-            } else if (service === 'bill') {
-                selections = {
-                    paperQuality: document.getElementById(`paper-quality-${service}`).value,
-                    binding: document.getElementById(`binding-${service}`).value,
-                    orientation: document.getElementById(`orientation-${service}`).value,
-                    quantity: document.getElementById(`quantity-${service}`).value
-                };
-                labels = {
-                    paperQuality: 'Paper Quality',
-                    binding: 'Binding',
-                    orientation: 'Orientation',
-                    quantity: 'Quantity (Books)'
-                };
-            } else if (service === 'letter') {
-                selections = {
-                    paperQuality: document.getElementById(`paper-quality-${service}`).value,
-                    orientation: document.getElementById(`orientation-${service}`).value,
-                    printingLocation: document.getElementById(`printing-location-${service}`).value,
-                    quantity: document.getElementById(`quantity-${service}`).value
-                };
-                labels = {
-                    paperQuality: 'Paper Quality',
-                    orientation: 'Orientation',
-                    printingLocation: 'Printing Location',
-                    quantity: 'Quantity (Sheets)'
-                };
-            }
-
-            const fileInput = document.getElementById(`design-upload-${service}`);
-            const fileName = fileInput.files.length > 0 ? fileInput.files[0].name : 'No file uploaded';
-
-            // Build the confirmation message
-            let confirmationHTML = `
-                <p>Thank you for your request!</p>
-                <p><strong>Your Selections:</strong></p>
-            `;
-            for (const [key, value] of Object.entries(selections)) {
-                let displayValue = value.charAt(0).toUpperCase() + value.slice(1);
-                if (key === 'finishing' && value === 'none') displayValue = 'No Finish';
-                if (key === 'binding' && value === 'gum') displayValue = 'Gum Binding';
-                if (key === 'binding' && value === 'staple') displayValue = 'Staple Binding';
-                if (key === 'printingLocation' && value === 'front') displayValue = 'Front';
-                if (key === 'printingLocation' && value === 'both') displayValue = 'Both Sides';
-                if (key === 'printingLocation' && value === 'header') displayValue = 'Header Only';
-                if (key === 'printingLocation' && value === 'header-footer') displayValue = 'Header and Footer';
-                confirmationHTML += `<p>${labels[key]}: ${displayValue}</p>`;
-            }
-            confirmationHTML += `
-                <p>Uploaded File: ${fileName}</p>
-                <p>We will contact you shortly to confirm your order and provide a quote.</p>
-            `;
-
-            const confirmationMessage = document.getElementById(`confirmation-message-${service}`);
-            confirmationMessage.innerHTML = confirmationHTML;
-            confirmationMessage.className = 'confirmation-message';
-            confirmationMessage.style.display = 'block';
-
-            // Scroll to the confirmation message
-            confirmationMessage.scrollIntoView({ behavior: 'smooth' });
         }
 
         window.onclick = function(event) {
