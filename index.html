@@ -3,40 +3,78 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Farhan Printing Press offers wedding cards, visiting cards, flex printing, and more in Siddharth Nagar. Contact us for quality printing services!">
+    <meta name="keywords" content="printing services Siddharth Nagar, wedding cards, visiting cards, flex printing, bill books, letter pads">
+    <meta name="author" content="Farhan Printing Press">
     <title>Farhan Printing Press</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Roboto', sans-serif;
+            font-family: 'Poppins', sans-serif;
         }
 
         body {
-            background-color: #f4f6f8;
+            background-color: #f9f9f9;
+            background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.1) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.1) 50%, rgba(255, 255, 255, 0.1) 75%, transparent 75%, transparent);
+            background-size: 50px 50px;
         }
 
         header {
-            background-color: #0d1b2a;
+            background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
             color: white;
-            text-align: center;
-            padding: 1.5rem;
+            padding: 1.5rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
         }
 
-        header h1 {
+        .logo {
+            font-size: 1.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: white;
+            transition: transform 0.3s;
+        }
+
+        .logo i {
+            color: #f1c40f;
             font-size: 2rem;
+        }
+
+        .logo span {
             font-weight: 700;
         }
 
-        header p {
+        .logo span small {
+            font-weight: 300;
             font-size: 1rem;
-            margin-top: 0.5rem;
+            margin-left: 0.2rem;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .header-content {
+            text-align: center;
+            flex: 1;
+            padding: 0 2rem;
+        }
+
+        header h1 {
+            font-size: 1.5rem;
+            font-weight: 400;
+            color: rgba(255, 255, 255, 0.9);
         }
 
         nav {
-            background-color: #1b263b;
+            background: #34495e;
             padding: 1rem;
         }
 
@@ -51,26 +89,117 @@
             color: white;
             text-decoration: none;
             font-size: 1.1rem;
+            font-weight: 400;
+            transition: color 0.3s;
         }
 
         nav a:hover {
-            text-decoration: underline;
+            color: #f1c40f;
         }
 
         .hero {
-            background: url('https://images.unsplash.com/photo-1516321497487-e288fb19713f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80') center/cover no-repeat;
-            height: 300px;
+            position: relative;
+            background: url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80') center/cover no-repeat;
+            height: 350px;
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
             text-align: center;
             color: white;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4);
         }
 
         .hero h2 {
-            font-size: 2.5rem;
-            font-weight: 700;
+            font-size: 2.8rem;
+            font-weight: 600;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            font-weight: 300;
+            margin: 0.5rem 0 1rem;
+            position: relative;
+            z-index: 1;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .hero .cta-btn {
+            position: relative;
+            z-index: 1;
+            padding: 0.75rem 1.5rem;
+            background-color: #25D366;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: 500;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+
+        .hero .cta-btn:hover {
+            background-color: #1ebe52;
+        }
+
+        .home-content {
+            padding: 2rem 1rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .home-content h3 {
+            font-size: 1.8rem;
+            color: #2c3e50;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .home-content p {
+            font-size: 1rem;
+            color: #7f8c8d;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .home-highlights {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        .highlight {
+            background: white;
+            border-radius: 8px;
+            padding: 1rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            width: 200px;
+            text-align: center;
+        }
+
+        .highlight i {
+            font-size: 1.5rem;
+            color: #3498db;
+            margin-bottom: 0.5rem;
+        }
+
+        .highlight p {
+            font-size: 0.9rem;
+            color: #2c3e50;
+            font-weight: 500;
         }
 
         .services {
@@ -83,6 +212,8 @@
             text-align: center;
             margin-bottom: 2rem;
             font-size: 2rem;
+            color: #2c3e50;
+            font-weight: 600;
         }
 
         .service-grid {
@@ -94,33 +225,49 @@
 
         .service-card {
             background: white;
-            border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
             width: 300px;
             padding: 1.5rem;
             text-align: center;
             cursor: pointer;
-            transition: transform 0.3s;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 2px solid transparent;
+            background: linear-gradient(145deg, #ffffff, #f0f0f0);
         }
 
         .service-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-8px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            border-color: #f1c40f;
         }
 
         .service-card i {
             font-size: 2.5rem;
-            color: #0d1b2a;
+            color: #3498db;
             margin-bottom: 1rem;
+            transition: color 0.3s;
+        }
+
+        .service-card:hover i {
+            color: #f1c40f;
         }
 
         .service-card h3 {
             font-size: 1.25rem;
             margin-bottom: 0.5rem;
+            color: #2c3e50;
+            font-weight: 600;
+        }
+
+        .service-card p {
+            color: #7f8c8d;
+            font-size: 0.9rem;
         }
 
         .contact {
             padding: 3rem 1rem;
-            background-color: #1b263b;
+            background: linear-gradient(135deg, #34495e 0%, #2c3e50 100%);
             color: white;
             text-align: center;
         }
@@ -128,26 +275,30 @@
         .contact h2 {
             font-size: 2rem;
             margin-bottom: 1rem;
+            font-weight: 600;
         }
 
         .contact p {
             margin-bottom: 0.5rem;
+            font-weight: 300;
         }
 
         .contact a {
-            color: #f4f6f8;
+            color: #f1c40f;
             text-decoration: none;
+            transition: color 0.3s;
         }
 
         .contact a:hover {
-            text-decoration: underline;
+            color: #f39c12;
         }
 
         footer {
-            background-color: #0d1b2a;
+            background: #2c3e50;
             color: white;
             text-align: center;
             padding: 1rem;
+            font-weight: 300;
         }
 
         .modal {
@@ -157,7 +308,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.5);
+            background: rgba(0, 0, 0, 0.6);
             justify-content: center;
             align-items: center;
             z-index: 1000;
@@ -166,19 +317,23 @@
         .modal-content {
             background: white;
             padding: 2rem;
-            border-radius: 8px;
+            border-radius: 12px;
             max-width: 500px;
             width: 90%;
             position: relative;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
         }
 
         .modal-content h3 {
             font-size: 1.5rem;
             margin-bottom: 1rem;
+            color: #2c3e50;
+            font-weight: 600;
         }
 
         .modal-content p {
             margin-bottom: 1rem;
+            color: #7f8c8d;
         }
 
         .modal-content ul {
@@ -189,6 +344,7 @@
 
         .modal-content ul li {
             margin-bottom: 0.5rem;
+            color: #7f8c8d;
         }
 
         .modal-options {
@@ -204,16 +360,30 @@
         }
 
         .modal-option label {
-            font-weight: bold;
+            font-weight: 600;
             font-size: 0.9rem;
+            color: #2c3e50;
         }
 
         .modal-option select {
-            padding: 0.3rem;
-            border: 1px solid #ccc;
-            border-radius: 4px;
+            padding: 0.5rem;
+            border: 1px solid #dfe6e9;
+            border-radius: 6px;
             font-size: 0.9rem;
             width: 60%;
+            background: #f9f9f9;
+            transition: border-color 0.3s;
+        }
+
+        .modal-option select:focus {
+            border-color: #3498db;
+            outline: none;
+        }
+
+        .modal-price {
+            font-weight: 600;
+            color: #e74c3c;
+            margin-bottom: 1rem;
         }
 
         .whatsapp-btn {
@@ -223,8 +393,9 @@
             background-color: #25D366;
             color: white;
             border: none;
-            border-radius: 4px;
+            border-radius: 6px;
             font-size: 1rem;
+            font-weight: 500;
             cursor: pointer;
             transition: background-color 0.3s;
             text-decoration: none;
@@ -241,11 +412,52 @@
             right: 10px;
             font-size: 1.5rem;
             cursor: pointer;
+            color: #7f8c8d;
+            transition: color 0.3s;
+        }
+
+        .close-btn:hover {
+            color: #e74c3c;
+        }
+
+        .whatsapp-chat {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #25D366;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .whatsapp-chat:hover {
+            background-color: #1ebe52;
+            transform: scale(1.1);
+        }
+
+        .whatsapp-chat i {
+            font-size: 2rem;
         }
 
         @media (max-width: 768px) {
             .hero h2 {
-                font-size: 1.8rem;
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .hero .cta-btn {
+                font-size: 0.9rem;
+                padding: 0.5rem 1rem;
             }
 
             nav ul {
@@ -262,23 +474,85 @@
             .modal-option select {
                 width: 100%;
             }
+
+            .whatsapp-chat {
+                width: 50px;
+                height: 50px;
+            }
+
+            .whatsapp-chat i {
+                font-size: 1.5rem;
+            }
+
+            .logo {
+                font-size: 1.5rem;
+            }
+
+            .logo i {
+                font-size: 1.8rem;
+            }
+
+            header {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+
+            .header-content {
+                padding: 1rem 0 0 0;
+            }
+
+            header h1 {
+                font-size: 1.2rem;
+            }
+
+            .highlight {
+                width: 100%;
+                max-width: 250px;
+            }
         }
     </style>
 </head>
 <body>
     <header>
-        <h1>Farhan Printing Press</h1>
-        <p>Printing & Stationery Services - Siddharth Nagar</p>
+        <div class="logo">
+            <i class="fas fa-print"></i>
+            <span>Farhan <small>Printing Press</small></span>
+        </div>
+        <div class="header-content">
+            <h1>Quality Printing Services in Siddharth Nagar</h1>
+        </div>
     </header>
     <nav>
         <ul>
             <li><a href="#home">Home</a></li>
             <li><a href="#services">Services</a></li>
+            <li><a href="#track-order">Track Order</a></li>
             <li><a href="#contact">Contact</a></li>
         </ul>
     </nav>
-    <section id="home" class="hero">
+    <section id="home" class="hero" alt="Printing press hero image">
         <h2>Your One-Stop Print Solution</h2>
+        <p>From Wedding Cards to Flex Printing – We Bring Your Ideas to Life!</p>
+        <a href="https://wa.me/+919935644687?text=Hello%2C%20I%20want%20to%20learn%20more%20about%20your%20printing%20services%21" target="_blank" class="cta-btn">Contact Us on WhatsApp</a>
+    </section>
+    <section class="home-content">
+        <h3>Welcome to Farhan Printing Press</h3>
+        <p>Based in Siddharth Nagar, Farhan Printing Press has been providing high-quality printing and stationery services for over a decade. Whether you need elegant wedding cards, professional visiting cards, or large-scale flex printing, we’re here to deliver exceptional results with a fast turnaround.</p>
+        <div class="home-highlights">
+            <div class="highlight">
+                <i class="fas fa-clock"></i>
+                <p>Over 10 Years of Experience</p>
+            </div>
+            <div class="highlight">
+                <i class="fas fa-star"></i>
+                <p>High-Quality Printing</p>
+            </div>
+            <div class="highlight">
+                <i class="fas fa-shipping-fast"></i>
+                <p>Fast Turnaround</p>
+            </div>
+        </div>
     </section>
     <section id="services" class="services">
         <h2>Our Services</h2>
@@ -315,6 +589,16 @@
             </div>
         </div>
     </section>
+    <section id="track-order" class="services">
+        <h2>Track Your Order</h2>
+        <div class="service-grid">
+            <div class="service-card" onclick="window.open('https://wa.me/+919935644687?text=I%20want%20to%20track%20my%20order', '_blank')">
+                <i class="fas fa-truck"></i>
+                <h3>Track Your Order</h3>
+                <p>Check the status of your order via WhatsApp.</p>
+            </div>
+        </div>
+    </section>
     <section id="contact" class="contact">
         <h2>Contact Us</h2>
         <p><a href="https://maps.app.goo.gl/MoK3G1FZXpAs1Wb79" target="_blank">📍 Near SBI Bank, Belauha Bazar, Siddharth Nagar</a></p>
@@ -331,6 +615,9 @@
             <div id="modal-description"></div>
         </div>
     </div>
+    <a href="https://wa.me/+919935644687?text=Hello%2C%20I%20have%20a%20question%20about%20your%20printing%20services%21" target="_blank" class="whatsapp-chat">
+        <i class="fab fa-whatsapp"></i>
+    </a>
     <script>
         const modal = document.getElementById('modal');
         const modalTitle = document.getElementById('modal-title');
@@ -345,6 +632,7 @@
                         <li><strong>Size:</strong> Standard (5 x 7 inches) or custom dimensions</li>
                         <li><strong>Minimum Order:</strong> 50 units</li>
                     </ul>
+                    <p class="modal-price">Starting at ₹500 for 50 units (final price depends on selections).</p>
                     <p>Select your preferences below, then click the button to send your request via WhatsApp.</p>
                     <div class="modal-options">
                         <div class="modal-option">
@@ -401,6 +689,7 @@
                         <li><strong>Size:</strong> 3.5 x 2 inches</li>
                         <li><strong>Minimum Order:</strong> 100 units</li>
                     </ul>
+                    <p class="modal-price">Starting at ₹200 for 100 units (final price depends on selections).</p>
                     <p>Select your preferences below, then click the button to send your request via WhatsApp.</p>
                     <div class="modal-options">
                         <div class="modal-option">
@@ -453,6 +742,7 @@
                         <li><strong>Size:</strong> Custom dimensions (specify in your request)</li>
                         <li><strong>Minimum Order:</strong> 1 unit</li>
                     </ul>
+                    <p class="modal-price">Starting at ₹100 per square foot (final price depends on selections).</p>
                     <p>Select your preferences below, then click the button to send your request via WhatsApp.</p>
                     <div class="modal-options">
                         <div class="modal-option">
@@ -498,6 +788,7 @@
                         <li><strong>Size:</strong> A4, A5, or custom dimensions</li>
                         <li><strong>Minimum Order:</strong> 10 units</li>
                     </ul>
+                    <p class="modal-price">Starting at ₹10 per page for 10 units (final price depends on selections).</p>
                     <p>Select your preferences below, then click the button to send your request via WhatsApp.</p>
                     <div class="modal-options">
                         <div class="modal-option">
@@ -519,7 +810,7 @@
                         <div class="modal-option">
                             <label for="orientation-digital">Orientation</label>
                             <select id="orientation-digital" name="orientation">
-                                <option value="Portrait">Portrait</option>
+                                <option value="Portrait Perr">Portrait</option>
                                 <option value="Landscape">Landscape</option>
                             </select>
                         </div>
@@ -551,6 +842,7 @@
                         <li><strong>Size:</strong> A5 or custom dimensions</li>
                         <li><strong>Minimum Order:</strong> 5 books (50 sheets per book)</li>
                     </ul>
+                    <p class="modal-price">Starting at ₹300 for 5 books (final price depends on selections).</p>
                     <p>Select your preferences below, then click the button to send your request via WhatsApp.</p>
                     <div class="modal-options">
                         <div class="modal-option">
@@ -595,6 +887,7 @@
                         <li><strong>Size:</strong> A4 or custom dimensions</li>
                         <li><strong>Minimum Order:</strong> 100 sheets</li>
                     </ul>
+                    <p class="modal-price">Starting at ₹150 for 100 sheets (final price depends on selections).</p>
                     <p>Select your preferences below, then click the button to send your request via WhatsApp.</p>
                     <div class="modal-options">
                         <div class="modal-option">
