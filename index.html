@@ -1316,8 +1316,8 @@
 
         const visitingCardPricing = {
             "Normal Visiting Card": {
-                "1 Side": { 100: 150, 200: 250, 500: 500, 1000: 800 },
-                "2 Sides": { 100: 200, 200: 350, 500: 750, 1000: 1100 }
+                "1 Side": { 100: 130, 200: 200, 500: 400, 1000: 600 },
+                "2 Sides": { 100: 180, 200: 350, 500: 650, 1000: 950 }
             },
             "UV Card": {
                 "1 Side": { 1000: 2000, 2000: 3500 },
@@ -1418,7 +1418,7 @@
                         <div class="modal-option">
                             <label for="card-category-visiting">${translations.en["label-card-category"]}</label>
                             <select id="card-category-visiting" name="card_category" onchange="updateVisitingCardOptions()">
-                                <option value="Normal Visiting Card">Normal Visiting Card</option>
+                                <option value="Normal Visiting Card">Normal Visiting Card(Same Day Printing)</option>
                                 <option value="UV Card">UV Card</option>
                                 <option value="Gloss Laminated Card">Gloss Laminated Card</option>
                                 <option value="Plastic Visiting Card">Plastic Visiting Card</option>
