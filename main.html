@@ -1898,7 +1898,7 @@
             modal.style.display = 'none';
         }
 
-        function sendWhatsApp(service) {
+function sendWhatsApp(service) {
             const options = {};
             const modalOptions = document.querySelectorAll(`#modal .modal-option select, #modal .modal-option textarea`);
             modalOptions.forEach(input => {
@@ -1919,8 +1919,13 @@
             message += `\nPlease provide further details or confirm the order.`;
             const encodedMessage = encodeURIComponent(message);
             const whatsappUrl = `https://wa.me/+919838644687?text=${encodedMessage}`;
+
             window.open(whatsappUrl, '_blank');
+            setTimeout(() => {
+                window.location.href = 'thankyou.html';
+            }, 2000); // 2-second delay before redirect
         }
+
 
         window.onclick = function(event) {
             if (event.target === modal) {
