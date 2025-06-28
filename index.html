@@ -3,25 +3,835 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Farhan Printing Press offers wedding cards, visiting cards, digital printing, and more in Siddharth Nagar. Contact us for quality printing services!">
-    <meta name="keywords" content="printing services Siddharth Nagar, wedding cards, visiting cards, digital printing, bill books, letter pads, handbills, posters, envelopes">
+    <meta name="description" content="Farhan Printing Press offers wedding cards, visiting cards, and more in Siddharth Nagar. Contact us for quality printing services!">
+    <meta name="keywords" content="printing services Siddharth Nagar, wedding cards, visiting cards, bill books, letter pads, handbills, posters, envelopes">
     <meta name="author" content="Farhan Printing Press">
     <title>Farhan Printing Press</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="styles.css">
     <link rel="icon" type="image/x-icon" href="https://farhanprintpress.github.io/farhanprintpress/favicon.ico">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: #f9f9f9;
+            background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.1) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.1) 50%, rgba(255, 255, 255, 0.1) 75%, transparent 75%, transparent);
+            background-size: 50px 50px;
+            padding-top: 120px;
+        }
+
+        header {
+            background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+            color: white;
+            padding: 1rem 2rem;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: white;
+            transition: transform 0.3s;
+        }
+
+        .logo i {
+            color: #f1c40f;
+            font-size: 1.8rem;
+        }
+
+        .logo span {
+            font-weight: 700;
+        }
+
+        .logo span small {
+            font-weight: 300;
+            font-size: 0.9rem;
+            margin-left: 0.2rem;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .cart-icon {
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            position: relative;
+            transition: transform 0.3s;
+        }
+
+        .cart-icon:hover {
+            transform: scale(1.1);
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: #f1c40f;
+            color: #2c3e50;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            font-weight: bold;
+        }
+
+        nav {
+            background: #34495e;
+            padding: 1rem;
+            position: fixed;
+            top: 70px;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: 400;
+            transition: color 0.3s;
+            padding: 0.5rem;
+        }
+
+        nav a:hover {
+            color: #f1c40f;
+        }
+
+        .hero {
+            position: relative;
+            background: url('https://i.ibb.co/5hJPcH1V/Welcome.jpg') center/cover no-repeat;
+            height: 400px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            margin-top: 10px;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+        }
+
+        .hero h2 {
+            font-size: 2.5rem;
+            font-weight: 600;
+            position: relative;
+            z-index: 1;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            font-weight: 300;
+            margin: 0.5rem 0 1rem;
+            position: relative;
+            z-index: 1;
+            color: rgba(255, 255, 255, 0.9);
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+
+        .hero .cta-btn {
+            position: relative;
+            z-index: 1;
+            padding: 0.75rem 1.5rem;
+            background-color: #25D366;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: 500;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+
+        .hero .cta-btn:hover {
+            background-color: #1ebe52;
+        }
+
+        .home-content {
+            padding: 2rem 1rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .home-content h3 {
+            font-size: 1.8rem;
+            color: #2c3e50;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .home-content p {
+            font-size: 1rem;
+            color: #7f8c8d;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .home-highlights {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        .highlight {
+            background: white;
+            border-radius: 8px;
+            padding: 1rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            width: 200px;
+            text-align: center;
+        }
+
+        .highlight i {
+            font-size: 1.5rem;
+            color: #3498db;
+            margin-bottom: 0.5rem;
+        }
+
+        .highlight p {
+            font-size: 0.9rem;
+            color: #2c3e50;
+            font-weight: 500;
+        }
+
+        .services {
+            padding: 3rem 1rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .services h2 {
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 2rem;
+            color: #2c3e50;
+            font-weight: 600;
+        }
+
+        .service-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            justify-content: center;
+        }
+
+        .service-card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            padding: 1.5rem;
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 2px solid transparent;
+            background: linear-gradient(145deg, #ffffff, #f0f0f0);
+        }
+
+        .service-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            border-color: #f1c40f;
+        }
+
+        .service-card i {
+            font-size: 2.5rem;
+            color: #3498db;
+            margin-bottom: 1rem;
+            transition: color 0.3s;
+        }
+
+        .service-card:hover i {
+            color: #f1c40f;
+        }
+
+        .service-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+            color: #2c3e50;
+            font-weight: 600;
+        }
+
+        .service-card p {
+            color: #7f8c8d;
+            font-size: 0.9rem;
+        }
+
+        .contact {
+            padding: 3rem 1rem;
+            background: linear-gradient(135deg, #34495e 0%, #2c3e50 100%);
+            color: white;
+            text-align: center;
+        }
+
+        .contact h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .contact p {
+            margin-bottom: 0.75rem;
+            font-weight: 300;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .contact a {
+            color: #f1c40f;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .contact a:hover {
+            color: #f39c12;
+        }
+
+        .contact i {
+            color: #f1c40f;
+            font-size: 1.2rem;
+            transition: color 0.3s;
+        }
+
+        .contact i:hover {
+            color: #f39c12;
+        }
+
+        footer {
+            background: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 1rem;
+            font-weight: 300;
+        }
+
+        /* Login Modal */
+        #login-modal {
+            display: flex;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+        }
+
+        .login-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 400px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .login-content h3 {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            color: #2c3e50;
+        }
+
+        .login-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .login-form input {
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+
+        .login-btn {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 0.75rem;
+            border-radius: 4px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .login-btn:hover {
+            background: #2980b9;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            overflow-y: auto;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            max-width: 500px;
+            width: 90%;
+            position: relative;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            max-height: 80vh;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .modal-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #2c3e50;
+            font-weight: 600;
+        }
+
+        .modal-content p {
+            margin-bottom: 1rem;
+            color: #7f8c8d;
+        }
+
+        .modal-content ul {
+            list-style-type: disc;
+            padding-left: 20px;
+            margin-bottom: 1rem;
+        }
+
+        .modal-content ul li {
+            margin-bottom: 0.5rem;
+            color: #7f8c8d;
+        }
+
+        .modal-options {
+            margin-top: 1rem;
+            flex-grow: 1;
+        }
+
+        .modal-option {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .modal-option label {
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: #2c3e50;
+        }
+
+        .modal-option select,
+        .modal-option textarea,
+        .modal-option input {
+            padding: 0.5rem;
+            border: 1px solid #dfe6e9;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            width: 60%;
+            background: #f9f9f9;
+            transition: border-color 0.3s;
+        }
+
+        .modal-option textarea {
+            width: 60%;
+            resize: vertical;
+            min-height: 60px;
+        }
+
+        .modal-option select:focus,
+        .modal-option textarea:focus,
+        .modal-option input:focus {
+            border-color: #3498db;
+            outline: none;
+        }
+
+        .modal-price {
+            font-weight: 600;
+            color: #e74c3c;
+            margin-bottom: 1rem;
+        }
+
+        .whatsapp-btn {
+            display: block;
+            margin: 1rem 0 0;
+            padding: 0.75rem 1.5rem;
+            background-color: #25D366;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            text-decoration: none;
+            text-align: center;
+        }
+
+        .whatsapp-btn:hover {
+            background-color: #1ebe52;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 1.8rem;
+            cursor: pointer;
+            color: #7f8c8d;
+            transition: color 0.3s;
+            z-index: 1001;
+        }
+
+        .close-btn:hover {
+            color: #e74c3c;
+        }
+
+        .whatsapp-chat {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #25D366;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .whatsapp-chat:hover {
+            background-color: #1ebe52;
+            transform: scale(1.1);
+        }
+
+        .cart-item {
+            border-bottom: 1px solid #eee;
+            padding: 1rem 0;
+        }
+
+        .cart-item h4 {
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+        }
+
+        .cart-item p {
+            color: #7f8c8d;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .cart-item button {
+            background: #e74c3c;
+            color: white;
+            border: none;
+            padding: 0.3rem 0.6rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            transition: background 0.3s;
+        }
+
+        .cart-item button:hover {
+            background: #c0392b;
+        }
+
+        .invoice {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            max-width: 500px;
+            margin: 0 auto;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .invoice-header {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 1rem;
+        }
+
+        .invoice-header h2 {
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+        }
+
+        .invoice-logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .invoice-logo i {
+            color: #f1c40f;
+            font-size: 1.5rem;
+        }
+
+        .invoice-logo span {
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
+        .invoice-details {
+            margin-bottom: 1.5rem;
+        }
+
+        .invoice-details p {
+            margin-bottom: 0.5rem;
+            color: #7f8c8d;
+        }
+
+        .invoice-items {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 1.5rem;
+        }
+
+        .invoice-items th {
+            background: #f1f1f1;
+            padding: 0.5rem;
+            text-align: left;
+            color: #2c3e50;
+        }
+
+        .invoice-items td {
+            padding: 0.5rem;
+            border-bottom: 1px solid #eee;
+            color: #7f8c8d;
+        }
+
+        .invoice-total {
+            text-align: right;
+            font-weight: bold;
+            color: #2c3e50;
+            font-size: 1.1rem;
+            margin-top: 1rem;
+        }
+
+        .print-btn {
+            display: block;
+            margin: 1rem auto 0;
+            padding: 0.75rem 1.5rem;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .print-btn:hover {
+            background-color: #2980b9;
+        }
+
+        @media print {
+            body * {
+                visibility: hidden;
+            }
+            .invoice, .invoice * {
+                visibility: visible;
+            }
+            .invoice {
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+                box-shadow: none;
+                padding: 1rem;
+                margin: 0;
+            }
+            .print-btn {
+                display: none;
+            }
+        }
+
+        /* Media Queries for Responsiveness */
+        @media (max-width: 768px) {
+            body {
+                padding-top: 110px;
+            }
+
+            nav {
+                top: 60px;
+                padding: 0.5rem;
+            }
+
+            nav ul {
+                gap: 0.5rem;
+            }
+
+            nav a {
+                font-size: 0.9rem;
+                padding: 0.3rem;
+            }
+
+            .logo {
+                font-size: 1.3rem;
+            }
+
+            .logo i {
+                font-size: 1.5rem;
+            }
+
+            .hero {
+                height: 300px;
+            }
+
+            .hero h2 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .service-card {
+                width: 100%;
+                max-width: 280px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding-top: 100px;
+            }
+
+            nav {
+                top: 50px;
+            }
+
+            nav ul {
+                flex-wrap: wrap;
+                gap: 0.3rem;
+            }
+
+            nav a {
+                font-size: 0.8rem;
+                padding: 0.2rem;
+            }
+
+            .logo {
+                font-size: 1.1rem;
+            }
+
+            .logo i {
+                font-size: 1.3rem;
+            }
+
+            .hero {
+                height: 250px;
+            }
+
+            .hero h2 {
+                font-size: 1.5rem;
+            }
+
+            .hero p {
+                font-size: 0.9rem;
+            }
+
+            .highlight {
+                width: 100%;
+                max-width: 160px;
+            }
+        }
+    </style>
 </head>
 <body>
+    <!-- Login Modal -->
+    <div id="login-modal">
+        <div class="login-content">
+            <h3>Welcome to Farhan Printing Press</h3>
+            <form class="login-form" id="login-form">
+                <input type="text" id="login-name" placeholder="Your Name" required>
+                <input type="tel" id="login-phone" placeholder="Your Phone Number" required>
+                <button type="submit" class="login-btn">Continue Shopping</button>
+            </form>
+        </div>
+    </div>
+
     <header>
-        <div class="logo">
-            <i class="fas fa-print"></i>
-            <span>Farhan <small>Printing Press</small></span>
+        <div class="header-container">
+            <div class="logo">
+                <i class="fas fa-print"></i>
+                <span>Farhan <small>Printing Press</small></span>
+            </div>
+            <div class="cart-icon" onclick="openCart()">
+                <i class="fas fa-shopping-cart"></i>
+                <span class="cart-count">0</span>
+            </div>
         </div>
-        <div class="header-content">
-            <h1>Quality Printing Services in Siddharth Nagar</h1>
-        </div>
-        <i class="fas fa-shopping-cart cart-icon" onclick="toggleCartModal()"></i>
     </header>
     <nav>
         <ul>
@@ -31,14 +841,14 @@
             <li><a href="#contact">Contact</a></li>
         </ul>
     </nav>
-    <section id="home" class="hero" alt="Printing press hero image">
+    <section id="home" class="hero">
         <h2>Your One-Stop Print Solution</h2>
-        <p>From Wedding Cards to Digital Printing – We Bring Your Ideas to Life!</p>
+        <p>From Wedding Cards to Business Stationery – We Bring Your Ideas to Life!</p>
         <a href="https://wa.me/+919838644687?text=Hello%2C%20I%20want%20to%20learn%20more%20about%20your%20printing%20services%21" target="_blank" class="cta-btn">Contact Us on WhatsApp</a>
     </section>
     <section class="home-content">
         <h3>Welcome to Farhan Printing Press</h3>
-        <p>Based in Siddharth Nagar, Farhan Printing Press has been providing high-quality printing and stationery services for over a decade. Whether you need elegant wedding cards, professional visiting cards, or customized digital printing, we’re here to deliver exceptional results with a fast turnaround.</p>
+        <p>Based in Siddharth Nagar, Farhan Printing Press has been providing high-quality printing and stationery services for over a decade. Whether you need elegant wedding cards, professional visiting cards, or customized business stationery, we're here to deliver exceptional results with a fast turnaround.</p>
         <div class="home-highlights">
             <div class="highlight">
                 <i class="fas fa-clock"></i>
@@ -64,13 +874,8 @@
             </div>
             <div class="service-card" onclick="openModal('visiting')">
                 <i class="fas fa-address-card"></i>
-                <h3>Visiting Card</h3>
+                <h3>Visiting Card (Same Day Delivery)</h3>
                 <p>Professional visiting cards for lasting impressions.</p>
-            </div>
-            <div class="service-card" onclick="openModal('digital')">
-                <i class="fas fa-print"></i>
-                <h3>Digital Printing</h3>
-                <p>Fast and cost-effective digital printing.</p>
             </div>
             <div class="service-card" onclick="openModal('bill')">
                 <i class="fas fa-file-invoice"></i>
@@ -131,21 +936,24 @@
             <h3 id="modal-title"></h3>
             <div id="modal-description"></div>
             <div id="modal-price-display" class="modal-price"></div>
-            <a id="add-to-cart-btn" class="add-to-cart-btn" href="#" onclick="addToCartFromModal(event)">Add to Cart</a>
         </div>
     </div>
-    <div id="cart-modal" class="cart-modal">
-        <div class="cart-modal-content">
-            <span class="close-btn" onclick="closeCartModal()">×</span>
-            <h4>Your Cart</h4>
+    <div id="cart-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeCart()">×</span>
+            <h3>Your Order Summary</h3>
             <div id="cart-items">
-                <p class="empty-cart" id="empty-cart">Your cart is empty. Items will appear here when added.</p>
+                <p>Your cart is empty</p>
             </div>
-            <div id="order-summary" class="hidden mt-4">
-                <div id="summary-items"></div>
-                <div class="total" id="total-price">Total: ₹0</div>
-                <button id="confirm-order" class="confirm-btn" onclick="confirmOrder()">Confirm Order</button>
-            </div>
+            <div id="cart-total" class="modal-price"></div>
+            <a href="#" class="whatsapp-btn" onclick="checkout()">Proceed to Checkout</a>
+        </div>
+    </div>
+    <div id="invoice-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeInvoice()">×</span>
+            <div id="invoice-content"></div>
+            <button class="print-btn" onclick="printInvoice()">Print Invoice</button>
         </div>
     </div>
     <a href="https://wa.me/+919838644687?text=Hello%2C%20I%20have%20a%20question%20about%20your%20printing%20services%21" target="_blank" class="whatsapp-chat">
@@ -154,47 +962,6 @@
     <script>
         const translations = {
             en: {
-                title: "Farhan Printing Press",
-                logo: "Farhan <small>Printing Press</small>",
-                "header-title": "Quality Printing Services in Siddharth Nagar",
-                "nav-home": "Home",
-                "nav-services": "Services",
-                "nav-track-order": "Track Order",
-                "nav-contact": "Contact",
-                "hero-title": "Your One-Stop Print Solution",
-                "hero-subtitle": "From Wedding Cards to Digital Printing – We Bring Your Ideas to Life!",
-                "hero-cta": "Contact Us on WhatsApp",
-                "home-title": "Welcome to Farhan Printing Press",
-                "home-description": "Based in Siddharth Nagar, Farhan Printing Press has been providing high-quality printing and stationery services for over a decade. Whether you need elegant wedding cards, professional visiting cards, or customized digital printing, we’re here to deliver exceptional results with a fast turnaround.",
-                "highlight-experience": "Over 10 Years of Experience",
-                "highlight-quality": "High-Quality Printing",
-                "highlight-turnaround": "Fast Turnaround",
-                "services-title": "Our Services",
-                "service-wedding": "Wedding Card Printing",
-                "service-wedding-desc": "Elegant and customizable wedding cards.",
-                "service-visiting": "Visiting Card",
-                "service-visiting-desc": "Professional visiting cards for lasting impressions.",
-                "service-digital": "Digital Printing",
-                "service-digital-desc": "Fast and cost-effective digital printing.",
-                "service-bill": "Bill Book Printing",
-                "service-bill-desc": "Customized bill books for your business.",
-                "service-letter": "Letter Pad Printing",
-                "service-letter-desc": "Personalized letter pads with your logo.",
-                "service-handbill": "Handbill/Pamphlet",
-                "service-handbill-desc": "Promotional handbills and pamphlets.",
-                "service-poster": "Poster",
-                "service-poster-desc": "Eye-catching posters for promotions.",
-                "service-envelope": "Envelope Printing",
-                "service-envelope-desc": "Customized envelopes for your business.",
-                "track-order-title": "Track Your Order",
-                "track-order": "Track Your Order",
-                "track-order-desc": "Check the status of your order via WhatsApp.",
-                "contact-title": "Contact Us",
-                "contact-address": "Near SBI Bank, Belauha Bazar, Siddharth Nagar",
-                "contact-call": "Call Us",
-                "contact-whatsapp": "WhatsApp Us",
-                "contact-instagram": "Follow us on Instagram",
-                footer: "© 2025 Farhan Printing Press. All rights reserved.",
                 "wedding-title": "Wedding Card Printing",
                 "wedding-description": `
                     <p>Design your perfect wedding card with Farhan Printing Press. Please provide the following details to help us create a card that matches your vision:</p>
@@ -202,9 +969,8 @@
                         <li><strong>Size:</strong> Standard (5 x 7 inches) or custom dimensions</li>
                         <li><strong>Minimum Order:</strong> 50 units</li>
                     </ul>
-                    <p>Select your preferences below, then click the button to add to your cart.</p>
+                    <p>Select your preferences below, then click the button to add to cart.</p>
                 `,
-                "wedding-whatsapp": "Add to Cart",
                 "visiting-title": "Visiting Card",
                 "visiting-description": `
                     <p>Make a lasting impression with our Visiting Cards, designed to communicate your professional identity effectively.</p>
@@ -212,20 +978,8 @@
                         <li><strong>Size:</strong> 3.5 x 2 inches</li>
                         <li><strong>Minimum Order:</strong> 100 units</li>
                     </ul>
-                    <p>Select your preferences below, then click the button to add to your cart.</p>
+                    <p>Select your preferences below, then click the button to add to cart.</p>
                 `,
-                "visiting-whatsapp": "Add to Cart",
-                "digital-title": "Digital Printing",
-                "digital-description": `
-                    <p>Fast and cost-effective Digital Printing services for a variety of needs, from flyers to brochures.</p>
-                    <ul>
-                        <li><strong>Size:</strong> A4, A5, or custom dimensions</li>
-                        <li><strong>Minimum Order:</strong> 10 units</li>
-                    </ul>
-                    <p class="modal-price">Starting at ₹10 per page for 10 units (final price depends on selections).</p>
-                    <p>Select your preferences below, then click the button to add to your cart.</p>
-                `,
-                "digital-whatsapp": "Add to Cart",
                 "bill-title": "Bill Book Printing",
                 "bill-description": `
                     <p>Customized bill books designed for your business, ensuring a professional look for invoices.</p>
@@ -233,9 +987,8 @@
                         <li><strong>Size:</strong> A5, A4, or Custom</li>
                         <li><strong>Minimum Order:</strong> 5 books (50 sheets per book)</li>
                     </ul>
-                    <p>Select your preferences below, then click the button to add to your cart.</p>
+                    <p>Select your preferences below, then click the button to add to cart.</p>
                 `,
-                "bill-whatsapp": "Add to Cart",
                 "letter-title": "Letter Pad Printing",
                 "letter-description": `
                     <p>Personalized letter pads with your company logo and details, ideal for official correspondence.</p>
@@ -243,9 +996,8 @@
                         <li><strong>Size:</strong> A4, A5, or Legal</li>
                         <li><strong>Minimum Order:</strong> 100 sheets</li>
                     </ul>
-                    <p>Select your preferences below, then click the button to add to your cart.</p>
+                    <p>Select your preferences below, then click the button to add to cart.</p>
                 `,
-                "letter-whatsapp": "Add to Cart",
                 "handbill-title": "Handbill/Pamphlet",
                 "handbill-description": `
                     <p>Promotional handbills and pamphlets to effectively market your business or event.</p>
@@ -253,9 +1005,8 @@
                         <li><strong>Size:</strong> A5, A4, or A3</li>
                         <li><strong>Minimum Order:</strong> 100 units</li>
                     </ul>
-                    <p>Select your preferences below, then click the button to add to your cart.</p>
+                    <p>Select your preferences below, then click the button to add to cart.</p>
                 `,
-                "handbill-whatsapp": "Add to Cart",
                 "poster-title": "Poster",
                 "poster-description": `
                     <p>Eye-catching posters for promotions, events, or advertisements.</p>
@@ -263,9 +1014,8 @@
                         <li><strong>Size:</strong> A3, A2, or A1</li>
                         <li><strong>Minimum Order:</strong> 1 unit</li>
                     </ul>
-                    <p>Select your preferences below, then click the button to add to your cart.</p>
+                    <p>Select your preferences below, then click the button to add to cart.</p>
                 `,
-                "poster-whatsapp": "Add to Cart",
                 "envelope-title": "Envelope Printing",
                 "envelope-description": `
                     <p>Customized envelopes with your business logo and details.</p>
@@ -273,9 +1023,8 @@
                         <li><strong>Size:</strong> Standard (4 x 9 inches), C5, or C4</li>
                         <li><strong>Minimum Order:</strong> 100 units</li>
                     </ul>
-                    <p>Select your preferences below, then click the button to add to your cart.</p>
+                    <p>Select your preferences below, then click the button to add to cart.</p>
                 `,
-                "envelope-whatsapp": "Add to Cart",
                 "label-price-range": "Price Range (per unit)",
                 "label-quantity": "Quantity",
                 "label-size": "Size",
@@ -292,10 +1041,7 @@
                 "label-quantity-sheets": "Quantity (Sheets)",
                 "label-card-category": "Card Category",
                 "label-printing-sides": "Printing",
-                "label-printing": "Printing",
-                "label-name": "Your Name",
-                "go-to-cart": "Go to Cart",
-                "add-again": "Add"
+                "label-name": "Your Name"
             }
         };
 
@@ -304,12 +1050,37 @@
         const modalDescription = document.getElementById('modal-description');
         const modalPriceDisplay = document.getElementById('modal-price-display');
         const cartModal = document.getElementById('cart-modal');
-        const addToCartBtn = document.getElementById('add-to-cart-btn');
+        const invoiceModal = document.getElementById('invoice-modal');
+        const invoiceContent = document.getElementById('invoice-content');
+        const loginModal = document.getElementById('login-modal');
+        const loginForm = document.getElementById('login-form');
+        let cart = [];
+        let currentUser = null;
+
+        // Show login modal on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            loginModal.style.display = 'flex';
+        });
+
+        // Handle login form submission
+        loginForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const name = document.getElementById('login-name').value;
+            const phone = document.getElementById('login-phone').value;
+            
+            if (name && phone) {
+                currentUser = {
+                    name: name,
+                    phone: phone
+                };
+                loginModal.style.display = 'none';
+            }
+        });
 
         const visitingCardPricing = {
             "Normal Visiting Card": {
-                "1 Side": { 100: 150, 200: 250, 500: 500, 1000: 800 },
-                "2 Sides": { 100: 200, 200: 350, 500: 750, 1000: 1100 }
+                "1 Side": { 100: 130, 200: 200, 500: 400, 1000: 600 },
+                "2 Sides": { 100: 180, 200: 350, 500: 650, 1000: 950 }
             },
             "UV Card": {
                 "1 Side": { 1000: 2000, 2000: 3500 },
@@ -320,8 +1091,8 @@
                 "2 side printing + 2 side lamination": { 100: 350, 200: 450, 500: 650, 1000: 950 }
             },
             "Plastic Visiting Card": {
-                "with lamination": { 1000: 800, 2000: 1500 },
-                "without lamination": { 1000: 750, 2000: 1450 }
+                "with lamination": { 1000: 1200, 2000: 2200 },
+                "without lamination": { 1000: 1000, 2000: 1900 }
             },
             "Texture + Lamination Visiting Card": {
                 "1 Side": { 1000: 1500, 2000: 2800 },
@@ -395,6 +1166,7 @@
                             </select>
                         </div>
                     </div>
+                    <a href="#" class="whatsapp-btn" onclick="addToCart('wedding')">Add to Cart</a>
                 `
             },
             visiting: {
@@ -403,13 +1175,9 @@
                     ${translations.en["visiting-description"]}
                     <div class="modal-options">
                         <div class="modal-option">
-                            <label for="customer-name-visiting">${translations.en["label-name"]}</label>
-                            <textarea id="customer-name-visiting" name="customer_name" placeholder="Enter your name"></textarea>
-                        </div>
-                        <div class="modal-option">
                             <label for="card-category-visiting">${translations.en["label-card-category"]}</label>
                             <select id="card-category-visiting" name="card_category" onchange="updateVisitingCardOptions()">
-                                <option value="Normal Visiting Card">Normal Visiting Card</option>
+                                <option value="Normal Visiting Card">Normal Visiting Card(Same Day Printing)</option>
                                 <option value="UV Card">UV Card</option>
                                 <option value="Gloss Laminated Card">Gloss Laminated Card</option>
                                 <option value="Plastic Visiting Card">Plastic Visiting Card</option>
@@ -419,46 +1187,7 @@
                         </div>
                         <div id="visiting-card-options"></div>
                     </div>
-                `
-            },
-            digital: {
-                title: "digital-title",
-                description: `
-                    ${translations.en["digital-description"]}
-                    <div class="modal-options">
-                        <div class="modal-option">
-                            <label for="size-digital">${translations.en["label-size"]}</label>
-                            <select id="size-digital" name="size">
-                                <option value="A4">A4</option>
-                                <option value="A5">A5</option>
-                                <option value="Custom">Custom</option>
-                            </select>
-                        </div>
-                        <div class="modal-option">
-                            <label for="paper-quality-digital">${translations.en["label-paper-quality"]}</label>
-                            <select id="paper-quality-digital" name="paper_quality">
-                                <option value="70 GSM">70 GSM</option>
-                                <option value="100 GSM">100 GSM</option>
-                                <option value="Glossy Paper">Glossy Paper</option>
-                            </select>
-                        </div>
-                        <div class="modal-option">
-                            <label for="printing-sides-digital">${translations.en["label-printing-sides"]}</label>
-                            <select id="printing-sides-digital" name="printing_sides">
-                                <option value="1 Side">1 Side</option>
-                                <option value="2 Sides">2 Sides</option>
-                            </select>
-                        </div>
-                        <div class="modal-option">
-                            <label for="quantity-digital">${translations.en["label-quantity"]}</label>
-                            <select id="quantity-digital" name="quantity">
-                                <option value="10">10</option>
-                                <option value="50">50</option>
-                                <option value="100">100</option>
-                                <option value="200">200</option>
-                            </select>
-                        </div>
-                    </div>
+                    <a href="#" class="whatsapp-btn" onclick="addToCart('visiting')">Add to Cart</a>
                 `
             },
             bill: {
@@ -508,6 +1237,7 @@
                             </select>
                         </div>
                     </div>
+                    <a href="#" class="whatsapp-btn" onclick="addToCart('bill')">Add to Cart</a>
                 `
             },
             letter: {
@@ -549,6 +1279,7 @@
                             </select>
                         </div>
                     </div>
+                    <a href="#" class="whatsapp-btn" onclick="addToCart('letter')">Add to Cart</a>
                 `
             },
             handbill: {
@@ -589,6 +1320,7 @@
                             </select>
                         </div>
                     </div>
+                    <a href="#" class="whatsapp-btn" onclick="addToCart('handbill')">Add to Cart</a>
                 `
             },
             poster: {
@@ -630,6 +1362,7 @@
                             </select>
                         </div>
                     </div>
+                    <a href="#" class="whatsapp-btn" onclick="addToCart('poster')">Add to Cart</a>
                 `
             },
             envelope: {
@@ -669,11 +1402,10 @@
                             </select>
                         </div>
                     </div>
+                    <a href="#" class="whatsapp-btn" onclick="addToCart('envelope')">Add to Cart</a>
                 `
             }
         };
-
-        let cart = [];
 
         function updateVisitingCardOptions() {
             const cardCategory = document.getElementById('card-category-visiting').value;
@@ -866,6 +1598,12 @@
         }
 
         function openModal(service) {
+            if (!currentUser) {
+                alert('Please login first');
+                loginModal.style.display = 'flex';
+                return;
+            }
+            
             const serviceData = services[service];
             modalTitle.textContent = translations.en[serviceData.title];
             modalDescription.innerHTML = serviceData.description;
@@ -876,106 +1614,99 @@
             if (service === 'handbill') calculateHandbillPrice();
             if (service === 'poster') calculatePosterPrice();
             if (service === 'envelope') calculateEnvelopePrice();
-            
-            addToCartBtn.style.display = 'block';
-            addToCartBtn.onclick = function(event) { event.preventDefault(); addToCartFromModal(service); };
             modal.style.display = 'flex';
         }
 
         function closeModal() {
             modal.style.display = 'none';
-            const goToCartBtn = modal.querySelector('.go-to-cart-btn');
-            const addAgainBtn = modal.querySelector('.add-again-btn');
-            if (goToCartBtn) goToCartBtn.remove();
-            if (addAgainBtn) addAgainBtn.remove();
-            addToCartBtn.style.display = 'block';
         }
 
-        function toggleCartModal() {
-            cartModal.style.display = cartModal.style.display === 'flex' ? 'none' : 'flex';
-            if (cartModal.style.display === 'flex') {
-                updateCartDisplay();
+        function openCart() {
+            if (!currentUser) {
+                alert('Please login first');
+                loginModal.style.display = 'flex';
+                return;
             }
+            updateCartDisplay();
+            cartModal.style.display = 'flex';
         }
 
-        function closeCartModal() {
+        function closeCart() {
             cartModal.style.display = 'none';
         }
 
-        function addToCartFromModal(service) {
+        function openInvoice() {
+            invoiceModal.style.display = 'flex';
+        }
+
+        function closeInvoice() {
+            invoiceModal.style.display = 'none';
+        }
+
+        function updateCartDisplay() {
+            const cartItemsEl = document.getElementById('cart-items');
+            const cartCountEl = document.querySelector('.cart-count');
+            const cartTotalEl = document.getElementById('cart-total');
+            
+            if (cart.length === 0) {
+                cartItemsEl.innerHTML = '<p>Your cart is empty</p>';
+                cartTotalEl.textContent = '';
+                cartCountEl.textContent = '0';
+                return;
+            }
+            
+            let itemsHTML = '';
+            let total = 0;
+            
+            cart.forEach((item, index) => {
+                itemsHTML += `
+                    <div class="cart-item">
+                        <h4>${item.service}</h4>
+                        <p>${formatOptions(JSON.parse(item.options))}</p>
+                        <p>Price: ₹${item.price}</p>
+                        <button onclick="removeFromCart(${index})">Remove</button>
+                    </div>
+                `;
+                total += item.price;
+            });
+            
+            cartItemsEl.innerHTML = itemsHTML;
+            cartTotalEl.textContent = `Total: ₹${total}`;
+            cartCountEl.textContent = cart.length;
+        }
+
+        function formatOptions(options) {
+            let formatted = '';
+            for (const [key, value] of Object.entries(options)) {
+                formatted += `${key.replace(/_/g, ' ')}: ${value}<br>`;
+            }
+            return formatted;
+        }
+
+        function addToCart(service) {
             const options = {};
-            const modalOptions = document.querySelectorAll(`#modal .modal-option select, #modal .modal-option textarea`);
+            const modalOptions = document.querySelectorAll(`#modal .modal-option select, #modal .modal-option textarea, #modal .modal-option input`);
+            
             modalOptions.forEach(input => {
                 options[input.name] = input.value;
             });
 
-            const price = modalPriceDisplay.textContent.replace('Total Price: ₹', '');
-            const order = {
+            const priceText = modalPriceDisplay.textContent;
+            let price = 0;
+            
+            if (priceText && priceText !== 'Price not available') {
+                price = parseInt(priceText.replace(/\D/g, ''));
+            }
+            
+            cart.push({
                 service: translations.en[`${service}-title`],
-                quantity: options.quantity || options.quantity_books || options.quantity_sheets || 1,
-                price: parseInt(price) || 0
-            };
-            cart.push(order);
-            updateCartDisplay();
-            if (cart.length > 0) {
-                document.getElementById('empty-cart').style.display = 'none';
-                document.getElementById('order-summary').classList.remove('hidden');
-            }
-
-            addToCartBtn.style.display = 'none';
-            const goToCartBtn = document.createElement('a');
-            goToCartBtn.className = 'go-to-cart-btn';
-            goToCartBtn.textContent = translations.en["go-to-cart"];
-            goToCartBtn.href = '#';
-            goToCartBtn.onclick = function(e) {
-                e.preventDefault();
-                toggleCartModal();
-                closeModal();
-            };
-            const addAgainBtn = document.createElement('a');
-            addAgainBtn.className = 'add-again-btn';
-            addAgainBtn.textContent = translations.en["add-again"];
-            addAgainBtn.href = '#';
-            addAgainBtn.onclick = function(e) {
-                e.preventDefault();
-                addToCartFromModal(service);
-            };
-            modal.querySelector('.modal-content').appendChild(goToCartBtn);
-            modal.querySelector('.modal-content').appendChild(addAgainBtn);
-        }
-
-        function updateCartDisplay() {
-            const cartItems = document.getElementById('cart-items');
-            const summaryItems = document.getElementById('summary-items');
-            const totalPrice = document.getElementById('total-price');
-            cartItems.innerHTML = '';
-            summaryItems.innerHTML = '';
-
-            if (cart.length === 0) {
-                const emptyCart = document.getElementById('empty-cart');
-                emptyCart.style.display = 'block';
-                document.getElementById('order-summary').classList.add('hidden');
-                totalPrice.textContent = 'Total: ₹0';
-                return;
-            }
-
-            cart.forEach((item, index) => {
-                const cartItem = document.createElement('div');
-                cartItem.className = 'cart-item';
-                cartItem.innerHTML = `
-                    <span>${item.service} - Quantity: ${item.quantity} - ₹${item.price}</span>
-                    <button class="remove-btn" onclick="removeFromCart(${index})">Remove</button>
-                `;
-                cartItems.appendChild(cartItem);
-
-                const summaryItem = document.createElement('div');
-                summaryItem.className = 'cart-item';
-                summaryItem.textContent = `${item.service} - Quantity: ${item.quantity} - ₹${item.price}`;
-                summaryItems.appendChild(summaryItem);
+                options: JSON.stringify(options),
+                price: price
             });
-
-            const total = cart.reduce((sum, item) => sum + item.price, 0);
-            totalPrice.textContent = `Total: ₹${total}`;
+            
+            updateCartDisplay();
+            closeModal();
+            alert('Item added to cart!');
         }
 
         function removeFromCart(index) {
@@ -983,14 +1714,91 @@
             updateCartDisplay();
         }
 
-        function confirmOrder() {
-            if (cart.length > 0) {
-                const message = `Order Details:\n${cart.map(item => `${item.service} - Quantity: ${item.quantity} - ₹${item.price}`).join('\n')}\nTotal: ₹${cart.reduce((sum, item) => sum + item.price, 0)}`;
-                window.open(`https://wa.me/+919838644687?text=${encodeURIComponent(message)}`, '_blank');
-                cart = [];
-                updateCartDisplay();
-                closeCartModal();
+        function generateInvoice() {
+            const now = new Date();
+            const invoiceNumber = 'INV-' + now.getFullYear() + (now.getMonth() + 1).toString().padStart(2, '0') + now.getDate().toString().padStart(2, '0') + '-' + Math.floor(Math.random() * 1000).toString().padStart(3, '0');
+            
+            let itemsHTML = '';
+            let total = 0;
+            
+            cart.forEach(item => {
+                itemsHTML += `
+                    <tr>
+                        <td>${item.service}</td>
+                        <td>${formatOptions(JSON.parse(item.options))}</td>
+                        <td>₹${item.price}</td>
+                    </tr>
+                `;
+                total += item.price;
+            });
+            
+            const invoiceHTML = `
+                <div class="invoice">
+                    <div class="invoice-header">
+                        <div class="invoice-logo">
+                            <i class="fas fa-print"></i>
+                            <span>Farhan Printing Press</span>
+                        </div>
+                        <p>Quality Printing Services in Siddharth Nagar</p>
+                    </div>
+                    <div class="invoice-details">
+                        <p><strong>Invoice Number:</strong> ${invoiceNumber}</p>
+                        <p><strong>Date:</strong> ${now.toLocaleDateString()}</p>
+                        <p><strong>Customer Name:</strong> ${currentUser.name}</p>
+                        <p><strong>Phone:</strong> ${currentUser.phone}</p>
+                    </div>
+                    <table class="invoice-items">
+                        <thead>
+                            <tr>
+                                <th>Service</th>
+                                <th>Details</th>
+                                <th>Price</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${itemsHTML}
+                        </tbody>
+                    </table>
+                    <div class="invoice-total">
+                        <p><strong>Total Amount:</strong> ₹${total}</p>
+                    </div>
+                </div>
+            `;
+            
+            invoiceContent.innerHTML = invoiceHTML;
+            return invoiceHTML;
+        }
+
+        function printInvoice() {
+            generateInvoice();
+            window.print();
+        }
+
+        function checkout() {
+            if (cart.length === 0) {
+                alert('Your cart is empty!');
+                return;
             }
+            
+            generateInvoice();
+            closeCart();
+            openInvoice();
+            
+            let message = "Hello, I would like to place the following order:\n\n";
+            message += `Customer Name: ${currentUser.name}\n`;
+            message += `Phone: ${currentUser.phone}\n\n`;
+            message += `Order Details:\n`;
+            
+            cart.forEach(item => {
+                message += `\nService: ${item.service}\n`;
+                message += `Options:\n${formatOptions(JSON.parse(item.options))}\n`;
+                message += `Price: ₹${item.price}\n`;
+            });
+            
+            const total = cart.reduce((sum, item) => sum + item.price, 0);
+            message += `\nTotal Amount: ₹${total}\n\nPlease confirm my order.`;
+
+            window.open(`https://wa.me/+919838644687?text=${encodeURIComponent(message)}`, '_blank');
         }
     </script>
 </body>
