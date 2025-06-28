@@ -1,10 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Farhan Printing Press offers wedding cards, visiting cards, and more in Siddharth Nagar. Contact us for quality printing services!">
-    <meta name="keywords" content="printing services Siddharth Nagar, wedding cards, visiting cards, bill books, letter pads, handbills, posters, envelopes">
+    <meta name="description"
+        content="Farhan Printing Press offers wedding cards, visiting cards, and more in Siddharth Nagar. Contact us for quality printing services!">
+    <meta name="keywords"
+        content="printing services Siddharth Nagar, wedding cards, visiting cards, bill books, letter pads, handbills, posters, envelopes">
     <meta name="author" content="Farhan Printing Press">
     <title>Farhan Printing Press</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
@@ -34,7 +37,7 @@
             left: 0;
             right: 0;
             z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
 
         .header-container {
@@ -109,7 +112,7 @@
             left: 0;
             right: 0;
             z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
 
         nav ul {
@@ -356,63 +359,6 @@
             font-weight: 300;
         }
 
-        /* Login Modal */
-        #login-modal {
-            display: flex;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.7);
-            justify-content: center;
-            align-items: center;
-            z-index: 2000;
-        }
-
-        .login-content {
-            background: white;
-            padding: 2rem;
-            border-radius: 8px;
-            width: 90%;
-            max-width: 400px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-        }
-
-        .login-content h3 {
-            text-align: center;
-            margin-bottom: 1.5rem;
-            color: #2c3e50;
-        }
-
-        .login-form {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-
-        .login-form input {
-            padding: 0.75rem;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            font-size: 1rem;
-        }
-
-        .login-btn {
-            background: #3498db;
-            color: white;
-            border: none;
-            padding: 0.75rem;
-            border-radius: 4px;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: background 0.3s;
-        }
-
-        .login-btn:hover {
-            background: #2980b9;
-        }
-
         .modal {
             display: none;
             position: fixed;
@@ -602,118 +548,18 @@
             background: #c0392b;
         }
 
-        .invoice {
-            background: white;
-            padding: 2rem;
-            border-radius: 8px;
-            max-width: 500px;
-            margin: 0 auto;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-
-        .invoice-header {
-            text-align: center;
-            margin-bottom: 1.5rem;
-            border-bottom: 1px solid #eee;
-            padding-bottom: 1rem;
-        }
-
-        .invoice-header h2 {
-            color: #2c3e50;
-            margin-bottom: 0.5rem;
-        }
-
-        .invoice-logo {
+        .checkout-form {
             display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-            margin-bottom: 0.5rem;
+            flex-direction: column;
+            gap: 1rem;
+            margin-bottom: 1rem;
         }
 
-        .invoice-logo i {
-            color: #f1c40f;
-            font-size: 1.5rem;
-        }
-
-        .invoice-logo span {
-            font-weight: 700;
-            font-size: 1.2rem;
-        }
-
-        .invoice-details {
-            margin-bottom: 1.5rem;
-        }
-
-        .invoice-details p {
-            margin-bottom: 0.5rem;
-            color: #7f8c8d;
-        }
-
-        .invoice-items {
-            width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 1.5rem;
-        }
-
-        .invoice-items th {
-            background: #f1f1f1;
-            padding: 0.5rem;
-            text-align: left;
-            color: #2c3e50;
-        }
-
-        .invoice-items td {
-            padding: 0.5rem;
-            border-bottom: 1px solid #eee;
-            color: #7f8c8d;
-        }
-
-        .invoice-total {
-            text-align: right;
-            font-weight: bold;
-            color: #2c3e50;
-            font-size: 1.1rem;
-            margin-top: 1rem;
-        }
-
-        .print-btn {
-            display: block;
-            margin: 1rem auto 0;
-            padding: 0.75rem 1.5rem;
-            background-color: #3498db;
-            color: white;
-            border: none;
-            border-radius: 6px;
+        .checkout-form input {
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
             font-size: 1rem;
-            font-weight: 500;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-
-        .print-btn:hover {
-            background-color: #2980b9;
-        }
-
-        @media print {
-            body * {
-                visibility: hidden;
-            }
-            .invoice, .invoice * {
-                visibility: visible;
-            }
-            .invoice {
-                position: absolute;
-                left: 0;
-                top: 0;
-                width: 100%;
-                box-shadow: none;
-                padding: 1rem;
-                margin: 0;
-            }
-            .print-btn {
-                display: none;
-            }
         }
 
         /* Media Queries for Responsiveness */
@@ -808,19 +654,8 @@
         }
     </style>
 </head>
-<body>
-    <!-- Login Modal -->
-    <div id="login-modal">
-        <div class="login-content">
-            <h3>Welcome to Farhan Printing Press</h3>
-            <form class="login-form" id="login-form">
-                <input type="text" id="login-name" placeholder="Your Name" required>
-                <input type="tel" id="login-phone" placeholder="Your Phone Number" required>
-                <button type="submit" class="login-btn">Continue Shopping</button>
-            </form>
-        </div>
-    </div>
 
+<body>
     <header>
         <div class="header-container">
             <div class="logo">
@@ -844,11 +679,14 @@
     <section id="home" class="hero">
         <h2>Your One-Stop Print Solution</h2>
         <p>From Wedding Cards to Business Stationery – We Bring Your Ideas to Life!</p>
-        <a href="https://wa.me/+919838644687?text=Hello%2C%20I%20want%20to%20learn%20more%20about%20your%20printing%20services%21" target="_blank" class="cta-btn">Contact Us on WhatsApp</a>
+        <a href="https://wa.me/+919838644687?text=Hello%2C%20I%20want%20to%20learn%20more%20about%20your%20printing%20services%21"
+            target="_blank" class="cta-btn">Contact Us on WhatsApp</a>
     </section>
     <section class="home-content">
         <h3>Welcome to Farhan Printing Press</h3>
-        <p>Based in Siddharth Nagar, Farhan Printing Press has been providing high-quality printing and stationery services for over a decade. Whether you need elegant wedding cards, professional visiting cards, or customized business stationery, we're here to deliver exceptional results with a fast turnaround.</p>
+        <p>Based in Siddharth Nagar, Farhan Printing Press has been providing high-quality printing and stationery
+            services for over a decade. Whether you need elegant wedding cards, professional visiting cards, or
+            customized business stationery, we're here to deliver exceptional results with a fast turnaround.</p>
         <div class="home-highlights">
             <div class="highlight">
                 <i class="fas fa-clock"></i>
@@ -907,7 +745,8 @@
     <section id="track-order" class="services">
         <h2>Track Your Order</h2>
         <div class="service-grid">
-            <div class="service-card" onclick="window.open('https://wa.me/+919838644687?text=I%20want%20to%20track%20my%20order', '_blank')">
+            <div class="service-card"
+                onclick="window.open('https://wa.me/+919838644687?text=I%20want%20to%20track%20my%20order', '_blank')">
                 <i class="fas fa-truck"></i>
                 <h3>Track Your Order</h3>
                 <p>Check the status of your order via WhatsApp.</p>
@@ -916,7 +755,8 @@
     </section>
     <section id="contact" class="contact">
         <h2>Contact Us</h2>
-        <p><i class="fas fa-map-marker-alt"></i> <a href="https://maps.app.goo.gl/MoK3G1FZXpAs1Wb79" target="_blank">Near SBI Bank, Belauha Bazar, Siddharth Nagar</a></p>
+        <p><i class="fas fa-map-marker-alt"></i> <a href="https://maps.app.goo.gl/MoK3G1FZXpAs1Wb79"
+                target="_blank">Near SBI Bank, Belauha Bazar, Siddharth Nagar</a></p>
         <p><i class="fas fa-phone"></i> Call Us</p>
         <div class="phone-numbers">
             <a href="tel:+919935644687">+91 99356 44687</a>
@@ -924,8 +764,11 @@
             <a href="tel:+919140242441">+91 91402 42441</a>
         </div>
         <p><i class="fab fa-whatsapp"></i> <a href="https://wa.me/+919838644687" target="_blank">WhatsApp Us</a></p>
-        <p><i class="fab fa-instagram"></i> <a href="https://www.instagram.com/farhan_printing_press?igsh=c3E4dWE3bmF0bWFu" target="_blank">Follow us on Instagram</a></p>
-        <p><i class="fas fa-envelope"></i> <a href="mailto:farhanprintpress@gmail.com">farhanprintpress@gmail.com</a></p>
+        <p><i class="fab fa-instagram"></i> <a
+                href="https://www.instagram.com/farhan_printing_press?igsh=c3E4dWE3bmF0bWFu" target="_blank">Follow us
+                on Instagram</a></p>
+        <p><i class="fas fa-envelope"></i> <a href="mailto:farhanprintpress@gmail.com">farhanprintpress@gmail.com</a>
+        </p>
     </section>
     <footer>
         <p>© 2025 Farhan Printing Press. All rights reserved.</p>
@@ -946,17 +789,15 @@
                 <p>Your cart is empty</p>
             </div>
             <div id="cart-total" class="modal-price"></div>
-            <a href="#" class="whatsapp-btn" onclick="checkout()">Proceed to Checkout</a>
+            <form id="checkout-form" class="checkout-form">
+                <input type="text" id="checkout-name" placeholder="Your Name" required>
+                <input type="tel" id="checkout-phone" placeholder="Your Phone Number" required>
+                <button type="submit" class="whatsapp-btn">Proceed to Checkout</button>
+            </form>
         </div>
     </div>
-    <div id="invoice-modal" class="modal">
-        <div class="modal-content">
-            <span class="close-btn" onclick="closeInvoice()">×</span>
-            <div id="invoice-content"></div>
-            <button class="print-btn" onclick="printInvoice()">Print Invoice</button>
-        </div>
-    </div>
-    <a href="https://wa.me/+919838644687?text=Hello%2C%20I%20have%20a%20question%20about%20your%20printing%20services%21" target="_blank" class="whatsapp-chat">
+    <a href="https://wa.me/+919838644687?text=Hello%2C%20I%20have%20a%20question%20about%20your%20printing%20services%21"
+        target="_blank" class="whatsapp-chat">
         <i class="fab fa-whatsapp"></i>
     </a>
     <script>
@@ -1050,32 +891,60 @@
         const modalDescription = document.getElementById('modal-description');
         const modalPriceDisplay = document.getElementById('modal-price-display');
         const cartModal = document.getElementById('cart-modal');
-        const invoiceModal = document.getElementById('invoice-modal');
-        const invoiceContent = document.getElementById('invoice-content');
-        const loginModal = document.getElementById('login-modal');
-        const loginForm = document.getElementById('login-form');
+        const checkoutForm = document.getElementById('checkout-form');
         let cart = [];
-        let currentUser = null;
 
-        // Show login modal on page load
+        // Initialize cart from localStorage with error handling
+        try {
+            const storedCart = localStorage.getItem('cart');
+            if (storedCart) {
+                cart = JSON.parse(storedCart);
+                if (!Array.isArray(cart)) {
+                    console.error('Invalid cart data in localStorage, resetting cart');
+                    cart = [];
+                    localStorage.setItem('cart', JSON.stringify(cart));
+                }
+            }
+        } catch (e) {
+            console.error('Error parsing cart from localStorage:', e);
+            cart = [];
+            localStorage.setItem('cart', JSON.stringify(cart));
+        }
+
+        // Update cart display on page load
         document.addEventListener('DOMContentLoaded', () => {
-            loginModal.style.display = 'flex';
-        });
-
-        // Handle login form submission
-        loginForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            const name = document.getElementById('login-name').value;
-            const phone = document.getElementById('login-phone').value;
-            
-            if (name && phone) {
-                currentUser = {
-                    name: name,
-                    phone: phone
-                };
-                loginModal.style.display = 'none';
+            console.log('DOM loaded, updating cart display');
+            updateCartDisplay();
+            if (!checkoutForm) {
+                console.error('Checkout form not found');
             }
         });
+
+        // Handle checkout form submission
+        if (checkoutForm) {
+            checkoutForm.addEventListener('submit', (e) => {
+                console.log('Checkout form submitted');
+                e.preventDefault();
+                const nameInput = document.getElementById('checkout-name');
+                const phoneInput = document.getElementById('checkout-phone');
+                if (!nameInput || !phoneInput) {
+                    console.error('Checkout form inputs not found');
+                    alert('Form elements are missing. Please contact support.');
+                    return;
+                }
+                const name = nameInput.value.trim();
+                const phone = phoneInput.value.trim();
+                console.log('Name:', name, 'Phone:', phone);
+
+                if (name && phone) {
+                    checkout(name, phone);
+                } else {
+                    alert('Please enter both name and phone number.');
+                }
+            });
+        } else {
+            console.error('Checkout form not found in DOM');
+        }
 
         const visitingCardPricing = {
             "Normal Visiting Card": {
@@ -1408,398 +1277,470 @@
         };
 
         function updateVisitingCardOptions() {
-            const cardCategory = document.getElementById('card-category-visiting').value;
-            const optionsContainer = document.getElementById('visiting-card-options');
-            let optionsHTML = '';
+            try {
+                console.log('Updating visiting card options');
+                const cardCategory = document.getElementById('card-category-visiting')?.value;
+                const optionsContainer = document.getElementById('visiting-card-options');
+                if (!cardCategory || !optionsContainer) {
+                    console.error('Card category or options container not found');
+                    return;
+                }
 
-            if (cardCategory === 'Normal Visiting Card') {
-                optionsHTML = `
-                    <div class="modal-option">
-                        <label for="printing-sides-visiting">${translations.en["label-printing"]}</label>
-                        <select id="printing-sides-visiting" name="printing_sides" onchange="calculateVisitingCardPrice()">
-                            <option value="1 Side">1 Side</option>
-                            <option value="2 Sides">2 Sides</option>
-                        </select>
-                    </div>
-                    <div class="modal-option">
-                        <label for="quantity-visiting">${translations.en["label-quantity"]}</label>
-                        <select id="quantity-visiting" name="quantity" onchange="calculateVisitingCardPrice()">
-                            <option value="100">100</option>
-                            <option value="200">200</option>
-                            <option value="500">500</option>
-                            <option value="1000">1000</option>
-                        </select>
-                    </div>
-                `;
-            } else if (cardCategory === 'UV Card') {
-                optionsHTML = `
-                    <div class="modal-option">
-                        <label for="printing-sides-visiting">${translations.en["label-printing"]}</label>
-                        <select id="printing-sides-visiting" name="printing_sides" onchange="calculateVisitingCardPrice()">
-                            <option value="1 Side">1 Side</option>
-                            <option value="2 Sides">2 Sides</option>
-                        </select>
-                    </div>
-                    <div class="modal-option">
-                        <label for="quantity-visiting">${translations.en["label-quantity"]}</label>
-                        <select id="quantity-visiting" name="quantity" onchange="calculateVisitingCardPrice()">
-                            <option value="1000">1000</option>
-                            <option value="2000">2000</option>
-                        </select>
-                    </div>
-                `;
-            } else if (cardCategory === 'Gloss Laminated Card') {
-                optionsHTML = `
-                    <div class="modal-option">
-                        <label for="printing-sides-visiting">${translations.en["label-printing"]}</label>
-                        <select id="printing-sides-visiting" name="printing_sides" onchange="calculateVisitingCardPrice()">
-                            <option value="1 side printing + 1 side lamination">1 side printing + 1 side lamination</option>
-                            <option value="2 side printing + 2 side lamination">2 side printing + 2 side lamination</option>
-                        </select>
-                    </div>
-                    <div class="modal-option">
-                        <label for="quantity-visiting">${translations.en["label-quantity"]}</label>
-                        <select id="quantity-visiting" name="quantity" onchange="calculateVisitingCardPrice()">
-                            <option value="100">100</option>
-                            <option value="200">200</option>
-                            <option value="500">500</option>
-                            <option value="1000">1000</option>
-                            <option value="2000">2000</option>
-                            <option value="5000">5000</option>
-                            <option value="10000">10000</option>
-                        </select>
-                    </div>
-                `;
-            } else if (cardCategory === 'Plastic Visiting Card') {
-                optionsHTML = `
-                    <div class="modal-option">
-                        <label>${translations.en["label-printing"]}</label>
-                        <span>1 Side</span>
-                    </div>
-                    <div class="modal-option">
-                        <label for="lamination-visiting">${translations.en["label-lamination"]}</label>
-                        <select id="lamination-visiting" name="lamination" onchange="calculateVisitingCardPrice()">
-                            <option value="with lamination">With Lamination</option>
-                            <option value="without lamination">Without Lamination</option>
-                        </select>
-                    </div>
-                    <div class="modal-option">
-                        <label for="quantity-visiting">${translations.en["label-quantity"]}</label>
-                        <select id="quantity-visiting" name="quantity" onchange="calculateVisitingCardPrice()">
-                            <option value="1000">1000</option>
-                            <option value="2000">2000</option>
-                        </select>
-                    </div>
-                `;
-            } else if (cardCategory === 'Texture + Lamination Visiting Card') {
-                optionsHTML = `
-                    <div class="modal-option">
-                        <label for="printing-sides-visiting">${translations.en["label-printing"]}</label>
-                        <select id="printing-sides-visiting" name="printing_sides" onchange="calculateVisitingCardPrice()">
-                            <option value="1 Side">1 Side</option>
-                            <option value="2 Sides">2 Sides</option>
-                        </select>
-                    </div>
-                    <div class="modal-option">
-                        <label for="quantity-visiting">${translations.en["label-quantity"]}</label>
-                        <select id="quantity-visiting" name="quantity" onchange="calculateVisitingCardPrice()">
-                            <option value="1000">1000</option>
-                            <option value="2000">2000</option>
-                        </select>
-                    </div>
-                `;
-            } else if (cardCategory === 'Gold Foil Visiting Card') {
-                optionsHTML = `
-                    <div class="modal-option">
-                        <label for="printing-sides-visiting">${translations.en["label-printing"]}</label>
-                        <select id="printing-sides-visiting" name="printing_sides" onchange="calculateVisitingCardPrice()">
-                            <option value="1 Side">1 Side</option>
-                            <option value="2 Sides">2 Sides</option>
-                        </select>
-                    </div>
-                    <div class="modal-option">
-                        <label for="quantity-visiting">${translations.en["label-quantity"]}</label>
-                        <select id="quantity-visiting" name="quantity" onchange="calculateVisitingCardPrice()">
-                            <option value="500">500</option>
-                            <option value="1000">1000</option>
-                        </select>
-                    </div>
-                `;
+                let optionsHTML = '';
+
+                if (cardCategory === 'Normal Visiting Card') {
+                    optionsHTML = `
+                        <div class="modal-option">
+                            <label for="printing-sides-visiting">${translations.en["label-printing-sides"]}</label>
+                            <select id="printing-sides-visiting" name="printing_sides" onchange="calculateVisitingCardPrice()">
+                                <option value="1 Side">1 Side</option>
+                                <option value="2 Sides">2 Sides</option>
+                            </select>
+                        </div>
+                        <div class="modal-option">
+                            <label for="quantity-visiting">${translations.en["label-quantity"]}</label>
+                            <select id="quantity-visiting" name="quantity" onchange="calculateVisitingCardPrice()">
+                                <option value="100">100</option>
+                                <option value="200">200</option>
+                                <option value="500">500</option>
+                                <option value="1000">1000</option>
+                            </select>
+                        </div>
+                    `;
+                } else if (cardCategory === 'UV Card') {
+                    optionsHTML = `
+                        <div class="modal-option">
+                            <label for="printing-sides-visiting">${translations.en["label-printing-sides"]}</label>
+                            <select id="printing-sides-visiting" name="printing_sides" onchange="calculateVisitingCardPrice()">
+                                <option value="1 Side">1 Side</option>
+                                <option value="2 Sides">2 Sides</option>
+                            </select>
+                        </div>
+                        <div class="modal-option">
+                            <label for="quantity-visiting">${translations.en["label-quantity"]}</label>
+                            <select id="quantity-visiting" name="quantity" onchange="calculateVisitingCardPrice()">
+                                <option value="1000">1000</option>
+                                <option value="2000">2000</option>
+                            </select>
+                        </div>
+                    `;
+                } else if (cardCategory === 'Gloss Laminated Card') {
+                    optionsHTML = `
+                        <div class="modal-option">
+                            <label for="printing-sides-visiting">${translations.en["label-printing-sides"]}</label>
+                            <select id="printing-sides-visiting" name="printing_sides" onchange="calculateVisitingCardPrice()">
+                                <option value="1 side printing + 1 side lamination">1 side printing + 1 side lamination</option>
+                                <option value="2 side printing + 2 side lamination">2 side printing + 2 side lamination</option>
+                            </select>
+                        </div>
+                        <div class="modal-option">
+                            <label for="quantity-visiting">${translations.en["label-quantity"]}</label>
+                            <select id="quantity-visiting" name="quantity" onchange="calculateVisitingCardPrice()">
+                                <option value="100">100</option>
+                                <option value="200">200</option>
+                                <option value="500">500</option>
+                                <option value="1000">1000</option>
+                                <option value="2000">2000</option>
+                                <option value="5000">5000</option>
+                                <option value="10000">10000</option>
+                            </select>
+                        </div>
+                    `;
+                } else if (cardCategory === 'Plastic Visiting Card') {
+                    optionsHTML = `
+                        <div class="modal-option">
+                            <label>${translations.en["label-printing-sides"]}</label>
+                            <span>1 Side</span>
+                        </div>
+                        <div class="modal-option">
+                            <label for="lamination-visiting">${translations.en["label-lamination"]}</label>
+                            <select id="lamination-visiting" name="lamination" onchange="calculateVisitingCardPrice()">
+                                <option value="with lamination">With Lamination</option>
+                                <option value="without lamination">Without Lamination</option>
+                            </select>
+                        </div>
+                        <div class="modal-option">
+                            <label for="quantity-visiting">${translations.en["label-quantity"]}</label>
+                            <select id="quantity-visiting" name="quantity" onchange="calculateVisitingCardPrice()">
+                                <option value="1000">1000</option>
+                                <option value="2000">2000</option>
+                            </select>
+                        </div>
+                    `;
+                } else if (cardCategory === 'Texture + Lamination Visiting Card') {
+                    optionsHTML = `
+                        <div class="modal-option">
+                            <label for="printing-sides-visiting">${translations.en["label-printing-sides"]}</label>
+                            <select id="printing-sides-visiting" name="printing_sides" onchange="calculateVisitingCardPrice()">
+                                <option value="1 Side">1 Side</option>
+                                <option value="2 Sides">2 Sides</option>
+                            </select>
+                        </div>
+                        <div class="modal-option">
+                            <label for="quantity-visiting">${translations.en["label-quantity"]}</label>
+                            <select id="quantity-visiting" name="quantity" onchange="calculateVisitingCardPrice()">
+                                <option value="1000">1000</option>
+                                <option value="2000">2000</option>
+                            </select>
+                        </div>
+                    `;
+                } else if (cardCategory === 'Gold Foil Visiting Card') {
+                    optionsHTML = `
+                        <div class="modal-option">
+                            <label for="printing-sides-visiting">${translations.en["label-printing-sides"]}</label>
+                            <select id="printing-sides-visiting" name="printing_sides" onchange="calculateVisitingCardPrice()">
+                                <option value="1 Side">1 Side</option>
+                                <option value="2 Sides">2 Sides</option>
+                            </select>
+                        </div>
+                        <div class="modal-option">
+                            <label for="quantity-visiting">${translations.en["label-quantity"]}</label>
+                            <select id="quantity-visiting" name="quantity" onchange="calculateVisitingCardPrice()">
+                                <option value="500">500</option>
+                                <option value="1000">1000</option>
+                            </select>
+                        </div>
+                    `;
+                }
+
+                optionsContainer.innerHTML = optionsHTML;
+                calculateVisitingCardPrice();
+            } catch (e) {
+                console.error('Error in updateVisitingCardOptions:', e);
             }
-
-            optionsContainer.innerHTML = optionsHTML;
-            calculateVisitingCardPrice();
         }
 
         function calculateVisitingCardPrice() {
-            const cardCategory = document.getElementById('card-category-visiting').value;
-            let printingSides = document.getElementById('printing-sides-visiting')?.value;
-            const lamination = document.getElementById('lamination-visiting')?.value;
-            const quantity = parseInt(document.getElementById('quantity-visiting')?.value);
+            try {
+                const cardCategory = document.getElementById('card-category-visiting')?.value;
+                const printingSides = document.getElementById('printing-sides-visiting')?.value;
+                const lamination = document.getElementById('lamination-visiting')?.value;
+                const quantity = parseInt(document.getElementById('quantity-visiting')?.value);
 
-            let priceKey = printingSides;
-            if (cardCategory === 'Plastic Visiting Card') {
-                priceKey = lamination;
+                if (!cardCategory || !quantity) {
+                    console.error('Missing card category or quantity');
+                    modalPriceDisplay.textContent = 'Price not available';
+                    return;
+                }
+
+                let priceKey = printingSides;
+                if (cardCategory === 'Plastic Visiting Card') {
+                    priceKey = lamination;
+                }
+
+                const price = visitingCardPricing[cardCategory]?.[priceKey]?.[quantity] || 0;
+                modalPriceDisplay.textContent = price ? `Total Price: ₹${price}` : 'Price not available';
+                console.log('Visiting card price calculated:', { cardCategory, priceKey, quantity, price });
+            } catch (e) {
+                console.error('Error in calculateVisitingCardPrice:', e);
+                modalPriceDisplay.textContent = 'Price not available';
             }
-
-            const price = visitingCardPricing[cardCategory]?.[priceKey]?.[quantity] || 0;
-            modalPriceDisplay.textContent = price ? `Total Price: ₹${price}` : 'Price not available';
         }
 
         function calculateBillBookPrice() {
-            const size = document.getElementById('size-bill').value;
-            const paperQuality = document.getElementById('paper-quality-bill').value;
-            const binding = document.getElementById('binding-bill').value;
-            const sheetsPerBook = document.getElementById('sheets-per-book-bill').value;
-            const quantity = parseInt(document.getElementById('quantity-bill').value);
-            const key = `${size}_${paperQuality}_${binding}_${sheetsPerBook}`;
-            const price = billBookPricing[key]?.[quantity] || 0;
-            modalPriceDisplay.textContent = price ? `Total Price: ₹${price}` : 'Price not available';
+            try {
+                const size = document.getElementById('size-bill')?.value;
+                const paperQuality = document.getElementById('paper-quality-bill')?.value;
+                const binding = document.getElementById('binding-bill')?.value;
+                const sheetsPerBook = document.getElementById('sheets-per-book-bill')?.value;
+                const quantity = parseInt(document.getElementById('quantity-bill')?.value);
+                const key = `${size}_${paperQuality}_${binding}_${sheetsPerBook}`;
+                const price = billBookPricing[key]?.[quantity] || 0;
+                modalPriceDisplay.textContent = price ? `Total Price: ₹${price}` : 'Price not available';
+                console.log('Bill book price calculated:', { key, quantity, price });
+            } catch (e) {
+                console.error('Error in calculateBillBookPrice:', e);
+                modalPriceDisplay.textContent = 'Price not available';
+            }
         }
 
         function calculateLetterPadPrice() {
-            const size = document.getElementById('size-letter').value;
-            const paperQuality = document.getElementById('paper-quality-letter').value;
-            const printingLocation = document.getElementById('printing-location-letter').value;
-            const quantity = parseInt(document.getElementById('quantity-letter').value);
-            const key = `${size}_${paperQuality}_${printingLocation}`;
-            const price = letterPadPricing[key]?.[quantity] || 0;
-            modalPriceDisplay.textContent = price ? `Total Price: ₹${price}` : 'Price not available';
+            try {
+                const size = document.getElementById('size-letter')?.value;
+                const paperQuality = document.getElementById('paper-quality-letter')?.value;
+                const printingLocation = document.getElementById('printing-location-letter')?.value;
+                const quantity = parseInt(document.getElementById('quantity-letter')?.value);
+                const key = `${size}_${paperQuality}_${printingLocation}`;
+                const price = letterPadPricing[key]?.[quantity] || 0;
+                modalPriceDisplay.textContent = price ? `Total Price: ₹${price}` : 'Price not available';
+                console.log('Letter pad price calculated:', { key, quantity, price });
+            } catch (e) {
+                console.error('Error in calculateLetterPadPrice:', e);
+                modalPriceDisplay.textContent = 'Price not available';
+            }
         }
 
         function calculateHandbillPrice() {
-            const size = document.getElementById('size-handbill').value;
-            const paperQuality = document.getElementById('paper-quality-handbill').value;
-            const printingSides = document.getElementById('printing-sides-handbill').value;
-            const quantity = parseInt(document.getElementById('quantity-handbill').value);
-            const key = `${size}_${paperQuality}_${printingSides}`;
-            const price = handbillPricing[key]?.[quantity] || 0;
-            modalPriceDisplay.textContent = price ? `Total Price: ₹${price}` : 'Price not available';
+            try {
+                const size = document.getElementById('size-handbill')?.value;
+                const paperQuality = document.getElementById('paper-quality-handbill')?.value;
+                const printingSides = document.getElementById('printing-sides-handbill')?.value;
+                const quantity = parseInt(document.getElementById('quantity-handbill')?.value);
+                const key = `${size}_${paperQuality}_${printingSides}`;
+                const price = handbillPricing[key]?.[quantity] || 0;
+                modalPriceDisplay.textContent = price ? `Total Price: ₹${price}` : 'Price not available';
+                console.log('Handbill price calculated:', { key, quantity, price });
+            } catch (e) {
+                console.error('Error in calculateHandbillPrice:', e);
+                modalPriceDisplay.textContent = 'Price not available';
+            }
         }
 
         function calculatePosterPrice() {
-            const size = document.getElementById('size-poster').value;
-            const material = document.getElementById('material-poster').value;
-            const lamination = document.getElementById('lamination-poster').value;
-            const quantity = parseInt(document.getElementById('quantity-poster').value);
-            const key = `${size}_${material}_${lamination}`;
-            const price = posterPricing[key]?.[quantity] || 0;
-            modalPriceDisplay.textContent = price ? `Total Price: ₹${price}` : 'Price not available';
+            try {
+                const size = document.getElementById('size-poster')?.value;
+                const material = document.getElementById('material-poster')?.value;
+                const lamination = document.getElementById('lamination-poster')?.value;
+                const quantity = parseInt(document.getElementById('quantity-poster')?.value);
+                const key = `${size}_${material}_${lamination}`;
+                const price = posterPricing[key]?.[quantity] || 0;
+                modalPriceDisplay.textContent = price ? `Total Price: ₹${price}` : 'Price not available';
+                console.log('Poster price calculated:', { key, quantity, price });
+            } catch (e) {
+                console.error('Error in calculatePosterPrice:', e);
+                modalPriceDisplay.textContent = 'Price not available';
+            }
         }
 
         function calculateEnvelopePrice() {
-            const size = document.getElementById('size-envelope').value;
-            const paperQuality = document.getElementById('paper-quality-envelope').value;
-            const printingLocation = document.getElementById('printing-location-envelope').value;
-            const quantity = parseInt(document.getElementById('quantity-envelope').value);
-            const key = `${size}_${paperQuality}_${printingLocation}`;
-            const price = envelopePricing[key]?.[quantity] || 0;
-            modalPriceDisplay.textContent = price ? `Total Price: ₹${price}` : 'Price not available';
+            try {
+                const size = document.getElementById('size-envelope')?.value;
+                const paperQuality = document.getElementById('paper-quality-envelope')?.value;
+                const printingLocation = document.getElementById('printing-location-envelope')?.value;
+                const quantity = parseInt(document.getElementById('quantity-envelope')?.value);
+                const key = `${size}_${paperQuality}_${printingLocation}`;
+                const price = envelopePricing[key]?.[quantity] || 0;
+                modalPriceDisplay.textContent = price ? `Total Price: ₹${price}` : 'Price not available';
+                console.log('Envelope price calculated:', { key, quantity, price });
+            } catch (e) {
+                console.error('Error in calculateEnvelopePrice:', e);
+                modalPriceDisplay.textContent = 'Price not available';
+            }
         }
 
         function openModal(service) {
-            if (!currentUser) {
-                alert('Please login first');
-                loginModal.style.display = 'flex';
-                return;
+            try {
+                if (!modal || !modalTitle || !modalDescription) {
+                    console.error('Modal elements not found');
+                    return;
+                }
+                const serviceData = services[service];
+                if (!serviceData) {
+                    console.error('Service not found:', service);
+                    return;
+                }
+                modalTitle.textContent = translations.en[serviceData.title] || 'Service';
+                modalDescription.innerHTML = serviceData.description || '';
+                modalPriceDisplay.textContent = '';
+                if (service === 'visiting') updateVisitingCardOptions();
+                if (service === 'bill') calculateBillBookPrice();
+                if (service === 'letter') calculateLetterPadPrice();
+                if (service === 'handbill') calculateHandbillPrice();
+                if (service === 'poster') calculatePosterPrice();
+                if (service === 'envelope') calculateEnvelopePrice();
+                modal.style.display = 'flex';
+                console.log('Modal opened for service:', service);
+            } catch (e) {
+                console.error('Error in openModal:', e);
             }
-            
-            const serviceData = services[service];
-            modalTitle.textContent = translations.en[serviceData.title];
-            modalDescription.innerHTML = serviceData.description;
-            modalPriceDisplay.textContent = '';
-            if (service === 'visiting') updateVisitingCardOptions();
-            if (service === 'bill') calculateBillBookPrice();
-            if (service === 'letter') calculateLetterPadPrice();
-            if (service === 'handbill') calculateHandbillPrice();
-            if (service === 'poster') calculatePosterPrice();
-            if (service === 'envelope') calculateEnvelopePrice();
-            modal.style.display = 'flex';
         }
 
         function closeModal() {
-            modal.style.display = 'none';
+            try {
+                if (modal) {
+                    modal.style.display = 'none';
+                    console.log('Modal closed');
+                }
+            } catch (e) {
+                console.error('Error in closeModal:', e);
+            }
         }
 
         function openCart() {
-            if (!currentUser) {
-                alert('Please login first');
-                loginModal.style.display = 'flex';
-                return;
+            try {
+                if (!cartModal) {
+                    console.error('Cart modal not found');
+                    return;
+                }
+                updateCartDisplay();
+                cartModal.style.display = 'flex';
+                console.log('Cart modal opened');
+            } catch (e) {
+                console.error('Error in openCart:', e);
             }
-            updateCartDisplay();
-            cartModal.style.display = 'flex';
         }
 
         function closeCart() {
-            cartModal.style.display = 'none';
-        }
-
-        function openInvoice() {
-            invoiceModal.style.display = 'flex';
-        }
-
-        function closeInvoice() {
-            invoiceModal.style.display = 'none';
+            try {
+                if (cartModal) {
+                    cartModal.style.display = 'none';
+                    console.log('Cart modal closed');
+                }
+            } catch (e) {
+                console.error('Error in closeCart:', e);
+            }
         }
 
         function updateCartDisplay() {
-            const cartItemsEl = document.getElementById('cart-items');
-            const cartCountEl = document.querySelector('.cart-count');
-            const cartTotalEl = document.getElementById('cart-total');
-            
-            if (cart.length === 0) {
-                cartItemsEl.innerHTML = '<p>Your cart is empty</p>';
-                cartTotalEl.textContent = '';
-                cartCountEl.textContent = '0';
-                return;
+            try {
+                const cartItemsEl = document.getElementById('cart-items');
+                const cartCountEl = document.querySelector('.cart-count');
+                const cartTotalEl = document.getElementById('cart-total');
+
+                if (!cartItemsEl || !cartCountEl || !cartTotalEl) {
+                    console.error('Cart display elements not found');
+                    return;
+                }
+
+                if (!cart || cart.length === 0) {
+                    cartItemsEl.innerHTML = '<p>Your cart is empty</p>';
+                    cartTotalEl.textContent = '';
+                    cartCountEl.textContent = '0';
+                    console.log('Cart is empty');
+                    return;
+                }
+
+                let itemsHTML = '';
+                let total = 0;
+
+                cart.forEach((item, index) => {
+                    try {
+                        itemsHTML += `
+                            <div class="cart-item">
+                                <h4>${item.service || 'Unknown Service'}</h4>
+                                <p>${formatOptions(JSON.parse(item.options || '{}'))}</p>
+                                <p>Price: ₹${item.price || 0}</p>
+                                <button onclick="removeFromCart(${index})">Remove</button>
+                            </div>
+                        `;
+                        total += item.price || 0;
+                    } catch (e) {
+                        console.error(`Error rendering cart item ${index}:`, e);
+                    }
+                });
+
+                cartItemsEl.innerHTML = itemsHTML;
+                cartTotalEl.textContent = `Total: ₹${total}`;
+                cartCountEl.textContent = cart.length;
+                console.log('Cart updated:', cart);
+            } catch (e) {
+                console.error('Error in updateCartDisplay:', e);
             }
-            
-            let itemsHTML = '';
-            let total = 0;
-            
-            cart.forEach((item, index) => {
-                itemsHTML += `
-                    <div class="cart-item">
-                        <h4>${item.service}</h4>
-                        <p>${formatOptions(JSON.parse(item.options))}</p>
-                        <p>Price: ₹${item.price}</p>
-                        <button onclick="removeFromCart(${index})">Remove</button>
-                    </div>
-                `;
-                total += item.price;
-            });
-            
-            cartItemsEl.innerHTML = itemsHTML;
-            cartTotalEl.textContent = `Total: ₹${total}`;
-            cartCountEl.textContent = cart.length;
         }
 
         function formatOptions(options) {
-            let formatted = '';
-            for (const [key, value] of Object.entries(options)) {
-                formatted += `${key.replace(/_/g, ' ')}: ${value}<br>`;
+            try {
+                let formatted = '';
+                for (const [key, value] of Object.entries(options)) {
+                    formatted += `${key.replace(/_/g, ' ')}: ${value}<br>`;
+                }
+                return formatted || 'No options selected';
+            } catch (e) {
+                console.error('Error in formatOptions:', e);
+                return 'Error formatting options';
             }
-            return formatted;
         }
 
         function addToCart(service) {
-            const options = {};
-            const modalOptions = document.querySelectorAll(`#modal .modal-option select, #modal .modal-option textarea, #modal .modal-option input`);
-            
-            modalOptions.forEach(input => {
-                options[input.name] = input.value;
-            });
+            try {
+                console.log('Adding to cart:', service);
+                const options = {};
+                const modalOptions = document.querySelectorAll(`#modal .modal-option select, #modal .modal-option textarea, #modal .modal-option input`);
 
-            const priceText = modalPriceDisplay.textContent;
-            let price = 0;
-            
-            if (priceText && priceText !== 'Price not available') {
-                price = parseInt(priceText.replace(/\D/g, ''));
+                if (!modalOptions.length) {
+                    console.error('No modal options found for service:', service);
+                    alert('Unable to add to cart: No options available');
+                    return;
+                }
+
+                modalOptions.forEach(input => {
+                    if (input.name && input.value) {
+                        options[input.name] = input.value;
+                    }
+                });
+
+                const priceText = modalPriceDisplay?.textContent || '';
+                let price = 0;
+
+                if (priceText && priceText !== 'Price not available') {
+                    price = parseInt(priceText.replace(/\D/g, '')) || 0;
+                }
+
+                const cartItem = {
+                    service: translations.en[`${service}-title`] || service,
+                    options: JSON.stringify(options),
+                    price: price
+                };
+
+                cart.push(cartItem);
+                localStorage.setItem('cart', JSON.stringify(cart));
+                updateCartDisplay();
+                closeModal();
+                alert('Item added to cart!');
+                console.log('Cart item added:', cartItem);
+            } catch (e) {
+                console.error('Error in addToCart:', e);
+                alert('Error adding item to cart');
             }
-            
-            cart.push({
-                service: translations.en[`${service}-title`],
-                options: JSON.stringify(options),
-                price: price
-            });
-            
-            updateCartDisplay();
-            closeModal();
-            alert('Item added to cart!');
         }
 
         function removeFromCart(index) {
-            cart.splice(index, 1);
-            updateCartDisplay();
-        }
-
-        function generateInvoice() {
-            const now = new Date();
-            const invoiceNumber = 'INV-' + now.getFullYear() + (now.getMonth() + 1).toString().padStart(2, '0') + now.getDate().toString().padStart(2, '0') + '-' + Math.floor(Math.random() * 1000).toString().padStart(3, '0');
-            
-            let itemsHTML = '';
-            let total = 0;
-            
-            cart.forEach(item => {
-                itemsHTML += `
-                    <tr>
-                        <td>${item.service}</td>
-                        <td>${formatOptions(JSON.parse(item.options))}</td>
-                        <td>₹${item.price}</td>
-                    </tr>
-                `;
-                total += item.price;
-            });
-            
-            const invoiceHTML = `
-                <div class="invoice">
-                    <div class="invoice-header">
-                        <div class="invoice-logo">
-                            <i class="fas fa-print"></i>
-                            <span>Farhan Printing Press</span>
-                        </div>
-                        <p>Quality Printing Services in Siddharth Nagar</p>
-                    </div>
-                    <div class="invoice-details">
-                        <p><strong>Invoice Number:</strong> ${invoiceNumber}</p>
-                        <p><strong>Date:</strong> ${now.toLocaleDateString()}</p>
-                        <p><strong>Customer Name:</strong> ${currentUser.name}</p>
-                        <p><strong>Phone:</strong> ${currentUser.phone}</p>
-                    </div>
-                    <table class="invoice-items">
-                        <thead>
-                            <tr>
-                                <th>Service</th>
-                                <th>Details</th>
-                                <th>Price</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            ${itemsHTML}
-                        </tbody>
-                    </table>
-                    <div class="invoice-total">
-                        <p><strong>Total Amount:</strong> ₹${total}</p>
-                    </div>
-                </div>
-            `;
-            
-            invoiceContent.innerHTML = invoiceHTML;
-            return invoiceHTML;
-        }
-
-        function printInvoice() {
-            generateInvoice();
-            window.print();
-        }
-
-        function checkout() {
-            if (cart.length === 0) {
-                alert('Your cart is empty!');
-                return;
+            try {
+                if (index >= 0 && index < cart.length) {
+                    console.log('Removing cart item at index:', index);
+                    cart.splice(index, 1);
+                    localStorage.setItem('cart', JSON.stringify(cart));
+                    updateCartDisplay();
+                } else {
+                    console.error('Invalid cart index:', index);
+                }
+            } catch (e) {
+                console.error('Error in removeFromCart:', e);
             }
-            
-            generateInvoice();
-            closeCart();
-            openInvoice();
-            
-            let message = "Hello, I would like to place the following order:\n\n";
-            message += `Customer Name: ${currentUser.name}\n`;
-            message += `Phone: ${currentUser.phone}\n\n`;
-            message += `Order Details:\n`;
-            
-            cart.forEach(item => {
-                message += `\nService: ${item.service}\n`;
-                message += `Options:\n${formatOptions(JSON.parse(item.options))}\n`;
-                message += `Price: ₹${item.price}\n`;
-            });
-            
-            const total = cart.reduce((sum, item) => sum + item.price, 0);
-            message += `\nTotal Amount: ₹${total}\n\nPlease confirm my order.`;
-
-            window.open(`https://wa.me/+919838644687?text=${encodeURIComponent(message)}`, '_blank');
         }
+
+        function checkout(name, phone) {
+            try {
+                if (!cart.length) {
+                    alert('Your cart is empty!');
+                    console.log('Checkout attempted with empty cart');
+                    return;
+                }
+
+                // Store customer details in localStorage
+                localStorage.setItem('customer', JSON.stringify({ name, phone }));
+
+                // Generate WhatsApp message
+                let message = "Hello, I would like to place the following order:\n\n";
+                message += `Customer Name: ${name}\n`;
+                message += `Phone: ${phone}\n\n`;
+                message += `Order Details:\n`;
+
+                cart.forEach(item => {
+                    try {
+                        message += `\nService: ${item.service || 'Unknown Service'}\n`;
+                        message += `Options:\n${formatOptions(JSON.parse(item.options || '{}'))}\n`;
+                        message += `Price: ₹${item.price || 0}\n`;
+                    } catch (e) {
+                        console.error('Error formatting cart item in checkout:', e);
+                    }
+                });
+
+                const total = cart.reduce((sum, item) => sum + (item.price || 0), 0);
+                message += `\nTotal Amount: ₹${total}\n\nPlease confirm my order.`;
+
+                // Open WhatsApp link in a new tab
+                window.open(`https://wa.me/+919838644687?text=${encodeURIComponent(message)}`, '_blank');
+
+                // Redirect to invoice page
+                window.location.href = 'invoice.html';
+            } catch (e) {
+                console.error('Error in checkout:', e);
+                alert('Error during checkout');
+            }
+        }
+
     </script>
 </body>
+
 </html>
