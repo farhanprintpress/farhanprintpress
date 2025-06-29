@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Design your custom envelopes with Farhan Printing Press.">
-    <meta name="keywords" content="envelopes, printing services Siddharth Nagar">
+    <meta name="description" content="Professional envelope printing services by Farhan Printing Press.">
+    <meta name="keywords" content="envelope printing, printing services Siddharth Nagar">
     <meta name="author" content="Farhan Printing Press">
     <title>Envelope Printing</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
@@ -218,25 +218,44 @@
             font-weight: 600;
         }
 
-        .service-options .form-group {
-            margin-bottom: 1rem;
+        .form-group {
+            margin-bottom: 1.5rem;
             text-align: left;
         }
 
-        .service-options label {
+        .form-group label {
             font-weight: 600;
             color: #2c3e50;
             display: block;
             margin-bottom: 0.5rem;
         }
 
-        .service-options select {
-            width: 100%;
-            padding: 0.5rem;
+        .option-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 0.5rem;
+        }
+
+        .option-btn {
+            padding: 0.5rem 1rem;
             border: 1px solid #dfe6e9;
             border-radius: 6px;
-            font-size: 0.9rem;
             background: #f9f9f9;
+            text-align: center;
+            cursor: pointer;
+            transition: background-color 0.3s, border-color 0.3s;
+            white-space: normal;
+            word-wrap: break-word;
+        }
+
+        .option-btn.active {
+            background-color: #3498db;
+            color: white;
+            border-color: #3498db;
+        }
+
+        .option-btn:hover {
+            background-color: #ecf0f1;
         }
 
         .service-options .whatsapp-btn {
@@ -520,6 +539,7 @@
             cursor: pointer;
             font-size: 0.8rem;
             transition: background 0.3s;
+            margin-right: 0.5rem;
         }
 
         .cart-item button:hover {
@@ -603,57 +623,59 @@
     </nav>
     <section class="hero">
         <h2>Envelope Printing</h2>
-        <p>Create customized envelopes for professional use.</p>
+        <p>High-quality envelopes tailored to your needs.</p>
         <button class="cta-btn" onclick="openModal()">Order Now</button>
     </section>
     <section class="service-content">
         <div class="service-options">
             <h2>Envelope Options</h2>
             <div class="form-group">
-                <label for="price-range">Price Range (per 100)</label>
-                <select id="price-range" name="price_range">
-                    <option value="30-60 rupees">30-60 rupees</option>
-                    <option value="60-90 rupees">60-90 rupees</option>
-                    <option value="90-120 rupees">90-120 rupees</option>
-                </select>
+                <label for="envelope-category">Envelope Category</label>
+                <div class="option-grid" id="envelope-category">
+                    <button class="option-btn" data-value="Envelope">Envelope</button>
+                </div>
             </div>
-            <div class="form-group">
-                <label for="quantity">Quantity (Sets of 100)</label>
-                <select id="quantity" name="quantity">
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="5">5</option>
-                    <option value="10">10</option>
-                </select>
-            </div>
-            <div class="form-group">
+            <div class="form-group" id="size-group" style="display: none;">
                 <label for="size">Size</label>
-                <select id="size" name="size">
-                    <option value="DL">DL (110x220 mm)</option>
-                    <option value="C5">C5 (162x229 mm)</option>
-                    <option value="Custom">Custom</option>
-                </select>
+                <div class="option-grid" id="size">
+                    <button class="option-btn" data-value="9x4">9x4</button>
+                    <button class="option-btn" data-value="10x4.5">10x4.5</button>
+                    <button class="option-btn" data-value="11 x 5">11 x 5</button>
+                    <button class="option-btn" data-value="7 x 5 (top open)">7 x 5 (top open)</button>
+                </div>
             </div>
-            <div class="form-group">
-                <label for="paper-quality">Paper Quality</label>
-                <select id="paper-quality" name="paper_quality">
-                    <option value="Standard">Standard</option>
-                    <option value="Premium">Premium</option>
-                </select>
+            <div class="form-group" id="color-group" style="display: none;">
+                <label for="color">Color</label>
+                <div class="option-grid" id="color">
+                    <button class="option-btn" data-value="1 color">1 color</button>
+                    <button class="option-btn" data-value="2 color">2 color</button>
+                    <button class="option-btn" data-value="multicolor (4 color)">multicolor (4 color)</button>
+                </div>
             </div>
-            <div class="form-group">
-                <label for="printing-location">Printing Location</label>
-                <select id="printing-location" name="printing_location">
-                    <option value="Front">Front Only</option>
-                    <option value="Front and Back">Front and Back</option>
-                </select>
+            <div class="form-group" id="thickness-group" style="display: none;">
+                <label for="thickness">Thickness</label>
+                <div class="option-grid" id="thickness">
+                    <button class="option-btn" data-value="70 GSM">70 GSM</button>
+                    <button class="option-btn" data-value="80 GSM">80 GSM</button>
+                    <button class="option-btn" data-value="100 GSM">100 GSM</button>
+                </div>
             </div>
-            <button class="whatsapp-btn" onclick="addToCart()">Add to Cart</button>
+            <div class="form-group" id="quantity-group" style="display: none;">
+                <label for="quantity">Quantity</label>
+                <div class="option-grid" id="quantity">
+                    <button class="option-btn" data-value="100">100</button>
+                    <button class="option-btn" data-value="500">500</button>
+                    <button class="option-btn" data-value="1000">1000</button>
+                </div>
+            </div>
+            <div id="price-display" class="modal-price" style="margin-top: 1rem; display: none;">Price: ₹0</div>
+            <button id="add-to-cart-btn" class="whatsapp-btn" onclick="addToCart()">Add to Cart</button>
+            <a href="#" class="whatsapp-btn" onclick="openCart(); return false;" style="margin-top: 1rem;">Go to Cart</a>
         </div>
         <div class="service-images">
             <div class="service-image">
                 <img src="https://images.unsplash.com/photo-1591123120675-6f7f1a4b8?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Example Envelope">
-                <p>Example of a premium envelope with front printing.</p>
+                <p>Example of a professional envelope.</p>
             </div>
         </div>
     </section>
@@ -709,7 +731,7 @@
                 "label-quantity-books": "Quantity (Books)",
                 "label-quantity-sheets": "Quantity (Sheets)",
                 "label-card-category": "Card Category",
-                "label-printing-sides": "Printing",
+                "label-printing": "Printing",
                 "label-name": "Your Name"
             }
         };
@@ -720,7 +742,86 @@
         const modalPriceDisplay = document.getElementById('modal-price-display');
         const cartModal = document.getElementById('cart-modal');
         const checkoutForm = document.getElementById('checkout-form');
+        const addToCartBtn = document.getElementById('add-to-cart-btn');
         let cart = [];
+        let selectedOptions = {
+            'envelope-category': null,
+            'size': null,
+            'color': null,
+            'thickness': null,
+            'quantity': null
+        };
+
+        const priceData = {
+            'Envelope': {
+                '1 color': {
+                    '9x4': {
+                        '70 GSM': { 100: 150, 500: 700, 1000: 1300 },
+                        '80 GSM': { 100: 170, 500: 750, 1000: 1400 },
+                        '100 GSM': { 100: 200, 500: 850, 1000: 1600 }
+                    },
+                    '10x4.5': {
+                        '70 GSM': { 100: 160, 500: 720, 1000: 1350 },
+                        '80 GSM': { 100: 180, 500: 780, 1000: 1450 },
+                        '100 GSM': { 100: 210, 500: 880, 1000: 1650 }
+                    },
+                    '11 x 5': {
+                        '70 GSM': { 100: 170, 500: 740, 1000: 1400 },
+                        '80 GSM': { 100: 190, 500: 800, 1000: 1500 },
+                        '100 GSM': { 100: 220, 500: 900, 1000: 1700 }
+                    },
+                    '7 x 5 (top open)': {
+                        '70 GSM': { 100: 140, 500: 680, 1000: 1250 },
+                        '80 GSM': { 100: 160, 500: 740, 1000: 1350 },
+                        '100 GSM': { 100: 190, 500: 840, 1000: 1550 }
+                    }
+                },
+                '2 color': {
+                    '9x4': {
+                        '70 GSM': { 100: 200, 500: 900, 1000: 1700 },
+                        '80 GSM': { 100: 220, 500: 950, 1000: 1800 },
+                        '100 GSM': { 100: 250, 500: 1050, 1000: 2000 }
+                    },
+                    '10x4.5': {
+                        '70 GSM': { 100: 210, 500: 920, 1000: 1750 },
+                        '80 GSM': { 100: 230, 500: 980, 1000: 1850 },
+                        '100 GSM': { 100: 260, 500: 1100, 1000: 2050 }
+                    },
+                    '11 x 5': {
+                        '70 GSM': { 100: 220, 500: 940, 1000: 1800 },
+                        '80 GSM': { 100: 240, 500: 1000, 1000: 1900 },
+                        '100 GSM': { 100: 270, 500: 1120, 1000: 2100 }
+                    },
+                    '7 x 5 (top open)': {
+                        '70 GSM': { 100: 190, 500: 880, 1000: 1650 },
+                        '80 GSM': { 100: 210, 500: 940, 1000: 1750 },
+                        '100 GSM': { 100: 240, 500: 1040, 1000: 1950 }
+                    }
+                },
+                'multicolor (4 color)': {
+                    '9x4': {
+                        '70 GSM': { 100: 300, 500: 1300, 1000: 2500 },
+                        '80 GSM': { 100: 320, 500: 1350, 1000: 2600 },
+                        '100 GSM': { 100: 350, 500: 1450, 1000: 2800 }
+                    },
+                    '10x4.5': {
+                        '70 GSM': { 100: 310, 500: 1320, 1000: 2550 },
+                        '80 GSM': { 100: 330, 500: 1370, 1000: 2650 },
+                        '100 GSM': { 100: 360, 500: 1470, 1000: 2850 }
+                    },
+                    '11 x 5': {
+                        '70 GSM': { 100: 320, 500: 1340, 1000: 2600 },
+                        '80 GSM': { 100: 340, 500: 1390, 1000: 2700 },
+                        '100 GSM': { 100: 370, 500: 1490, 1000: 2900 }
+                    },
+                    '7 x 5 (top open)': {
+                        '70 GSM': { 100: 290, 500: 1280, 1000: 2450 },
+                        '80 GSM': { 100: 310, 500: 1330, 1000: 2550 },
+                        '100 GSM': { 100: 340, 500: 1430, 1000: 2750 }
+                    }
+                }
+            }
+        };
 
         try {
             const storedCart = localStorage.getItem('cart');
@@ -741,6 +842,7 @@
         document.addEventListener('DOMContentLoaded', () => {
             console.log('DOM loaded, updating cart display');
             updateCartDisplay();
+            initializeButtons();
             if (!checkoutForm) {
                 console.error('Checkout form not found');
             }
@@ -769,6 +871,115 @@
             });
         } else {
             console.error('Checkout form not found in DOM');
+        }
+
+        function initializeButtons() {
+            const envelopeCategory = document.getElementById('envelope-category');
+            if (envelopeCategory) {
+                envelopeCategory.querySelectorAll('.option-btn').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        envelopeCategory.querySelectorAll('.option-btn').forEach(b => b.classList.remove('active'));
+                        btn.classList.add('active');
+                        selectedOptions['envelope-category'] = btn.getAttribute('data-value');
+                        updateOptions();
+                        console.log('Envelope category selected:', selectedOptions['envelope-category']);
+                    });
+                });
+            } else {
+                console.error('Element with id envelope-category not found');
+            }
+        }
+
+        function updateOptions() {
+            const category = selectedOptions['envelope-category'];
+            const sizeGroup = document.getElementById('size-group');
+            const colorGroup = document.getElementById('color-group');
+            const thicknessGroup = document.getElementById('thickness-group');
+            const quantityGroup = document.getElementById('quantity-group');
+            const priceDisplay = document.getElementById('price-display');
+
+            if (sizeGroup && colorGroup && thicknessGroup && quantityGroup && priceDisplay) {
+                sizeGroup.style.display = 'none';
+                colorGroup.style.display = 'none';
+                thicknessGroup.style.display = 'none';
+                quantityGroup.style.display = 'none';
+                priceDisplay.style.display = 'none';
+                selectedOptions['size'] = null;
+                selectedOptions['color'] = null;
+                selectedOptions['thickness'] = null;
+                selectedOptions['quantity'] = null;
+
+                if (category) {
+                    updateDynamicButtons('size', { '9x4': '9x4', '10x4.5': '10x4.5', '11 x 5': '11 x 5', '7 x 5 (top open)': '7 x 5 (top open)' });
+                    sizeGroup.style.display = 'block';
+                    updateDynamicButtons('color', { '1 color': '1 color', '2 color': '2 color', 'multicolor (4 color)': 'multicolor (4 color)' });
+                    colorGroup.style.display = 'block';
+                    updateDynamicButtons('thickness', { '70 GSM': '70 GSM', '80 GSM': '80 GSM', '100 GSM': '100 GSM' });
+                    thicknessGroup.style.display = 'block';
+                    updateQuantityButtons([100, 500, 1000]);
+                    quantityGroup.style.display = 'block';
+                    priceDisplay.style.display = 'block';
+                    updatePrice();
+                }
+            } else {
+                console.error('Option groups or price display not found');
+            }
+        }
+
+        function updateDynamicButtons(containerId, options) {
+            const container = document.getElementById(containerId + '-group');
+            const optionGrid = document.getElementById(containerId);
+            if (container && optionGrid) {
+                optionGrid.innerHTML = '';
+                Object.keys(options).forEach(option => {
+                    const btn = document.createElement('button');
+                    btn.className = 'option-btn';
+                    btn.setAttribute('data-value', option);
+                    btn.textContent = option;
+                    btn.addEventListener('click', () => {
+                        optionGrid.querySelectorAll('.option-btn').forEach(b => b.classList.remove('active'));
+                        btn.classList.add('active');
+                        if (containerId === 'size') {
+                            selectedOptions['size'] = option;
+                        } else if (containerId === 'color') {
+                            selectedOptions['color'] = option;
+                        } else if (containerId === 'thickness') {
+                            selectedOptions['thickness'] = option;
+                        }
+                        updatePrice();
+                        console.log(`${containerId} selected:`, option);
+                    });
+                    optionGrid.appendChild(btn);
+                });
+                container.style.display = 'block';
+            } else {
+                console.error(`Element with id ${containerId}-group or ${containerId} not found`);
+            }
+        }
+
+        function updateQuantityButtons(quantities) {
+            const container = document.getElementById('quantity-group');
+            const optionGrid = document.getElementById('quantity');
+            if (container && optionGrid) {
+                optionGrid.innerHTML = '';
+                quantities.forEach(qty => {
+                    const btn = document.createElement('button');
+                    btn.className = 'option-btn';
+                    btn.setAttribute('data-value', qty);
+                    btn.textContent = qty;
+                    btn.addEventListener('click', () => {
+                        optionGrid.querySelectorAll('.option-btn').forEach(b => b.classList.remove('active'));
+                        btn.classList.add('active');
+                        selectedOptions['quantity'] = qty;
+                        updatePrice();
+                        console.log('Quantity selected:', qty);
+                    });
+                    optionGrid.appendChild(btn);
+                });
+                container.style.display = 'block';
+            } else {
+                console.error('Element with id quantity-group or quantity not found');
+            }
         }
 
         function openModal() {
@@ -843,10 +1054,11 @@
 
                 cart.forEach((item, index) => {
                     try {
+                        const options = JSON.parse(item.options || '{}');
                         itemsHTML += `
                             <div class="cart-item">
                                 <h4>${item.service || 'Unknown Service'}</h4>
-                                <p>${formatOptions(JSON.parse(item.options || '{}'))}</p>
+                                <p>${formatOptions(options)}</p>
                                 <p>Price: ₹${item.price || 0}</p>
                                 <button onclick="removeFromCart(${index})">Remove</button>
                             </div>
@@ -881,45 +1093,51 @@
 
         function updatePrice() {
             try {
-                const priceRange = document.getElementById('price-range').value;
-                const quantity = document.getElementById('quantity').value;
-                const basePrice = parseInt(priceRange.split('-')[0]) || 0;
-                const totalPrice = (basePrice * parseInt(quantity)) / 100;
-                modalPriceDisplay.textContent = `Price: ₹${totalPrice}`;
-                console.log('Price updated:', totalPrice);
+                const category = selectedOptions['envelope-category'];
+                const size = selectedOptions['size'];
+                const color = selectedOptions['color'];
+                const thickness = selectedOptions['thickness'];
+                const quantity = selectedOptions['quantity'];
+                const priceDisplay = document.getElementById('price-display');
+
+                if (category && size && color && thickness && quantity) {
+                    const price = priceData[category][color][size][thickness][quantity] || 0;
+                    if (priceDisplay) {
+                        priceDisplay.textContent = `Price: ₹${price}`;
+                    }
+                } else if (priceDisplay) {
+                    priceDisplay.textContent = 'Price: Select all options';
+                }
+                console.log('Price updated:', priceDisplay ? priceDisplay.textContent : 'Price display not found');
             } catch (e) {
                 console.error('Error in updatePrice:', e);
-                modalPriceDisplay.textContent = 'Price: Error';
+                const priceDisplay = document.getElementById('price-display');
+                if (priceDisplay) priceDisplay.textContent = 'Price: Error';
             }
         }
 
-        ['price-range', 'quantity', 'size', 'paper-quality', 'printing-location'].forEach(id => {
-            const element = document.getElementById(id);
-            if (element) {
-                element.addEventListener('change', updatePrice);
-            } else {
-                console.error(`Element with id ${id} not found`);
-            }
-        });
-
         function addToCart() {
             try {
-                const priceRange = document.getElementById('price-range').value;
-                const quantity = document.getElementById('quantity').value;
-                const size = document.getElementById('size').value;
-                const paperQuality = document.getElementById('paper-quality').value;
-                const printingLocation = document.getElementById('printing-location').value;
-                const price = parseInt(priceRange.split('-')[0]) || 0;
+                if (Object.values(selectedOptions).some(val => val === null)) {
+                    alert('Please select all options before adding to cart.');
+                    return;
+                }
+
+                const category = selectedOptions['envelope-category'];
+                const size = selectedOptions['size'];
+                const color = selectedOptions['color'];
+                const thickness = selectedOptions['thickness'];
+                const quantity = selectedOptions['quantity'];
+                const price = priceData[category][color][size][thickness][quantity] || 0;
 
                 const cartItem = {
                     service: 'Envelope Printing',
-                    options: JSON.stringify({ 'price_range': priceRange, 'quantity': quantity, 'size': size, 'paper_quality': paperQuality, 'printing_location': printingLocation }),
-                    price: (price * parseInt(quantity)) / 100
+                    options: JSON.stringify({ 'envelope-category': category, 'size': size, 'color': color, 'thickness': thickness, 'quantity': quantity }),
+                    price: price
                 };
 
                 cart.push(cartItem);
                 localStorage.setItem('cart', JSON.stringify(cart));
-                closeModal();
                 updateCartDisplay();
                 alert('Item added to cart!');
                 console.log('Item added to cart:', cartItem);
