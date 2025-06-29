@@ -1,4 +1,43 @@
-<!DOCTYPE html>
+<script type="text/javascript">
+        var gk_isXlsx = false;
+        var gk_xlsxFileLookup = {};
+        var gk_fileData = {};
+        function filledCell(cell) {
+          return cell !== '' && cell != null;
+        }
+        function loadFileData(filename) {
+        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
+            try {
+                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
+                var firstSheetName = workbook.SheetNames[0];
+                var worksheet = workbook.Sheets[firstSheetName];
+
+                // Convert sheet to JSON to filter blank rows
+                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
+                // Filter out blank rows (rows where all cells are empty, null, or undefined)
+                var filteredData = jsonData.filter(row => row.some(filledCell));
+
+                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
+                var headerRowIndex = filteredData.findIndex((row, index) =>
+                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
+                );
+                // Fallback
+                if (headerRowIndex === -1 || headerRowIndex > 25) {
+                  headerRowIndex = 0;
+                }
+
+                // Convert filtered JSON back to CSV
+                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
+                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
+                return csv;
+            } catch (e) {
+                console.error(e);
+                return "";
+            }
+        }
+        return gk_fileData[filename] || "";
+        }
+        </script><!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -705,37 +744,37 @@
     <section id="services" class="services">
         <h2>Our Services</h2>
         <div class="service-grid">
-            <div class="service-card" onclick="openModal('wedding')">
+            <div class="service-card" onclick="window.location.href='wedding_card.html'">
                 <i class="fas fa-ring"></i>
                 <h3>Wedding Card Printing</h3>
                 <p>Elegant and customizable wedding cards.</p>
             </div>
-            <div class="service-card" onclick="openModal('visiting')">
+            <div class="service-card" onclick="window.location.href='visiting_card.html'">
                 <i class="fas fa-address-card"></i>
                 <h3>Visiting Card (Same Day Delivery)</h3>
                 <p>Professional visiting cards for lasting impressions.</p>
             </div>
-            <div class="service-card" onclick="openModal('bill')">
+            <div class="service-card" onclick="window.location.href='bill_book.html'">
                 <i class="fas fa-file-invoice"></i>
                 <h3>Bill Book Printing</h3>
                 <p>Customized bill books for your business.</p>
             </div>
-            <div class="service-card" onclick="openModal('letter')">
+            <div class="service-card" onclick="window.location.href='letter_pad.html'">
                 <i class="fas fa-file-alt"></i>
                 <h3>Letter Pad Printing</h3>
                 <p>Personalized letter pads with your logo.</p>
             </div>
-            <div class="service-card" onclick="openModal('handbill')">
+            <div class="service-card" onclick="window.location.href='handbill_pamphlet.html'">
                 <i class="fas fa-newspaper"></i>
                 <h3>Handbill/Pamphlet</h3>
                 <p>Promotional handbills and pamphlets.</p>
             </div>
-            <div class="service-card" onclick="openModal('poster')">
+            <div class="service-card" onclick="window.location.href='poster.html'">
                 <i class="fas fa-image"></i>
                 <h3>Poster</h3>
                 <p>Eye-catching posters for promotions.</p>
             </div>
-            <div class="service-card" onclick="openModal('envelope')">
+            <div class="service-card" onclick="window.location.href='envelope.html'">
                 <i class="fas fa-envelope"></i>
                 <h3>Envelope Printing</h3>
                 <p>Customized envelopes for your business.</p>
@@ -803,69 +842,6 @@
     <script>
         const translations = {
             en: {
-                "wedding-title": "Wedding Card Printing",
-                "wedding-description": `
-                    <p>Design your perfect wedding card with Farhan Printing Press. Please provide the following details to help us create a card that matches your vision:</p>
-                    <ul>
-                        <li><strong>Size:</strong> Standard (5 x 7 inches) or custom dimensions</li>
-                        <li><strong>Minimum Order:</strong> 50 units</li>
-                    </ul>
-                    <p>Select your preferences below, then click the button to add to cart.</p>
-                `,
-                "visiting-title": "Visiting Card",
-                "visiting-description": `
-                    <p>Make a lasting impression with our Visiting Cards, designed to communicate your professional identity effectively.</p>
-                    <ul>
-                        <li><strong>Size:</strong> 3.5 x 2 inches</li>
-                        <li><strong>Minimum Order:</strong> 100 units</li>
-                    </ul>
-                    <p>Select your preferences below, then click the button to add to cart.</p>
-                `,
-                "bill-title": "Bill Book Printing",
-                "bill-description": `
-                    <p>Customized bill books designed for your business, ensuring a professional look for invoices.</p>
-                    <ul>
-                        <li><strong>Size:</strong> A5, A4, or Custom</li>
-                        <li><strong>Minimum Order:</strong> 5 books (50 sheets per book)</li>
-                    </ul>
-                    <p>Select your preferences below, then click the button to add to cart.</p>
-                `,
-                "letter-title": "Letter Pad Printing",
-                "letter-description": `
-                    <p>Personalized letter pads with your company logo and details, ideal for official correspondence.</p>
-                    <ul>
-                        <li><strong>Size:</strong> A4, A5, or Legal</li>
-                        <li><strong>Minimum Order:</strong> 100 sheets</li>
-                    </ul>
-                    <p>Select your preferences below, then click the button to add to cart.</p>
-                `,
-                "handbill-title": "Handbill/Pamphlet",
-                "handbill-description": `
-                    <p>Promotional handbills and pamphlets to effectively market your business or event.</p>
-                    <ul>
-                        <li><strong>Size:</strong> A5, A4, or A3</li>
-                        <li><strong>Minimum Order:</strong> 100 units</li>
-                    </ul>
-                    <p>Select your preferences below, then click the button to add to cart.</p>
-                `,
-                "poster-title": "Poster",
-                "poster-description": `
-                    <p>Eye-catching posters for promotions, events, or advertisements.</p>
-                    <ul>
-                        <li><strong>Size:</strong> A3, A2, or A1</li>
-                        <li><strong>Minimum Order:</strong> 1 unit</li>
-                    </ul>
-                    <p>Select your preferences below, then click the button to add to cart.</p>
-                `,
-                "envelope-title": "Envelope Printing",
-                "envelope-description": `
-                    <p>Customized envelopes with your business logo and details.</p>
-                    <ul>
-                        <li><strong>Size:</strong> Standard (4 x 9 inches), C5, or C4</li>
-                        <li><strong>Minimum Order:</strong> 100 units</li>
-                    </ul>
-                    <p>Select your preferences below, then click the button to add to cart.</p>
-                `,
                 "label-price-range": "Price Range (per unit)",
                 "label-quantity": "Quantity",
                 "label-size": "Size",
@@ -946,604 +922,8 @@
             console.error('Checkout form not found in DOM');
         }
 
-        const visitingCardPricing = {
-            "Normal Visiting Card": {
-                "1 Side": { 100: 130, 200: 200, 500: 400, 1000: 600 },
-                "2 Sides": { 100: 180, 200: 350, 500: 650, 1000: 950 }
-            },
-            "UV Card": {
-                "1 Side": { 1000: 2000, 2000: 3500 },
-                "2 Sides": { 1000: 2300, 2000: 4500 }
-            },
-            "Gloss Laminated Card": {
-                "1 side printing + 1 side lamination": { 100: 220, 200: 350, 500: 550, 1000: 600, 2000: 1150, 5000: 2500, 10000: 4500 },
-                "2 side printing + 2 side lamination": { 100: 350, 200: 450, 500: 650, 1000: 950 }
-            },
-            "Plastic Visiting Card": {
-                "with lamination": { 1000: 1200, 2000: 2200 },
-                "without lamination": { 1000: 1000, 2000: 1900 }
-            },
-            "Texture + Lamination Visiting Card": {
-                "1 Side": { 1000: 1500, 2000: 2800 },
-                "2 Sides": { 1000: 1700, 2000: 3200 }
-            },
-            "Gold Foil Visiting Card": {
-                "1 Side": { 500: 2300, 1000: 3400 },
-                "2 Sides": { 500: 2700, 1000: 3900 }
-            }
-        };
-
-        const billBookPricing = {
-            "A5_70 GSM_Gum Binding_50": { 5: 300, 10: 550, 20: 1000, 50: 2200 },
-            "A4_80 GSM_Staple Binding_100": { 5: 500, 10: 900, 20: 1600, 50: 3500 },
-            "Custom_100 GSM_Perfect Binding_150": { 5: 800, 10: 1400, 20: 2600, 50: 5000 }
-        };
-
-        const letterPadPricing = {
-            "A4_80 GSM_Header Only": { 100: 150, 200: 280, 500: 650, 1000: 1200 },
-            "A5_100 GSM_Header and Footer": { 100: 180, 200: 340, 500: 800, 1000: 1500 },
-            "Legal_120 GSM_Full Page": { 100: 250, 200: 480, 500: 1100, 1000: 2000 }
-        };
-
-        const handbillPricing = {
-            "A5_80 GSM_1 Side": { 100: 200, 500: 800, 1000: 1500, 2000: 2800 },
-            "A4_100 GSM_2 Sides": { 100: 350, 500: 1400, 1000: 2600, 2000: 5000 },
-            "A3_130 GSM_1 Side": { 100: 500, 500: 2000, 1000: 3800, 2000: 7000 }
-        };
-
-        const posterPricing = {
-            "A3_Matte Paper_None": { 1: 100, 5: 450, 10: 800, 20: 1500 },
-            "A2_Glossy Paper_Matte": { 1: 200, 5: 900, 10: 1600, 20: 3000 },
-            "A1_Vinyl_Glossy": { 1: 400, 5: 1800, 10: 3200, 20: 6000 }
-        };
-
-        const envelopePricing = {
-            "Standard_90 GSM_Front Only": { 100: 150, 200: 280, 500: 650, 1000: 1200 },
-            "C5_120 GSM_Front and Back": { 100: 200, 200: 380, 500: 900, 1000: 1700 },
-            "C4_90 GSM_Front Only": { 100: 250, 200: 480, 500: 1100, 1000: 2000 }
-        };
-
-        const services = {
-            wedding: {
-                title: "wedding-title",
-                description: `
-                    ${translations.en["wedding-description"]}
-                    <div class="modal-options">
-                        <div class="modal-option">
-                            <label for="price-range-wedding">${translations.en["label-price-range"]}</label>
-                            <select id="price-range-wedding" name="price_range">
-                                <option value="7-10 rupees">7-10 rupees</option>
-                                <option value="10-20 rupees">10-20 rupees</option>
-                                <option value="20-30 rupees">20-30 rupees</option>
-                                <option value="30-40 rupees">30-40 rupees</option>
-                                <option value="40-50 rupees">40-50 rupees</option>
-                            </select>
-                        </div>
-                        <div class="modal-option">
-                            <label for="quantity-wedding">${translations.en["label-quantity"]}</label>
-                            <select id="quantity-wedding" name="quantity">
-                                <option value="50">50</option>
-                                <option value="100">100</option>
-                                <option value="150">150</option>
-                                <option value="200">200</option>
-                                <option value="250">250</option>
-                                <option value="300">300</option>
-                                <option value="350">350</option>
-                                <option value="400">400</option>
-                                <option value="450">450</option>
-                                <option value="500">500</option>
-                            </select>
-                        </div>
-                    </div>
-                    <a href="#" class="whatsapp-btn" onclick="addToCart('wedding')">Add to Cart</a>
-                `
-            },
-            visiting: {
-                title: "visiting-title",
-                description: `
-                    ${translations.en["visiting-description"]}
-                    <div class="modal-options">
-                        <div class="modal-option">
-                            <label for="card-category-visiting">${translations.en["label-card-category"]}</label>
-                            <select id="card-category-visiting" name="card_category" onchange="updateVisitingCardOptions()">
-                                <option value="Normal Visiting Card">Normal Visiting Card(Same Day Printing)</option>
-                                <option value="UV Card">UV Card</option>
-                                <option value="Gloss Laminated Card">Gloss Laminated Card</option>
-                                <option value="Plastic Visiting Card">Plastic Visiting Card</option>
-                                <option value="Texture + Lamination Visiting Card">Texture + Lamination Visiting Card</option>
-                                <option value="Gold Foil Visiting Card">Gold Foil Visiting Card</option>
-                            </select>
-                        </div>
-                        <div id="visiting-card-options"></div>
-                    </div>
-                    <a href="#" class="whatsapp-btn" onclick="addToCart('visiting')">Add to Cart</a>
-                `
-            },
-            bill: {
-                title: "bill-title",
-                description: `
-                    ${translations.en["bill-description"]}
-                    <div class="modal-options">
-                        <div class="modal-option">
-                            <label for="size-bill">${translations.en["label-size"]}</label>
-                            <select id="size-bill" name="size" onchange="calculateBillBookPrice()">
-                                <option value="A5">A5</option>
-                                <option value="A4">A4</option>
-                                <option value="Custom">Custom</option>
-                            </select>
-                        </div>
-                        <div class="modal-option">
-                            <label for="paper-quality-bill">${translations.en["label-paper-quality"]}</label>
-                            <select id="paper-quality-bill" name="paper_quality" onchange="calculateBillBookPrice()">
-                                <option value="70 GSM">70 GSM</option>
-                                <option value="80 GSM">80 GSM</option>
-                                <option value="100 GSM">100 GSM</option>
-                            </select>
-                        </div>
-                        <div class="modal-option">
-                            <label for="binding-bill">${translations.en["label-binding"]}</label>
-                            <select id="binding-bill" name="binding" onchange="calculateBillBookPrice()">
-                                <option value="Gum Binding">Gum Binding</option>
-                                <option value="Staple Binding">Staple Binding</option>
-                                <option value="Perfect Binding">Perfect Binding</option>
-                            </select>
-                        </div>
-                        <div class="modal-option">
-                            <label for="sheets-per-book-bill">${translations.en["label-sheets-per-book"]}</label>
-                            <select id="sheets-per-book-bill" name="sheets_per_book" onchange="calculateBillBookPrice()">
-                                <option value="50">50</option>
-                                <option value="100">100</option>
-                                <option value="150">150</option>
-                            </select>
-                        </div>
-                        <div class="modal-option">
-                            <label for="quantity-bill">${translations.en["label-quantity-books"]}</label>
-                            <select id="quantity-bill" name="quantity" onchange="calculateBillBookPrice()">
-                                <option value="5">5</option>
-                                <option value="10">10</option>
-                                <option value="20">20</option>
-                                <option value="50">50</option>
-                            </select>
-                        </div>
-                    </div>
-                    <a href="#" class="whatsapp-btn" onclick="addToCart('bill')">Add to Cart</a>
-                `
-            },
-            letter: {
-                title: "letter-title",
-                description: `
-                    ${translations.en["letter-description"]}
-                    <div class="modal-options">
-                        <div class="modal-option">
-                            <label for="size-letter">${translations.en["label-size"]}</label>
-                            <select id="size-letter" name="size" onchange="calculateLetterPadPrice()">
-                                <option value="A4">A4</option>
-                                <option value="A5">A5</option>
-                                <option value="Legal">Legal</option>
-                            </select>
-                        </div>
-                        <div class="modal-option">
-                            <label for="paper-quality-letter">${translations.en["label-paper-quality"]}</label>
-                            <select id="paper-quality-letter" name="paper_quality" onchange="calculateLetterPadPrice()">
-                                <option value="80 GSM">80 GSM</option>
-                                <option value="100 GSM">100 GSM</option>
-                                <option value="120 GSM">120 GSM</option>
-                            </select>
-                        </div>
-                        <div class="modal-option">
-                            <label for="printing-location-letter">${translations.en["label-printing-location"]}</label>
-                            <select id="printing-location-letter" name="printing_location" onchange="calculateLetterPadPrice()">
-                                <option value="Header Only">Header Only</option>
-                                <option value="Header and Footer">Header and Footer</option>
-                                <option value="Full Page">Full Page</option>
-                            </select>
-                        </div>
-                        <div class="modal-option">
-                            <label for="quantity-letter">${translations.en["label-quantity-sheets"]}</label>
-                            <select id="quantity-letter" name="quantity" onchange="calculateLetterPadPrice()">
-                                <option value="100">100</option>
-                                <option value="200">200</option>
-                                <option value="500">500</option>
-                                <option value="1000">1000</option>
-                            </select>
-                        </div>
-                    </div>
-                    <a href="#" class="whatsapp-btn" onclick="addToCart('letter')">Add to Cart</a>
-                `
-            },
-            handbill: {
-                title: "handbill-title",
-                description: `
-                    ${translations.en["handbill-description"]}
-                    <div class="modal-options">
-                        <div class="modal-option">
-                            <label for="size-handbill">${translations.en["label-size"]}</label>
-                            <select id="size-handbill" name="size" onchange="calculateHandbillPrice()">
-                                <option value="8x5">8x5</option>
-                                <option value="A4/2">A4/2</option>
-                                <option value="6x7.5">6x7.5</option>
-                                <option value="10x8">10x8</option>
-                            </select>
-                        </div>
-                        <div class="modal-option">
-                            <label for="paper-quality-handbill">${translations.en["label-paper-quality"]}</label>
-                            <select id="paper-quality-handbill" name="paper_quality" onchange="calculateHandbillPrice()">
-                                <option value="80 GSM">80 GSM</option>
-                                <option value="100 GSM">100 GSM</option>
-                                <option value="130 GSM">130 GSM</option>
-                            </select>
-                        </div>
-                        <div class="modal-option">
-                            <label for="printing-sides-handbill">${translations.en["label-printing-sides"]}</label>
-                            <select id="printing-sides-handbill" name="printing_sides" onchange="calculateHandbillPrice()">
-                                <option value="1 Side">1 Side</option>
-                                <option value="2 Sides">2 Sides</option>
-                            </select>
-                        </div>
-                        <div class="modal-option">
-                            <label for="quantity-handbill">${translations.en["label-quantity"]}</label>
-                            <select id="quantity-handbill" name="quantity" onchange="calculateHandbillPrice()">
-                                <option value="100">100</option>
-                                <option value="500">500</option>
-                                <option value="1000">1000</option>
-                                <option value="2000">2000</option>
-                            </select>
-                        </div>
-                    </div>
-                    <a href="#" class="whatsapp-btn" onclick="addToCart('handbill')">Add to Cart</a>
-                `
-            },
-            poster: {
-                title: "poster-title",
-                description: `
-                    ${translations.en["poster-description"]}
-                    <div class="modal-options">
-                        <div class="modal-option">
-                            <label for="size-poster">${translations.en["label-size"]}</label>
-                            <select id="size-poster" name="size" onchange="calculatePosterPrice()">
-                                <option value="A3">A3</option>
-                                <option value="A2">A2</option>
-                                <option value="A1">A1</option>
-                            </select>
-                        </div>
-                        <div class="modal-option">
-                            <label for="material-poster">${translations.en["label-material"]}</label>
-                            <select id="material-poster" name="material" onchange="calculatePosterPrice()">
-                                <option value="Matte Paper">Matte Paper</option>
-                                <option value="Glossy Paper">Glossy Paper</option>
-                                <option value="Vinyl">Vinyl</option>
-                            </select>
-                        </div>
-                        <div class="modal-option">
-                            <label for="lamination-poster">${translations.en["label-lamination"]}</label>
-                            <select id="lamination-poster" name="lamination" onchange="calculatePosterPrice()">
-                                <option value="None">None</option>
-                                <option value="Matte">Matte</option>
-                                <option value="Glossy">Glossy</option>
-                            </select>
-                        </div>
-                        <div class="modal-option">
-                            <label for="quantity-poster">${translations.en["label-quantity"]}</label>
-                            <select id="quantity-poster" name="quantity" onchange="calculatePosterPrice()">
-                                <option value="1">1</option>
-                                <option value="5">5</option>
-                                <option value="10">10</option>
-                                <option value="20">20</option>
-                            </select>
-                        </div>
-                    </div>
-                    <a href="#" class="whatsapp-btn" onclick="addToCart('poster')">Add to Cart</a>
-                `
-            },
-            envelope: {
-                title: "envelope-title",
-                description: `
-                    ${translations.en["envelope-description"]}
-                    <div class="modal-options">
-                        <div class="modal-option">
-                            <label for="size-envelope">${translations.en["label-size"]}</label>
-                            <select id="size-envelope" name="size" onchange="calculateEnvelopePrice()">
-                                <option value="Standard">Standard (4 x 9 inches)</option>
-                                <option value="C5">C5</option>
-                                <option value="C4">C4</option>
-                            </select>
-                        </div>
-                        <div class="modal-option">
-                            <label for="paper-quality-envelope">${translations.en["label-paper-quality"]}</label>
-                            <select id="paper-quality-envelope" name="paper_quality" onchange="calculateEnvelopePrice()">
-                                <option value="90 GSM">90 GSM</option>
-                                <option value="120 GSM">120 GSM</option>
-                            </select>
-                        </div>
-                        <div class="modal-option">
-                            <label for="printing-location-envelope">${translations.en["label-printing-location"]}</label>
-                            <select id="printing-location-envelope" name="printing_location" onchange="calculateEnvelopePrice()">
-                                <option value="Front Only">Front Only</option>
-                                <option value="Front and Back">Front and Back</option>
-                            </select>
-                        </div>
-                        <div class="modal-option">
-                            <label for="quantity-envelope">${translations.en["label-quantity"]}</label>
-                            <select id="quantity-envelope" name="quantity" onchange="calculateEnvelopePrice()">
-                                <option value="100">100</option>
-                                <option value="200">200</option>
-                                <option value="500">500</option>
-                                <option value="1000">1000</option>
-                            </select>
-                        </div>
-                    </div>
-                    <a href="#" class="whatsapp-btn" onclick="addToCart('envelope')">Add to Cart</a>
-                `
-            }
-        };
-
-        function updateVisitingCardOptions() {
-            try {
-                console.log('Updating visiting card options');
-                const cardCategory = document.getElementById('card-category-visiting')?.value;
-                const optionsContainer = document.getElementById('visiting-card-options');
-                if (!cardCategory || !optionsContainer) {
-                    console.error('Card category or options container not found');
-                    return;
-                }
-
-                let optionsHTML = '';
-
-                if (cardCategory === 'Normal Visiting Card') {
-                    optionsHTML = `
-                        <div class="modal-option">
-                            <label for="printing-sides-visiting">${translations.en["label-printing-sides"]}</label>
-                            <select id="printing-sides-visiting" name="printing_sides" onchange="calculateVisitingCardPrice()">
-                                <option value="1 Side">1 Side</option>
-                                <option value="2 Sides">2 Sides</option>
-                            </select>
-                        </div>
-                        <div class="modal-option">
-                            <label for="quantity-visiting">${translations.en["label-quantity"]}</label>
-                            <select id="quantity-visiting" name="quantity" onchange="calculateVisitingCardPrice()">
-                                <option value="100">100</option>
-                                <option value="200">200</option>
-                                <option value="500">500</option>
-                                <option value="1000">1000</option>
-                            </select>
-                        </div>
-                    `;
-                } else if (cardCategory === 'UV Card') {
-                    optionsHTML = `
-                        <div class="modal-option">
-                            <label for="printing-sides-visiting">${translations.en["label-printing-sides"]}</label>
-                            <select id="printing-sides-visiting" name="printing_sides" onchange="calculateVisitingCardPrice()">
-                                <option value="1 Side">1 Side</option>
-                                <option value="2 Sides">2 Sides</option>
-                            </select>
-                        </div>
-                        <div class="modal-option">
-                            <label for="quantity-visiting">${translations.en["label-quantity"]}</label>
-                            <select id="quantity-visiting" name="quantity" onchange="calculateVisitingCardPrice()">
-                                <option value="1000">1000</option>
-                                <option value="2000">2000</option>
-                            </select>
-                        </div>
-                    `;
-                } else if (cardCategory === 'Gloss Laminated Card') {
-                    optionsHTML = `
-                        <div class="modal-option">
-                            <label for="printing-sides-visiting">${translations.en["label-printing-sides"]}</label>
-                            <select id="printing-sides-visiting" name="printing_sides" onchange="calculateVisitingCardPrice()">
-                                <option value="1 side printing + 1 side lamination">1 side printing + 1 side lamination</option>
-                                <option value="2 side printing + 2 side lamination">2 side printing + 2 side lamination</option>
-                            </select>
-                        </div>
-                        <div class="modal-option">
-                            <label for="quantity-visiting">${translations.en["label-quantity"]}</label>
-                            <select id="quantity-visiting" name="quantity" onchange="calculateVisitingCardPrice()">
-                                <option value="100">100</option>
-                                <option value="200">200</option>
-                                <option value="500">500</option>
-                                <option value="1000">1000</option>
-                                <option value="2000">2000</option>
-                                <option value="5000">5000</option>
-                                <option value="10000">10000</option>
-                            </select>
-                        </div>
-                    `;
-                } else if (cardCategory === 'Plastic Visiting Card') {
-                    optionsHTML = `
-                        <div class="modal-option">
-                            <label>${translations.en["label-printing-sides"]}</label>
-                            <span>1 Side</span>
-                        </div>
-                        <div class="modal-option">
-                            <label for="lamination-visiting">${translations.en["label-lamination"]}</label>
-                            <select id="lamination-visiting" name="lamination" onchange="calculateVisitingCardPrice()">
-                                <option value="with lamination">With Lamination</option>
-                                <option value="without lamination">Without Lamination</option>
-                            </select>
-                        </div>
-                        <div class="modal-option">
-                            <label for="quantity-visiting">${translations.en["label-quantity"]}</label>
-                            <select id="quantity-visiting" name="quantity" onchange="calculateVisitingCardPrice()">
-                                <option value="1000">1000</option>
-                                <option value="2000">2000</option>
-                            </select>
-                        </div>
-                    `;
-                } else if (cardCategory === 'Texture + Lamination Visiting Card') {
-                    optionsHTML = `
-                        <div class="modal-option">
-                            <label for="printing-sides-visiting">${translations.en["label-printing-sides"]}</label>
-                            <select id="printing-sides-visiting" name="printing_sides" onchange="calculateVisitingCardPrice()">
-                                <option value="1 Side">1 Side</option>
-                                <option value="2 Sides">2 Sides</option>
-                            </select>
-                        </div>
-                        <div class="modal-option">
-                            <label for="quantity-visiting">${translations.en["label-quantity"]}</label>
-                            <select id="quantity-visiting" name="quantity" onchange="calculateVisitingCardPrice()">
-                                <option value="1000">1000</option>
-                                <option value="2000">2000</option>
-                            </select>
-                        </div>
-                    `;
-                } else if (cardCategory === 'Gold Foil Visiting Card') {
-                    optionsHTML = `
-                        <div class="modal-option">
-                            <label for="printing-sides-visiting">${translations.en["label-printing-sides"]}</label>
-                            <select id="printing-sides-visiting" name="printing_sides" onchange="calculateVisitingCardPrice()">
-                                <option value="1 Side">1 Side</option>
-                                <option value="2 Sides">2 Sides</option>
-                            </select>
-                        </div>
-                        <div class="modal-option">
-                            <label for="quantity-visiting">${translations.en["label-quantity"]}</label>
-                            <select id="quantity-visiting" name="quantity" onchange="calculateVisitingCardPrice()">
-                                <option value="500">500</option>
-                                <option value="1000">1000</option>
-                            </select>
-                        </div>
-                    `;
-                }
-
-                optionsContainer.innerHTML = optionsHTML;
-                calculateVisitingCardPrice();
-            } catch (e) {
-                console.error('Error in updateVisitingCardOptions:', e);
-            }
-        }
-
-        function calculateVisitingCardPrice() {
-            try {
-                const cardCategory = document.getElementById('card-category-visiting')?.value;
-                const printingSides = document.getElementById('printing-sides-visiting')?.value;
-                const lamination = document.getElementById('lamination-visiting')?.value;
-                const quantity = parseInt(document.getElementById('quantity-visiting')?.value);
-
-                if (!cardCategory || !quantity) {
-                    console.error('Missing card category or quantity');
-                    modalPriceDisplay.textContent = 'Price not available';
-                    return;
-                }
-
-                let priceKey = printingSides;
-                if (cardCategory === 'Plastic Visiting Card') {
-                    priceKey = lamination;
-                }
-
-                const price = visitingCardPricing[cardCategory]?.[priceKey]?.[quantity] || 0;
-                modalPriceDisplay.textContent = price ? `Total Price: ₹${price}` : 'Price not available';
-                console.log('Visiting card price calculated:', { cardCategory, priceKey, quantity, price });
-            } catch (e) {
-                console.error('Error in calculateVisitingCardPrice:', e);
-                modalPriceDisplay.textContent = 'Price not available';
-            }
-        }
-
-        function calculateBillBookPrice() {
-            try {
-                const size = document.getElementById('size-bill')?.value;
-                const paperQuality = document.getElementById('paper-quality-bill')?.value;
-                const binding = document.getElementById('binding-bill')?.value;
-                const sheetsPerBook = document.getElementById('sheets-per-book-bill')?.value;
-                const quantity = parseInt(document.getElementById('quantity-bill')?.value);
-                const key = `${size}_${paperQuality}_${binding}_${sheetsPerBook}`;
-                const price = billBookPricing[key]?.[quantity] || 0;
-                modalPriceDisplay.textContent = price ? `Total Price: ₹${price}` : 'Price not available';
-                console.log('Bill book price calculated:', { key, quantity, price });
-            } catch (e) {
-                console.error('Error in calculateBillBookPrice:', e);
-                modalPriceDisplay.textContent = 'Price not available';
-            }
-        }
-
-        function calculateLetterPadPrice() {
-            try {
-                const size = document.getElementById('size-letter')?.value;
-                const paperQuality = document.getElementById('paper-quality-letter')?.value;
-                const printingLocation = document.getElementById('printing-location-letter')?.value;
-                const quantity = parseInt(document.getElementById('quantity-letter')?.value);
-                const key = `${size}_${paperQuality}_${printingLocation}`;
-                const price = letterPadPricing[key]?.[quantity] || 0;
-                modalPriceDisplay.textContent = price ? `Total Price: ₹${price}` : 'Price not available';
-                console.log('Letter pad price calculated:', { key, quantity, price });
-            } catch (e) {
-                console.error('Error in calculateLetterPadPrice:', e);
-                modalPriceDisplay.textContent = 'Price not available';
-            }
-        }
-
-        function calculateHandbillPrice() {
-            try {
-                const size = document.getElementById('size-handbill')?.value;
-                const paperQuality = document.getElementById('paper-quality-handbill')?.value;
-                const printingSides = document.getElementById('printing-sides-handbill')?.value;
-                const quantity = parseInt(document.getElementById('quantity-handbill')?.value);
-                const key = `${size}_${paperQuality}_${printingSides}`;
-                const price = handbillPricing[key]?.[quantity] || 0;
-                modalPriceDisplay.textContent = price ? `Total Price: ₹${price}` : 'Price not available';
-                console.log('Handbill price calculated:', { key, quantity, price });
-            } catch (e) {
-                console.error('Error in calculateHandbillPrice:', e);
-                modalPriceDisplay.textContent = 'Price not available';
-            }
-        }
-
-        function calculatePosterPrice() {
-            try {
-                const size = document.getElementById('size-poster')?.value;
-                const material = document.getElementById('material-poster')?.value;
-                const lamination = document.getElementById('lamination-poster')?.value;
-                const quantity = parseInt(document.getElementById('quantity-poster')?.value);
-                const key = `${size}_${material}_${lamination}`;
-                const price = posterPricing[key]?.[quantity] || 0;
-                modalPriceDisplay.textContent = price ? `Total Price: ₹${price}` : 'Price not available';
-                console.log('Poster price calculated:', { key, quantity, price });
-            } catch (e) {
-                console.error('Error in calculatePosterPrice:', e);
-                modalPriceDisplay.textContent = 'Price not available';
-            }
-        }
-
-        function calculateEnvelopePrice() {
-            try {
-                const size = document.getElementById('size-envelope')?.value;
-                const paperQuality = document.getElementById('paper-quality-envelope')?.value;
-                const printingLocation = document.getElementById('printing-location-envelope')?.value;
-                const quantity = parseInt(document.getElementById('quantity-envelope')?.value);
-                const key = `${size}_${paperQuality}_${printingLocation}`;
-                const price = envelopePricing[key]?.[quantity] || 0;
-                modalPriceDisplay.textContent = price ? `Total Price: ₹${price}` : 'Price not available';
-                console.log('Envelope price calculated:', { key, quantity, price });
-            } catch (e) {
-                console.error('Error in calculateEnvelopePrice:', e);
-                modalPriceDisplay.textContent = 'Price not available';
-            }
-        }
-
-        function openModal(service) {
-            try {
-                if (!modal || !modalTitle || !modalDescription) {
-                    console.error('Modal elements not found');
-                    return;
-                }
-                const serviceData = services[service];
-                if (!serviceData) {
-                    console.error('Service not found:', service);
-                    return;
-                }
-                modalTitle.textContent = translations.en[serviceData.title] || 'Service';
-                modalDescription.innerHTML = serviceData.description || '';
-                modalPriceDisplay.textContent = '';
-                if (service === 'visiting') updateVisitingCardOptions();
-                if (service === 'bill') calculateBillBookPrice();
-                if (service === 'letter') calculateLetterPadPrice();
-                if (service === 'handbill') calculateHandbillPrice();
-                if (service === 'poster') calculatePosterPrice();
-                if (service === 'envelope') calculateEnvelopePrice();
-                modal.style.display = 'flex';
-                console.log('Modal opened for service:', service);
-            } catch (e) {
-                console.error('Error in openModal:', e);
-            }
+        function openModal() {
+            console.log('Modal functionality removed from index.html');
         }
 
         function closeModal() {
@@ -1642,47 +1022,8 @@
             }
         }
 
-        function addToCart(service) {
-            try {
-                console.log('Adding to cart:', service);
-                const options = {};
-                const modalOptions = document.querySelectorAll(`#modal .modal-option select, #modal .modal-option textarea, #modal .modal-option input`);
-
-                if (!modalOptions.length) {
-                    console.error('No modal options found for service:', service);
-                    alert('Unable to add to cart: No options available');
-                    return;
-                }
-
-                modalOptions.forEach(input => {
-                    if (input.name && input.value) {
-                        options[input.name] = input.value;
-                    }
-                });
-
-                const priceText = modalPriceDisplay?.textContent || '';
-                let price = 0;
-
-                if (priceText && priceText !== 'Price not available') {
-                    price = parseInt(priceText.replace(/\D/g, '')) || 0;
-                }
-
-                const cartItem = {
-                    service: translations.en[`${service}-title`] || service,
-                    options: JSON.stringify(options),
-                    price: price
-                };
-
-                cart.push(cartItem);
-                localStorage.setItem('cart', JSON.stringify(cart));
-                updateCartDisplay();
-                closeModal();
-                alert('Item added to cart!');
-                console.log('Cart item added:', cartItem);
-            } catch (e) {
-                console.error('Error in addToCart:', e);
-                alert('Error adding item to cart');
-            }
+        function addToCart() {
+            console.log('Add to cart functionality moved to service pages');
         }
 
         function removeFromCart(index) {
@@ -1740,7 +1081,6 @@
                 alert('Error during checkout');
             }
         }
-
     </script>
 </body>
 
