@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Design your custom bill books with Farhan Printing Press.">
-    <meta name="keywords" content="bill books, printing services Siddharth Nagar">
+    <meta name="description" content="Professional bill book printing services by Farhan Printing Press.">
+    <meta name="keywords" content="bill book printing, printing services Siddharth Nagar">
     <meta name="author" content="Farhan Printing Press">
     <title>Bill Book Printing</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
@@ -218,25 +218,44 @@
             font-weight: 600;
         }
 
-        .service-options .form-group {
-            margin-bottom: 1rem;
+        .form-group {
+            margin-bottom: 1.5rem;
             text-align: left;
         }
 
-        .service-options label {
+        .form-group label {
             font-weight: 600;
             color: #2c3e50;
             display: block;
             margin-bottom: 0.5rem;
         }
 
-        .service-options select {
-            width: 100%;
-            padding: 0.5rem;
+        .option-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 0.5rem;
+        }
+
+        .option-btn {
+            padding: 0.5rem 1rem;
             border: 1px solid #dfe6e9;
             border-radius: 6px;
-            font-size: 0.9rem;
             background: #f9f9f9;
+            text-align: center;
+            cursor: pointer;
+            transition: background-color 0.3s, border-color 0.3s;
+            white-space: normal;
+            word-wrap: break-word;
+        }
+
+        .option-btn.active {
+            background-color: #3498db;
+            color: white;
+            border-color: #3498db;
+        }
+
+        .option-btn:hover {
+            background-color: #ecf0f1;
         }
 
         .service-options .whatsapp-btn {
@@ -520,6 +539,7 @@
             cursor: pointer;
             font-size: 0.8rem;
             transition: background 0.3s;
+            margin-right: 0.5rem;
         }
 
         .cart-item button:hover {
@@ -603,57 +623,54 @@
     </nav>
     <section class="hero">
         <h2>Bill Book Printing</h2>
-        <p>Create customized bill books for your business needs.</p>
+        <p>High-quality bill books tailored to your needs.</p>
         <button class="cta-btn" onclick="openModal()">Order Now</button>
     </section>
     <section class="service-content">
         <div class="service-options">
             <h2>Bill Book Options</h2>
             <div class="form-group">
-                <label for="price-range">Price Range (per book)</label>
-                <select id="price-range" name="price_range">
-                    <option value="50-100 rupees">50-100 rupees</option>
-                    <option value="100-150 rupees">100-150 rupees</option>
-                    <option value="150-200 rupees">150-200 rupees</option>
-                </select>
+                <label for="billbook-category">Bill Book Category</label>
+                <div class="option-grid" id="billbook-category">
+                    <button class="option-btn" data-value="Bill Book">Bill Book</button>
+                </div>
             </div>
-            <div class="form-group">
-                <label for="quantity">Quantity (Books)</label>
-                <select id="quantity" name="quantity">
-                    <option value="10">10</option>
-                    <option value="20">20</option>
-                    <option value="30">30</option>
-                    <option value="50">50</option>
-                </select>
+            <div class="form-group" id="size-group" style="display: none;">
+                <label for="size">Size</label>
+                <div class="option-grid" id="size">
+                    <button class="option-btn" data-value="9.5x6.5 inch approx">9.5x6.5 inch approx</button>
+                    <button class="option-btn" data-value="6.5x4 inch">6.5x4 inch</button>
+                    <button class="option-btn" data-value="10 x 8 inch">10 x 8 inch</button>
+                    <button class="option-btn" data-value="8.5 x 7 inch">8.5 x 7 inch</button>
+                    <button class="option-btn" data-value="8 x 5 inch">8 x 5 inch</button>
+                </div>
             </div>
-            <div class="form-group">
-                <label for="sheets-per-book">Sheets per Book</label>
-                <select id="sheets-per-book" name="sheets_per_book">
-                    <option value="50">50</option>
-                    <option value="100">100</option>
-                    <option value="150">150</option>
-                </select>
+            <div class="form-group" id="page-group" style="display: none;">
+                <label for="page">Page Option</label>
+                <div class="option-grid" id="page">
+                    <button class="option-btn" data-value="1 page no carbon">1 page no carbon</button>
+                    <button class="option-btn" data-value="2 page - 1 page bill and 1 page carbon">2 page - 1 page bill and 1 page carbon</button>
+                    <button class="option-btn" data-value="3 page - 1 page bill and 2 page carbon">3 page - 1 page bill and 2 page carbon</button>
+                </div>
             </div>
-            <div class="form-group">
-                <label for="paper-quality">Paper Quality</label>
-                <select id="paper-quality" name="paper_quality">
-                    <option value="Standard">Standard</option>
-                    <option value="Premium">Premium</option>
-                </select>
+            <div class="form-group" id="quantity-group" style="display: none;">
+                <label for="quantity">Quantity</label>
+                <div class="option-grid" id="quantity">
+                    <button class="option-btn" data-value="100">100</button>
+                    <button class="option-btn" data-value="200">200</button>
+                    <button class="option-btn" data-value="500">500</button>
+                    <button class="option-btn" data-value="1000">1000</button>
+                    <button class="option-btn" data-value="2000">2000</button>
+                </div>
             </div>
-            <div class="form-group">
-                <label for="binding">Binding Type</label>
-                <select id="binding" name="binding">
-                    <option value="Stapled">Stapled</option>
-                    <option value="Spiral">Spiral</option>
-                </select>
-            </div>
-            <button class="whatsapp-btn" onclick="addToCart()">Add to Cart</button>
+            <div id="price-display" class="modal-price" style="margin-top: 1rem; display: none;">Price: ₹0</div>
+            <button id="add-to-cart-btn" class="whatsapp-btn" onclick="addToCart()">Add to Cart</button>
+            <a href="#" class="whatsapp-btn" onclick="openCart(); return false;" style="margin-top: 1rem;">Go to Cart</a>
         </div>
         <div class="service-images">
             <div class="service-image">
-                <img src="https://images.unsplash.com/photo-1591123120675-6f7f1a recorded4b8?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Example Bill Book">
-                <p>Example of a bill book with stapled binding.</p>
+                <img src="https://images.unsplash.com/photo-1591123120675-6f7f1a4b8?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Example Bill Book">
+                <p>Example of a professional bill book.</p>
             </div>
         </div>
     </section>
@@ -709,7 +726,7 @@
                 "label-quantity-books": "Quantity (Books)",
                 "label-quantity-sheets": "Quantity (Sheets)",
                 "label-card-category": "Card Category",
-                "label-printing-sides": "Printing",
+                "label-printing": "Printing",
                 "label-name": "Your Name"
             }
         };
@@ -720,7 +737,40 @@
         const modalPriceDisplay = document.getElementById('modal-price-display');
         const cartModal = document.getElementById('cart-modal');
         const checkoutForm = document.getElementById('checkout-form');
+        const addToCartBtn = document.getElementById('add-to-cart-btn');
         let cart = [];
+        let selectedOptions = {
+            'billbook-category': null,
+            'size': null,
+            'page': null,
+            'quantity': null
+        };
+
+        const priceData = {
+            'Bill Book': {
+                '1 page no carbon': {
+                    '9.5x6.5 inch approx': { 100: 300, 200: 550, 500: 1200, 1000: 2200, 2000: 4000 },
+                    '6.5x4 inch': { 100: 250, 200: 450, 500: 1000, 1000: 1800, 2000: 3400 },
+                    '10 x 8 inch': { 100: 350, 200: 600, 500: 1300, 1000: 2400, 2000: 4500 },
+                    '8.5 x 7 inch': { 100: 320, 200: 550, 500: 1200, 1000: 2200, 2000: 4000 },
+                    '8 x 5 inch': { 100: 280, 200: 500, 500: 1100, 1000: 2000, 2000: 3800 }
+                },
+                '2 page - 1 page bill and 1 page carbon': {
+                    '9.5x6.5 inch approx': { 100: 450, 200: 800, 500: 1800, 1000: 3400, 2000: 6500 },
+                    '6.5x4 inch': { 100: 400, 200: 700, 500: 1500, 1000: 2800, 2000: 5400 },
+                    '10 x 8 inch': { 100: 500, 200: 900, 500: 2000, 1000: 3800, 2000: 7200 },
+                    '8.5 x 7 inch': { 100: 470, 200: 850, 500: 1900, 1000: 3500, 2000: 6700 },
+                    '8 x 5 inch': { 100: 430, 200: 750, 500: 1700, 1000: 3200, 2000: 6000 }
+                },
+                '3 page - 1 page bill and 2 page carbon': {
+                    '9.5x6.5 inch approx': { 100: 600, 200: 1100, 500: 2500, 1000: 4800, 2000: 9000 },
+                    '6.5x4 inch': { 100: 550, 200: 1000, 500: 2200, 1000: 4200, 2000: 8000 },
+                    '10 x 8 inch': { 100: 650, 200: 1200, 500: 2700, 1000: 5000, 2000: 9500 },
+                    '8.5 x 7 inch': { 100: 620, 200: 1150, 500: 2600, 1000: 4900, 2000: 9200 },
+                    '8 x 5 inch': { 100: 580, 200: 1050, 500: 2400, 1000: 4600, 2000: 8700 }
+                }
+            }
+        };
 
         try {
             const storedCart = localStorage.getItem('cart');
@@ -741,6 +791,7 @@
         document.addEventListener('DOMContentLoaded', () => {
             console.log('DOM loaded, updating cart display');
             updateCartDisplay();
+            initializeButtons();
             if (!checkoutForm) {
                 console.error('Checkout form not found');
             }
@@ -769,6 +820,108 @@
             });
         } else {
             console.error('Checkout form not found in DOM');
+        }
+
+        function initializeButtons() {
+            const billbookCategory = document.getElementById('billbook-category');
+            if (billbookCategory) {
+                billbookCategory.querySelectorAll('.option-btn').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        billbookCategory.querySelectorAll('.option-btn').forEach(b => b.classList.remove('active'));
+                        btn.classList.add('active');
+                        selectedOptions['billbook-category'] = btn.getAttribute('data-value');
+                        updateOptions();
+                        console.log('Bill book category selected:', selectedOptions['billbook-category']);
+                    });
+                });
+            } else {
+                console.error('Element with id billbook-category not found');
+            }
+        }
+
+        function updateOptions() {
+            const category = selectedOptions['billbook-category'];
+            const sizeGroup = document.getElementById('size-group');
+            const pageGroup = document.getElementById('page-group');
+            const quantityGroup = document.getElementById('quantity-group');
+            const priceDisplay = document.getElementById('price-display');
+
+            if (sizeGroup && pageGroup && quantityGroup && priceDisplay) {
+                sizeGroup.style.display = 'none';
+                pageGroup.style.display = 'none';
+                quantityGroup.style.display = 'none';
+                priceDisplay.style.display = 'none';
+                selectedOptions['size'] = null;
+                selectedOptions['page'] = null;
+                selectedOptions['quantity'] = null;
+
+                if (category) {
+                    updateDynamicButtons('size', { '9.5x6.5 inch approx': '9.5x6.5 inch approx', '6.5x4 inch': '6.5x4 inch', '10 x 8 inch': '10 x 8 inch', '8.5 x 7 inch': '8.5 x 7 inch', '8 x 5 inch': '8 x 5 inch' });
+                    sizeGroup.style.display = 'block';
+                    updateDynamicButtons('page', { '1 page no carbon': '1 page no carbon', '2 page - 1 page bill and 1 page carbon': '2 page - 1 page bill and 1 page carbon', '3 page - 1 page bill and 2 page carbon': '3 page - 1 page bill and 2 page carbon' });
+                    pageGroup.style.display = 'block';
+                    updateQuantityButtons([100, 200, 500, 1000, 2000]);
+                    quantityGroup.style.display = 'block';
+                    priceDisplay.style.display = 'block';
+                    updatePrice();
+                }
+            } else {
+                console.error('Option groups or price display not found');
+            }
+        }
+
+        function updateDynamicButtons(containerId, options) {
+            const container = document.getElementById(containerId + '-group');
+            const optionGrid = document.getElementById(containerId);
+            if (container && optionGrid) {
+                optionGrid.innerHTML = '';
+                Object.keys(options).forEach(option => {
+                    const btn = document.createElement('button');
+                    btn.className = 'option-btn';
+                    btn.setAttribute('data-value', option);
+                    btn.textContent = option;
+                    btn.addEventListener('click', () => {
+                        optionGrid.querySelectorAll('.option-btn').forEach(b => b.classList.remove('active'));
+                        btn.classList.add('active');
+                        if (containerId === 'size') {
+                            selectedOptions['size'] = option;
+                        } else if (containerId === 'page') {
+                            selectedOptions['page'] = option;
+                        }
+                        updatePrice();
+                        console.log(`${containerId} selected:`, option);
+                    });
+                    optionGrid.appendChild(btn);
+                });
+                container.style.display = 'block';
+            } else {
+                console.error(`Element with id ${containerId}-group or ${containerId} not found`);
+            }
+        }
+
+        function updateQuantityButtons(quantities) {
+            const container = document.getElementById('quantity-group');
+            const optionGrid = document.getElementById('quantity');
+            if (container && optionGrid) {
+                optionGrid.innerHTML = '';
+                quantities.forEach(qty => {
+                    const btn = document.createElement('button');
+                    btn.className = 'option-btn';
+                    btn.setAttribute('data-value', qty);
+                    btn.textContent = qty;
+                    btn.addEventListener('click', () => {
+                        optionGrid.querySelectorAll('.option-btn').forEach(b => b.classList.remove('active'));
+                        btn.classList.add('active');
+                        selectedOptions['quantity'] = qty;
+                        updatePrice();
+                        console.log('Quantity selected:', qty);
+                    });
+                    optionGrid.appendChild(btn);
+                });
+                container.style.display = 'block';
+            } else {
+                console.error('Element with id quantity-group or quantity not found');
+            }
         }
 
         function openModal() {
@@ -843,10 +996,11 @@
 
                 cart.forEach((item, index) => {
                     try {
+                        const options = JSON.parse(item.options || '{}');
                         itemsHTML += `
                             <div class="cart-item">
                                 <h4>${item.service || 'Unknown Service'}</h4>
-                                <p>${formatOptions(JSON.parse(item.options || '{}'))}</p>
+                                <p>${formatOptions(options)}</p>
                                 <p>Price: ₹${item.price || 0}</p>
                                 <button onclick="removeFromCart(${index})">Remove</button>
                             </div>
@@ -881,46 +1035,49 @@
 
         function updatePrice() {
             try {
-                const priceRange = document.getElementById('price-range').value;
-                const quantity = document.getElementById('quantity').value;
-                const sheetsPerBook = document.getElementById('sheets-per-book').value;
-                const basePrice = parseInt(priceRange.split('-')[0]) || 0;
-                const totalPrice = basePrice * parseInt(quantity) * (parseInt(sheetsPerBook) / 50);
-                modalPriceDisplay.textContent = `Price: ₹${totalPrice}`;
-                console.log('Price updated:', totalPrice);
+                const category = selectedOptions['billbook-category'];
+                const size = selectedOptions['size'];
+                const page = selectedOptions['page'];
+                const quantity = selectedOptions['quantity'];
+                const priceDisplay = document.getElementById('price-display');
+
+                if (category && size && page && quantity) {
+                    const price = priceData[category][page][size][quantity] || 0;
+                    if (priceDisplay) {
+                        priceDisplay.textContent = `Price: ₹${price}`;
+                    }
+                } else if (priceDisplay) {
+                    priceDisplay.textContent = 'Price: Select all options';
+                }
+                console.log('Price updated:', priceDisplay ? priceDisplay.textContent : 'Price display not found');
             } catch (e) {
                 console.error('Error in updatePrice:', e);
-                modalPriceDisplay.textContent = 'Price: Error';
+                const priceDisplay = document.getElementById('price-display');
+                if (priceDisplay) priceDisplay.textContent = 'Price: Error';
             }
         }
 
-        ['price-range', 'quantity', 'sheets-per-book'].forEach(id => {
-            const element = document.getElementById(id);
-            if (element) {
-                element.addEventListener('change', updatePrice);
-            } else {
-                console.error(`Element with id ${id} not found`);
-            }
-        });
-
         function addToCart() {
             try {
-                const priceRange = document.getElementById('price-range').value;
-                const quantity = document.getElementById('quantity').value;
-                const sheetsPerBook = document.getElementById('sheets-per-book').value;
-                const paperQuality = document.getElementById('paper-quality').value;
-                const binding = document.getElementById('binding').value;
-                const price = parseInt(priceRange.split('-')[0]) || 0;
+                if (Object.values(selectedOptions).some(val => val === null)) {
+                    alert('Please select all options before adding to cart.');
+                    return;
+                }
+
+                const category = selectedOptions['billbook-category'];
+                const size = selectedOptions['size'];
+                const page = selectedOptions['page'];
+                const quantity = selectedOptions['quantity'];
+                const price = priceData[category][page][size][quantity] || 0;
 
                 const cartItem = {
                     service: 'Bill Book Printing',
-                    options: JSON.stringify({ 'price_range': priceRange, 'quantity': quantity, 'sheets_per_book': sheetsPerBook, 'paper_quality': paperQuality, 'binding': binding }),
-                    price: price * parseInt(quantity) * (parseInt(sheetsPerBook) / 50)
+                    options: JSON.stringify({ 'billbook-category': category, 'size': size, 'page': page, 'quantity': quantity }),
+                    price: price
                 };
 
                 cart.push(cartItem);
                 localStorage.setItem('cart', JSON.stringify(cart));
-                closeModal();
                 updateCartDisplay();
                 alert('Item added to cart!');
                 console.log('Item added to cart:', cartItem);
