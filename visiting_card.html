@@ -1043,7 +1043,9 @@
             try {
                 let formatted = '';
                 for (const [key, value] of Object.entries(options)) {
-                    formatted += `${key.replace(/_/g, ' ')}: ${value}<br>`;
+                    if (value !== null) {
+                        formatted += `${key.replace(/_/g, ' ')}: ${value}<br>`;
+                    }
                 }
                 return formatted || 'No options selected';
             } catch (e) {
@@ -1083,17 +1085,28 @@
 
         function addToCart() {
             try {
-                if (Object.values(selectedOptions).some(val => val === null)) {
-                    alert('Please select all options before adding to cart.');
-                    return;
-                }
-
                 const category = selectedOptions['card-category'];
                 const printing = selectedOptions['printing'];
                 const lamination = selectedOptions['lamination'];
                 const quantity = selectedOptions['quantity'];
-                let price = 0;
 
+                // Validate based on card category
+                if (!category || !quantity) {
+                    alert('Please select all options before adding to cart.');
+                    return;
+                }
+
+                if ((category === 'Normal Visiting Card' || category === 'UV Visiting Card' || category === 'Texture + Lamination Visiting Card' || category === 'Gold Foil Visiting Card' || category === 'Gloss Laminated Card') && !printing) {
+                    alert('Please select all options before adding to cart.');
+                    return;
+                }
+
+                if (category === 'Plastic Visiting Card' && !lamination) {
+                    alert('Please select all options before adding to cart.');
+                    return;
+                }
+
+                let price = 0;
                 if (category === 'Plastic Visiting Card') {
                     price = priceData[category][lamination][quantity] || 0;
                 } else {
