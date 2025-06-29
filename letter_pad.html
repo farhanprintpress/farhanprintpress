@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Design your professional letter pads with Farhan Printing Press.">
-    <meta name="keywords" content="letter pads, printing services Siddharth Nagar">
+    <meta name="description" content="Professional letter pad printing services by Farhan Printing Press.">
+    <meta name="keywords" content="letter pad printing, printing services Siddharth Nagar">
     <meta name="author" content="Farhan Printing Press">
     <title>Letter Pad Printing</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
@@ -218,25 +218,44 @@
             font-weight: 600;
         }
 
-        .service-options .form-group {
-            margin-bottom: 1rem;
+        .form-group {
+            margin-bottom: 1.5rem;
             text-align: left;
         }
 
-        .service-options label {
+        .form-group label {
             font-weight: 600;
             color: #2c3e50;
             display: block;
             margin-bottom: 0.5rem;
         }
 
-        .service-options select {
-            width: 100%;
-            padding: 0.5rem;
+        .option-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 0.5rem;
+        }
+
+        .option-btn {
+            padding: 0.5rem 1rem;
             border: 1px solid #dfe6e9;
             border-radius: 6px;
-            font-size: 0.9rem;
             background: #f9f9f9;
+            text-align: center;
+            cursor: pointer;
+            transition: background-color 0.3s, border-color 0.3s;
+            white-space: normal;
+            word-wrap: break-word;
+        }
+
+        .option-btn.active {
+            background-color: #3498db;
+            color: white;
+            border-color: #3498db;
+        }
+
+        .option-btn:hover {
+            background-color: #ecf0f1;
         }
 
         .service-options .whatsapp-btn {
@@ -520,6 +539,7 @@
             cursor: pointer;
             font-size: 0.8rem;
             transition: background 0.3s;
+            margin-right: 0.5rem;
         }
 
         .cart-item button:hover {
@@ -603,58 +623,67 @@
     </nav>
     <section class="hero">
         <h2>Letter Pad Printing</h2>
-        <p>Create professional and branded letter pads.</p>
+        <p>High-quality letter pads tailored to your needs.</p>
         <button class="cta-btn" onclick="openModal()">Order Now</button>
     </section>
     <section class="service-content">
         <div class="service-options">
             <h2>Letter Pad Options</h2>
             <div class="form-group">
-                <label for="price-range">Price Range (per 100 sheets)</label>
-                <select id="price-range" name="price_range">
-                    <option value="50-100 rupees">50-100 rupees</option>
-                    <option value="100-150 rupees">100-150 rupees</option>
-                    <option value="150-200 rupees">150-200 rupees</option>
-                </select>
+                <label for="letterpad-category">Letter Pad Category</label>
+                <div class="option-grid" id="letterpad-category">
+                    <button class="option-btn" data-value="Letter Pad">Letter Pad</button>
+                </div>
             </div>
-            <div class="form-group">
-                <label for="quantity">Quantity (Sets of 100)</label>
-                <select id="quantity" name="quantity">
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="5">5</option>
-                </select>
-            </div>
-            <div class="form-group">
+            <div class="form-group" id="size-group" style="display: none;">
                 <label for="size">Size</label>
-                <select id="size" name="size">
-                    <option value="A4">A4</option>
-                    <option value="Letter">Letter</option>
-                    <option value="Custom">Custom</option>
-                </select>
+                <div class="option-grid" id="size">
+                    <button class="option-btn" data-value="A4">A4</button>
+                    <button class="option-btn" data-value="A5 (A4/2)">A5 (A4/2)</button>
+                </div>
             </div>
-            <div class="form-group">
-                <label for="paper-quality">Paper Quality</label>
-                <select id="paper-quality" name="paper_quality">
-                    <option value="Standard">Standard</option>
-                    <option value="Premium">Premium</option>
-                </select>
+            <div class="form-group" id="color-group" style="display: none;">
+                <label for="color">Color</label>
+                <div class="option-grid" id="color">
+                    <button class="option-btn" data-value="Single Color">Single Color</button>
+                    <button class="option-btn" data-value="Two Color">Two Color</button>
+                    <button class="option-btn" data-value="4 Color (Multicolor)">4 Color (Multicolor)</button>
+                </div>
             </div>
-            <div class="form-group">
-                <label for="design-style">Design Style</label>
-                <select id="design-style" name="design_style">
-                    <option value="Corporate">Corporate</option>
-                    <option value="Minimal">Minimal</option>
-                    <option value="Custom">Custom</option>
-                </select>
+            <div class="form-group" id="paper-group" style="display: none;">
+                <label for="paper">Paper Quality</label>
+                <div class="option-grid" id="paper">
+                    <button class="option-btn" data-value="Century 75 gsm">Century 75 gsm</button>
+                    <button class="option-btn" data-value="Century 100 gsm">Century 100 gsm</button>
+                    <button class="option-btn" data-value="Bond 80 gsm">Bond 80 gsm</button>
+                    <button class="option-btn" data-value="Bond 100 gsm">Bond 100 gsm</button>
+                </div>
             </div>
-            <button class="whatsapp-btn" onclick="addToCart()">Add to Cart</button>
+            <div class="form-group" id="binding-group" style="display: none;">
+                <label for="binding">Binding</label>
+                <div class="option-grid" id="binding">
+                    <button class="option-btn" data-value="with binding">with binding</button>
+                    <button class="option-btn" data-value="loose (without binding)">loose (without binding)</button>
+                </div>
+            </div>
+            <div class="form-group" id="quantity-group" style="display: none;">
+                <label for="quantity">Quantity</label>
+                <div class="option-grid" id="quantity">
+                    <button class="option-btn" data-value="500">500</button>
+                    <button class="option-btn" data-value="1000">1000</button>
+                    <button class="option-btn" data-value="2000">2000</button>
+                    <button class="option-btn" data-value="4000">4000</button>
+                    <button class="option-btn" data-value="5000">5000</button>
+                </div>
+            </div>
+            <div id="price-display" class="modal-price" style="margin-top: 1rem; display: none;">Price: ₹0</div>
+            <button id="add-to-cart-btn" class="whatsapp-btn" onclick="addToCart()">Add to Cart</button>
+            <a href="#" class="whatsapp-btn" onclick="openCart(); return false;" style="margin-top: 1rem;">Go to Cart</a>
         </div>
         <div class="service-images">
             <div class="service-image">
                 <img src="https://images.unsplash.com/photo-1591123120675-6f7f1a4b8?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Example Letter Pad">
-                <p>Example of a professional letter pad with corporate design.</p>
+                <p>Example of a professional letter pad.</p>
             </div>
         </div>
     </section>
@@ -710,7 +739,7 @@
                 "label-quantity-books": "Quantity (Books)",
                 "label-quantity-sheets": "Quantity (Sheets)",
                 "label-card-category": "Card Category",
-                "label-printing-sides": "Printing",
+                "label-printing": "Printing",
                 "label-name": "Your Name"
             }
         };
@@ -721,7 +750,63 @@
         const modalPriceDisplay = document.getElementById('modal-price-display');
         const cartModal = document.getElementById('cart-modal');
         const checkoutForm = document.getElementById('checkout-form');
+        const addToCartBtn = document.getElementById('add-to-cart-btn');
         let cart = [];
+        let selectedOptions = {
+            'letterpad-category': null,
+            'size': null,
+            'color': null,
+            'paper': null,
+            'binding': null,
+            'quantity': null
+        };
+
+        const priceData = {
+            'Letter Pad': {
+                'Single Color': {
+                    'A4': {
+                        'Century 75 gsm': { 500: 800, 1000: 1500, 2000: 2800, 4000: 5200, 5000: 6400 },
+                        'Century 100 gsm': { 500: 900, 1000: 1700, 2000: 3200, 4000: 6000, 5000: 7500 },
+                        'Bond 80 gsm': { 500: 850, 1000: 1600, 2000: 3000, 4000: 5600, 5000: 7000 },
+                        'Bond 100 gsm': { 500: 950, 1000: 1800, 2000: 3400, 4000: 6400, 5000: 8000 }
+                    },
+                    'A5 (A4/2)': {
+                        'Century 75 gsm': { 500: 600, 1000: 1100, 2000: 2000, 4000: 3800, 5000: 4700 },
+                        'Century 100 gsm': { 500: 700, 1000: 1300, 2000: 2400, 4000: 4500, 5000: 5600 },
+                        'Bond 80 gsm': { 500: 650, 1000: 1200, 2000: 2200, 4000: 4000, 5000: 5000 },
+                        'Bond 100 gsm': { 500: 750, 1000: 1400, 2000: 2600, 4000: 4800, 5000: 6000 }
+                    }
+                },
+                'Two Color': {
+                    'A4': {
+                        'Century 75 gsm': { 500: 1000, 1000: 1900, 2000: 3600, 4000: 6800, 5000: 8400 },
+                        'Century 100 gsm': { 500: 1100, 1000: 2100, 2000: 4000, 4000: 7500, 5000: 9300 },
+                        'Bond 80 gsm': { 500: 1050, 1000: 2000, 2000: 3800, 4000: 7000, 5000: 8700 },
+                        'Bond 100 gsm': { 500: 1150, 1000: 2200, 2000: 4200, 4000: 7800, 5000: 9700 }
+                    },
+                    'A5 (A4/2)': {
+                        'Century 75 gsm': { 500: 800, 1000: 1500, 2000: 2800, 4000: 5200, 5000: 6400 },
+                        'Century 100 gsm': { 500: 900, 1000: 1700, 2000: 3200, 4000: 6000, 5000: 7500 },
+                        'Bond 80 gsm': { 500: 850, 1000: 1600, 2000: 3000, 4000: 5600, 5000: 7000 },
+                        'Bond 100 gsm': { 500: 950, 1000: 1800, 2000: 3400, 4000: 6400, 5000: 8000 }
+                    }
+                },
+                '4 Color (Multicolor)': {
+                    'A4': {
+                        'Century 75 gsm': { 500: 1300, 1000: 2500, 2000: 4800, 4000: 9000, 5000: 11200 },
+                        'Century 100 gsm': { 500: 1400, 1000: 2700, 2000: 5200, 4000: 9800, 5000: 12200 },
+                        'Bond 80 gsm': { 500: 1350, 1000: 2600, 2000: 5000, 4000: 9400, 5000: 11700 },
+                        'Bond 100 gsm': { 500: 1450, 1000: 2800, 2000: 5400, 4000: 10000, 5000: 12500 }
+                    },
+                    'A5 (A4/2)': {
+                        'Century 75 gsm': { 500: 1000, 1000: 1900, 2000: 3600, 4000: 6800, 5000: 8400 },
+                        'Century 100 gsm': { 500: 1100, 1000: 2100, 2000: 4000, 4000: 7500, 5000: 9300 },
+                        'Bond 80 gsm': { 500: 1050, 1000: 2000, 2000: 3800, 4000: 7000, 5000: 8700 },
+                        'Bond 100 gsm': { 500: 1150, 1000: 2200, 2000: 4200, 4000: 7800, 5000: 9700 }
+                    }
+                }
+            }
+        };
 
         try {
             const storedCart = localStorage.getItem('cart');
@@ -742,6 +827,7 @@
         document.addEventListener('DOMContentLoaded', () => {
             console.log('DOM loaded, updating cart display');
             updateCartDisplay();
+            initializeButtons();
             if (!checkoutForm) {
                 console.error('Checkout form not found');
             }
@@ -770,6 +856,122 @@
             });
         } else {
             console.error('Checkout form not found in DOM');
+        }
+
+        function initializeButtons() {
+            const letterpadCategory = document.getElementById('letterpad-category');
+            if (letterpadCategory) {
+                letterpadCategory.querySelectorAll('.option-btn').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        letterpadCategory.querySelectorAll('.option-btn').forEach(b => b.classList.remove('active'));
+                        btn.classList.add('active');
+                        selectedOptions['letterpad-category'] = btn.getAttribute('data-value');
+                        updateOptions();
+                        console.log('Letter pad category selected:', selectedOptions['letterpad-category']);
+                    });
+                });
+            } else {
+                console.error('Element with id letterpad-category not found');
+            }
+        }
+
+        function updateOptions() {
+            const category = selectedOptions['letterpad-category'];
+            const sizeGroup = document.getElementById('size-group');
+            const colorGroup = document.getElementById('color-group');
+            const paperGroup = document.getElementById('paper-group');
+            const bindingGroup = document.getElementById('binding-group');
+            const quantityGroup = document.getElementById('quantity-group');
+            const priceDisplay = document.getElementById('price-display');
+
+            if (sizeGroup && colorGroup && paperGroup && bindingGroup && quantityGroup && priceDisplay) {
+                sizeGroup.style.display = 'none';
+                colorGroup.style.display = 'none';
+                paperGroup.style.display = 'none';
+                bindingGroup.style.display = 'none';
+                quantityGroup.style.display = 'none';
+                priceDisplay.style.display = 'none';
+                selectedOptions['size'] = null;
+                selectedOptions['color'] = null;
+                selectedOptions['paper'] = null;
+                selectedOptions['binding'] = null;
+                selectedOptions['quantity'] = null;
+
+                if (category) {
+                    updateDynamicButtons('size', { 'A4': 'A4', 'A5 (A4/2)': 'A5 (A4/2)' });
+                    sizeGroup.style.display = 'block';
+                    updateDynamicButtons('color', { 'Single Color': 'Single Color', 'Two Color': 'Two Color', '4 Color (Multicolor)': '4 Color (Multicolor)' });
+                    colorGroup.style.display = 'block';
+                    updateDynamicButtons('paper', { 'Century 75 gsm': 'Century 75 gsm', 'Century 100 gsm': 'Century 100 gsm', 'Bond 80 gsm': 'Bond 80 gsm', 'Bond 100 gsm': 'Bond 100 gsm' });
+                    paperGroup.style.display = 'block';
+                    updateDynamicButtons('binding', { 'with binding': 'with binding', 'loose (without binding)': 'loose (without binding)' });
+                    bindingGroup.style.display = 'block';
+                    updateQuantityButtons([500, 1000, 2000, 4000, 5000]);
+                    quantityGroup.style.display = 'block';
+                    priceDisplay.style.display = 'block';
+                    updatePrice();
+                }
+            } else {
+                console.error('Option groups or price display not found');
+            }
+        }
+
+        function updateDynamicButtons(containerId, options) {
+            const container = document.getElementById(containerId + '-group');
+            const optionGrid = document.getElementById(containerId);
+            if (container && optionGrid) {
+                optionGrid.innerHTML = '';
+                Object.keys(options).forEach(option => {
+                    const btn = document.createElement('button');
+                    btn.className = 'option-btn';
+                    btn.setAttribute('data-value', option);
+                    btn.textContent = option;
+                    btn.addEventListener('click', () => {
+                        optionGrid.querySelectorAll('.option-btn').forEach(b => b.classList.remove('active'));
+                        btn.classList.add('active');
+                        if (containerId === 'size') {
+                            selectedOptions['size'] = option;
+                        } else if (containerId === 'color') {
+                            selectedOptions['color'] = option;
+                        } else if (containerId === 'paper') {
+                            selectedOptions['paper'] = option;
+                        } else if (containerId === 'binding') {
+                            selectedOptions['binding'] = option;
+                        }
+                        updatePrice();
+                        console.log(`${containerId} selected:`, option);
+                    });
+                    optionGrid.appendChild(btn);
+                });
+                container.style.display = 'block';
+            } else {
+                console.error(`Element with id ${containerId}-group or ${containerId} not found`);
+            }
+        }
+
+        function updateQuantityButtons(quantities) {
+            const container = document.getElementById('quantity-group');
+            const optionGrid = document.getElementById('quantity');
+            if (container && optionGrid) {
+                optionGrid.innerHTML = '';
+                quantities.forEach(qty => {
+                    const btn = document.createElement('button');
+                    btn.className = 'option-btn';
+                    btn.setAttribute('data-value', qty);
+                    btn.textContent = qty;
+                    btn.addEventListener('click', () => {
+                        optionGrid.querySelectorAll('.option-btn').forEach(b => b.classList.remove('active'));
+                        btn.classList.add('active');
+                        selectedOptions['quantity'] = qty;
+                        updatePrice();
+                        console.log('Quantity selected:', qty);
+                    });
+                    optionGrid.appendChild(btn);
+                });
+                container.style.display = 'block';
+            } else {
+                console.error('Element with id quantity-group or quantity not found');
+            }
         }
 
         function openModal() {
@@ -844,10 +1046,11 @@
 
                 cart.forEach((item, index) => {
                     try {
+                        const options = JSON.parse(item.options || '{}');
                         itemsHTML += `
                             <div class="cart-item">
                                 <h4>${item.service || 'Unknown Service'}</h4>
-                                <p>${formatOptions(JSON.parse(item.options || '{}'))}</p>
+                                <p>${formatOptions(options)}</p>
                                 <p>Price: ₹${item.price || 0}</p>
                                 <button onclick="removeFromCart(${index})">Remove</button>
                             </div>
@@ -882,45 +1085,53 @@
 
         function updatePrice() {
             try {
-                const priceRange = document.getElementById('price-range').value;
-                const quantity = document.getElementById('quantity').value;
-                const basePrice = parseInt(priceRange.split('-')[0]) || 0;
-                const totalPrice = basePrice * parseInt(quantity);
-                modalPriceDisplay.textContent = `Price: ₹${totalPrice}`;
-                console.log('Price updated:', totalPrice);
+                const category = selectedOptions['letterpad-category'];
+                const size = selectedOptions['size'];
+                const color = selectedOptions['color'];
+                const paper = selectedOptions['paper'];
+                const binding = selectedOptions['binding'];
+                const quantity = selectedOptions['quantity'];
+                const priceDisplay = document.getElementById('price-display');
+
+                if (category && size && color && paper && binding && quantity) {
+                    const price = priceData[category][color][size][paper][quantity] || 0;
+                    if (priceDisplay) {
+                        priceDisplay.textContent = `Price: ₹${price}`;
+                    }
+                } else if (priceDisplay) {
+                    priceDisplay.textContent = 'Price: Select all options';
+                }
+                console.log('Price updated:', priceDisplay ? priceDisplay.textContent : 'Price display not found');
             } catch (e) {
                 console.error('Error in updatePrice:', e);
-                modalPriceDisplay.textContent = 'Price: Error';
+                const priceDisplay = document.getElementById('price-display');
+                if (priceDisplay) priceDisplay.textContent = 'Price: Error';
             }
         }
 
-        ['price-range', 'quantity'].forEach(id => {
-            const element = document.getElementById(id);
-            if (element) {
-                element.addEventListener('change', updatePrice);
-            } else {
-                console.error(`Element with id ${id} not found`);
-            }
-        });
-
         function addToCart() {
             try {
-                const priceRange = document.getElementById('price-range').value;
-                const quantity = document.getElementById('quantity').value;
-                const size = document.getElementById('size').value;
-                const paperQuality = document.getElementById('paper-quality').value;
-                const designStyle = document.getElementById('design-style').value;
-                const price = parseInt(priceRange.split('-')[0]) || 0;
+                if (Object.values(selectedOptions).some(val => val === null)) {
+                    alert('Please select all options before adding to cart.');
+                    return;
+                }
+
+                const category = selectedOptions['letterpad-category'];
+                const size = selectedOptions['size'];
+                const color = selectedOptions['color'];
+                const paper = selectedOptions['paper'];
+                const binding = selectedOptions['binding'];
+                const quantity = selectedOptions['quantity'];
+                const price = priceData[category][color][size][paper][quantity] || 0;
 
                 const cartItem = {
                     service: 'Letter Pad Printing',
-                    options: JSON.stringify({ 'price_range': priceRange, 'quantity': quantity, 'size': size, 'paper_quality': paperQuality, 'design_style': designStyle }),
-                    price: price * parseInt(quantity)
+                    options: JSON.stringify({ 'letterpad-category': category, 'size': size, 'color': color, 'paper': paper, 'binding': binding, 'quantity': quantity }),
+                    price: price
                 };
 
                 cart.push(cartItem);
                 localStorage.setItem('cart', JSON.stringify(cart));
-                closeModal();
                 updateCartDisplay();
                 alert('Item added to cart!');
                 console.log('Item added to cart:', cartItem);
