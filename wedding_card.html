@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Design your perfect wedding card with Farhan Printing Press.">
-    <meta name="keywords" content="wedding cards, printing services Siddharth Nagar">
+    <meta name="description" content="Elegant wedding card printing services by Farhan Printing Press.">
+    <meta name="keywords" content="wedding card printing, printing services Siddharth Nagar">
     <meta name="author" content="Farhan Printing Press">
     <title>Wedding Card Printing</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
@@ -218,25 +218,42 @@
             font-weight: 600;
         }
 
-        .service-options .form-group {
-            margin-bottom: 1rem;
+        .form-group {
+            margin-bottom: 1.5rem;
             text-align: left;
         }
 
-        .service-options label {
+        .form-group label {
             font-weight: 600;
             color: #2c3e50;
             display: block;
             margin-bottom: 0.5rem;
         }
 
-        .service-options select {
-            width: 100%;
-            padding: 0.5rem;
+        .option-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 0.5rem;
+        }
+
+        .option-btn {
+            padding: 0.5rem 1rem;
             border: 1px solid #dfe6e9;
             border-radius: 6px;
-            font-size: 0.9rem;
             background: #f9f9f9;
+            text-align: center;
+            cursor: pointer;
+            transition: background-color 0.3s, border-color 0.3s;
+        }
+
+        .option-btn.active {
+            background-color: #3498db;
+            color: white;
+            border-color: #3498db;
+        }
+
+        .option-btn:hover {
+            background-color: #ecf0f1;
         }
 
         .service-options .whatsapp-btn {
@@ -520,6 +537,7 @@
             cursor: pointer;
             font-size: 0.8rem;
             transition: background 0.3s;
+            margin-right: 0.5rem;
         }
 
         .cart-item button:hover {
@@ -538,6 +556,33 @@
             border: 1px solid #ddd;
             border-radius: 4px;
             font-size: 1rem;
+        }
+
+        .quantity-controls {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .quantity-controls button {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 0.3rem 0.6rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            transition: background 0.3s;
+        }
+
+        .quantity-controls button:hover {
+            background: #2980b9;
+        }
+
+        .quantity-controls span {
+            font-weight: 600;
+            color: #2c3e50;
         }
 
         @media (max-width: 768px) {
@@ -603,75 +648,44 @@
     </nav>
     <section class="hero">
         <h2>Wedding Card Printing</h2>
-        <p>Create elegant and customizable wedding cards.</p>
+        <p>Create beautiful wedding invitations with our expert printing services.</p>
         <button class="cta-btn" onclick="openModal()">Order Now</button>
     </section>
     <section class="service-content">
         <div class="service-options">
             <h2>Wedding Card Options</h2>
             <div class="form-group">
-                <label for="price-range">Price Range (per unit)</label>
-                <select id="price-range" name="price_range">
-                    <option value="7-10 rupees">7-10 rupees</option>
-                    <option value="10-20 rupees">10-20 rupees</option>
-                    <option value="20-30 rupees">20-30 rupees</option>
-                    <option value="30-40 rupees">30-40 rupees</option>
-                    <option value="40-50 rupees">40-50 rupees</option>
-                </select>
+                <label for="price-range">Price Range (per card)</label>
+                <div class="option-grid" id="price-range">
+                    <button class="option-btn" data-value="7-10 rupees">7-10 rupees</button>
+                    <button class="option-btn" data-value="10-20 rupees">10-20 rupees</button>
+                    <button class="option-btn" data-value="20-30 rupees">20-30 rupees</button>
+                    <button class="option-btn" data-value="30-40 rupees">30-40 rupees</button>
+                    <button class="option-btn" data-value="40-50 rupees">40-50 rupees</button>
+                </div>
             </div>
             <div class="form-group">
                 <label for="quantity">Quantity</label>
-                <select id="quantity" name="quantity">
-                    <option value="50">50</option>
-                    <option value="100">100</option>
-                    <option value="150">150</option>
-                    <option value="200">200</option>
-                    <option value="250">250</option>
-                    <option value="300">300</option>
-                    <option value="350">350</option>
-                    <option value="400">400</option>
-                    <option value="450">450</option>
-                    <option value="500">500</option>
-                </select>
+                <div class="option-grid" id="quantity">
+                    <button class="option-btn" data-value="50">50</button>
+                    <button class="option-btn" data-value="100">100</button>
+                    <button class="option-btn" data-value="150">150</button>
+                    <button class="option-btn" data-value="200">200</button>
+                    <button class="option-btn" data-value="250">250</button>
+                    <button class="option-btn" data-value="300">300</button>
+                    <button class="option-btn" data-value="350">350</button>
+                    <button class="option-btn" data-value="400">400</button>
+                    <button class="option-btn" data-value="450">450</button>
+                    <button class="option-btn" data-value="500">500</button>
+                </div>
             </div>
-            <div class="form-group">
-                <label for="size">Size</label>
-                <select id="size" name="size">
-                    <option value="5x7 inches">5x7 inches</option>
-                    <option value="6x8 inches">6x8 inches</option>
-                    <option value="Custom">Custom</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="paper-quality">Paper Quality</label>
-                <select id="paper-quality" name="paper_quality">
-                    <option value="Matte">Matte</option>
-                    <option value="Glossy">Glossy</option>
-                    <option value="Premium">Premium</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="design-style">Design Style</label>
-                <select id="design-style" name="design_style">
-                    <option value="Traditional">Traditional</option>
-                    <option value="Modern">Modern</option>
-                    <option value="Custom">Custom</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="finishing">Finishing</label>
-                <select id="finishing" name="finishing">
-                    <option value="None">None</option>
-                    <option value="Embossing">Embossing</option>
-                    <option value="Foil Stamping">Foil Stamping</option>
-                </select>
-            </div>
-            <button class="whatsapp-btn" onclick="addToCart()">Add to Cart</button>
+            <button id="add-to-cart-btn" class="whatsapp-btn" onclick="addToCart()">Add to Cart</button>
+            <a href="#" class="whatsapp-btn" onclick="openCart(); return false;" style="margin-top: 1rem;">Go to Cart</a>
         </div>
         <div class="service-images">
             <div class="service-image">
-                <img src="https://images.unsplash.com/photo-1592030539974-5f1c6e8a8e5e?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Example Wedding Card">
-                <p>Example of a simple wedding card with elegant floral design.</p>
+                <img src="https://images.unsplash.com/photo-1591123120675-6f7f1a4b8?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Example Wedding Card">
+                <p>Example of an elegant wedding card design.</p>
             </div>
         </div>
     </section>
@@ -738,7 +752,13 @@
         const modalPriceDisplay = document.getElementById('modal-price-display');
         const cartModal = document.getElementById('cart-modal');
         const checkoutForm = document.getElementById('checkout-form');
+        const addToCartBtn = document.getElementById('add-to-cart-btn');
         let cart = [];
+        let selectedOptions = {
+            'price-range': null,
+            'quantity': null
+        };
+        let currentCartIndex = -1;
 
         try {
             const storedCart = localStorage.getItem('cart');
@@ -759,6 +779,7 @@
         document.addEventListener('DOMContentLoaded', () => {
             console.log('DOM loaded, updating cart display');
             updateCartDisplay();
+            initializeButtons();
             if (!checkoutForm) {
                 console.error('Checkout form not found');
             }
@@ -787,6 +808,25 @@
             });
         } else {
             console.error('Checkout form not found in DOM');
+        }
+
+        function initializeButtons() {
+            ['price-range', 'quantity'].forEach(id => {
+                const container = document.getElementById(id);
+                if (container) {
+                    container.querySelectorAll('.option-btn').forEach(btn => {
+                        btn.addEventListener('click', () => {
+                            container.querySelectorAll('.option-btn').forEach(b => b.classList.remove('active'));
+                            btn.classList.add('active');
+                            selectedOptions[id] = btn.getAttribute('data-value');
+                            updatePrice();
+                            console.log(`${id} selected:`, selectedOptions[id]);
+                        });
+                    });
+                } else {
+                    console.error(`Element with id ${id} not found`);
+                }
+            });
         }
 
         function openModal() {
@@ -861,10 +901,11 @@
 
                 cart.forEach((item, index) => {
                     try {
+                        const options = JSON.parse(item.options || '{}');
                         itemsHTML += `
                             <div class="cart-item">
                                 <h4>${item.service || 'Unknown Service'}</h4>
-                                <p>${formatOptions(JSON.parse(item.options || '{}'))}</p>
+                                <p>Price Range: ${options['price-range']}<br>Quantity: ${options['quantity']}</p>
                                 <p>Price: ₹${item.price || 0}</p>
                                 <button onclick="removeFromCart(${index})">Remove</button>
                             </div>
@@ -899,52 +940,110 @@
 
         function updatePrice() {
             try {
-                const priceRange = document.getElementById('price-range').value;
-                const quantity = document.getElementById('quantity').value;
-                const basePrice = parseInt(priceRange.split('-')[0]) || 0;
-                const totalPrice = basePrice * parseInt(quantity);
-                modalPriceDisplay.textContent = `Price: ₹${totalPrice}`;
-                console.log('Price updated:', totalPrice);
+                const priceRange = selectedOptions['price-range'];
+                const quantity = selectedOptions['quantity'];
+                if (priceRange && quantity) {
+                    const basePrice = parseInt(priceRange.split('-')[0]) || 0;
+                    const totalPrice = (basePrice * parseInt(quantity)) / 100;
+                    modalPriceDisplay.textContent = `Price: ₹${totalPrice}`;
+                } else {
+                    modalPriceDisplay.textContent = 'Price: Select options';
+                }
+                console.log('Price updated:', modalPriceDisplay.textContent);
             } catch (e) {
                 console.error('Error in updatePrice:', e);
                 modalPriceDisplay.textContent = 'Price: Error';
             }
         }
 
-        ['price-range', 'quantity'].forEach(id => {
-            const element = document.getElementById(id);
-            if (element) {
-                element.addEventListener('change', updatePrice);
-            } else {
-                console.error(`Element with id ${id} not found`);
-            }
-        });
-
         function addToCart() {
             try {
-                const priceRange = document.getElementById('price-range').value;
-                const quantity = document.getElementById('quantity').value;
-                const size = document.getElementById('size').value;
-                const paperQuality = document.getElementById('paper-quality').value;
-                const designStyle = document.getElementById('design-style').value;
-                const finishing = document.getElementById('finishing').value;
-                const price = parseInt(priceRange.split('-')[0]) || 0;
+                if (Object.values(selectedOptions).some(val => val === null)) {
+                    alert('Please select both price range and quantity before adding to cart.');
+                    return;
+                }
+
+                const priceRange = selectedOptions['price-range'];
+                const quantity = selectedOptions['quantity'];
+                const basePrice = parseInt(priceRange.split('-')[0]) || 0;
+                const price = (basePrice * parseInt(quantity)) / 100;
 
                 const cartItem = {
                     service: 'Wedding Card Printing',
-                    options: JSON.stringify({ 'price_range': priceRange, 'quantity': quantity, 'size': size, 'paper_quality': paperQuality, 'design_style': designStyle, 'finishing': finishing }),
-                    price: price * parseInt(quantity)
+                    options: JSON.stringify({ 'price-range': priceRange, 'quantity': quantity }),
+                    price: price,
+                    initialQuantity: parseInt(quantity)
                 };
 
                 cart.push(cartItem);
                 localStorage.setItem('cart', JSON.stringify(cart));
-                closeModal();
+                currentCartIndex = cart.length - 1;
                 updateCartDisplay();
+                updateAddToCartButton();
                 alert('Item added to cart!');
                 console.log('Item added to cart:', cartItem);
             } catch (e) {
                 console.error('Error in addToCart:', e);
                 alert('Error adding item to cart');
+            }
+        }
+
+        function updateAddToCartButton() {
+            try {
+                if (currentCartIndex >= 0 && currentCartIndex < cart.length) {
+                    addToCartBtn.innerHTML = '';
+                    const quantityControls = document.createElement('div');
+                    quantityControls.className = 'quantity-controls';
+                    quantityControls.innerHTML = `
+                        <button onclick="decreaseQuantity()">-</button>
+                        <span id="current-quantity">${cart[currentCartIndex].initialQuantity}</span>
+                        <button onclick="increaseQuantity()">+</button>
+                    `;
+                    addToCartBtn.appendChild(quantityControls);
+                } else {
+                    addToCartBtn.textContent = 'Add to Cart';
+                    addToCartBtn.onclick = addToCart;
+                }
+            } catch (e) {
+                console.error('Error in updateAddToCartButton:', e);
+            }
+        }
+
+        function increaseQuantity() {
+            try {
+                if (currentCartIndex >= 0 && currentCartIndex < cart.length) {
+                    cart[currentCartIndex].initialQuantity += 50;
+                    const basePrice = parseInt(cart[currentCartIndex].options['price-range'].split('-')[0]) || 0;
+                    cart[currentCartIndex].price = (basePrice * cart[currentCartIndex].initialQuantity) / 100;
+                    localStorage.setItem('cart', JSON.stringify(cart));
+                    document.getElementById('current-quantity').textContent = cart[currentCartIndex].initialQuantity;
+                    updateCartDisplay();
+                    console.log('Quantity increased:', cart[currentCartIndex]);
+                }
+            } catch (e) {
+                console.error('Error in increaseQuantity:', e);
+            }
+        }
+
+        function decreaseQuantity() {
+            try {
+                if (currentCartIndex >= 0 && currentCartIndex < cart.length && cart[currentCartIndex].initialQuantity > 50) {
+                    cart[currentCartIndex].initialQuantity -= 50;
+                    const basePrice = parseInt(cart[currentCartIndex].options['price-range'].split('-')[0]) || 0;
+                    cart[currentCartIndex].price = (basePrice * cart[currentCartIndex].initialQuantity) / 100;
+                    localStorage.setItem('cart', JSON.stringify(cart));
+                    document.getElementById('current-quantity').textContent = cart[currentCartIndex].initialQuantity;
+                    updateCartDisplay();
+                    console.log('Quantity decreased:', cart[currentCartIndex]);
+                } else if (cart[currentCartIndex].initialQuantity <= 50) {
+                    removeFromCart(currentCartIndex);
+                    addToCartBtn.textContent = 'Add to Cart';
+                    addToCartBtn.onclick = addToCart;
+                    currentCartIndex = -1;
+                    console.log('Quantity reduced to zero, item removed');
+                }
+            } catch (e) {
+                console.error('Error in decreaseQuantity:', e);
             }
         }
 
@@ -955,6 +1054,10 @@
                     cart.splice(index, 1);
                     localStorage.setItem('cart', JSON.stringify(cart));
                     updateCartDisplay();
+                    if (index === currentCartIndex) {
+                        currentCartIndex = -1;
+                        updateAddToCartButton();
+                    }
                 } else {
                     console.error('Invalid cart index:', index);
                 }
