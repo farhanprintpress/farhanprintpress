@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Design your professional visiting cards with Farhan Printing Press.">
-    <meta name="keywords" content="visiting cards, printing services Siddharth Nagar">
+    <meta name="description" content="Professional visiting card printing services by Farhan Printing Press.">
+    <meta name="keywords" content="visiting card printing, printing services Siddharth Nagar">
     <meta name="author" content="Farhan Printing Press">
     <title>Visiting Card Printing</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
@@ -218,25 +218,44 @@
             font-weight: 600;
         }
 
-        .service-options .form-group {
-            margin-bottom: 1rem;
+        .form-group {
+            margin-bottom: 1.5rem;
             text-align: left;
         }
 
-        .service-options label {
+        .form-group label {
             font-weight: 600;
             color: #2c3e50;
             display: block;
             margin-bottom: 0.5rem;
         }
 
-        .service-options select {
-            width: 100%;
-            padding: 0.5rem;
+        .option-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 0.5rem;
+        }
+
+        .option-btn {
+            padding: 0.5rem 1rem;
             border: 1px solid #dfe6e9;
             border-radius: 6px;
-            font-size: 0.9rem;
             background: #f9f9f9;
+            text-align: center;
+            cursor: pointer;
+            transition: background-color 0.3s, border-color 0.3s;
+            white-space: normal;
+            word-wrap: break-word;
+        }
+
+        .option-btn.active {
+            background-color: #3498db;
+            color: white;
+            border-color: #3498db;
+        }
+
+        .option-btn:hover {
+            background-color: #ecf0f1;
         }
 
         .service-options .whatsapp-btn {
@@ -520,6 +539,7 @@
             cursor: pointer;
             font-size: 0.8rem;
             transition: background 0.3s;
+            margin-right: 0.5rem;
         }
 
         .cart-item button:hover {
@@ -603,59 +623,49 @@
     </nav>
     <section class="hero">
         <h2>Visiting Card Printing</h2>
-        <p>Create professional and personalized visiting cards.</p>
+        <p>High-quality visiting cards tailored to your needs.</p>
         <button class="cta-btn" onclick="openModal()">Order Now</button>
     </section>
     <section class="service-content">
         <div class="service-options">
             <h2>Visiting Card Options</h2>
             <div class="form-group">
-                <label for="price-range">Price Range (per unit)</label>
-                <select id="price-range" name="price_range">
-                    <option value="5-10 rupees">5-10 rupees</option>
-                    <option value="10-15 rupees">10-15 rupees</option>
-                    <option value="15-20 rupees">15-20 rupees</option>
-                </select>
+                <label for="card-category">Card Category</label>
+                <div class="option-grid" id="card-category">
+                    <button class="option-btn" data-value="Normal Visiting Card">Normal Visiting Card</button>
+                    <button class="option-btn" data-value="UV Visiting Card">UV Visiting Card</button>
+                    <button class="option-btn" data-value="Gloss Laminated Card">Gloss Laminated Card</button>
+                    <button class="option-btn" data-value="Plastic Visiting Card">Plastic Visiting Card</button>
+                    <button class="option-btn" data-value="Texture + Lamination Visiting Card">Texture + Lamination Visiting Card</button>
+                    <button class="option-btn" data-value="Gold Foil Visiting Card">Gold Foil Visiting Card</button>
+                </div>
             </div>
-            <div class="form-group">
+            <div class="form-group" id="printing-group" style="display: none;">
+                <label for="printing">Printing</label>
+                <div class="option-grid" id="printing">
+                    <!-- Populated dynamically -->
+                </div>
+            </div>
+            <div class="form-group" id="lamination-group" style="display: none;">
+                <label for="lamination">Lamination</label>
+                <div class="option-grid" id="lamination">
+                    <!-- Populated dynamically -->
+                </div>
+            </div>
+            <div class="form-group" id="quantity-group" style="display: none;">
                 <label for="quantity">Quantity</label>
-                <select id="quantity" name="quantity">
-                    <option value="50">50</option>
-                    <option value="100">100</option>
-                    <option value="200">200</option>
-                    <option value="300">300</option>
-                    <option value="500">500</option>
-                </select>
+                <div class="option-grid" id="quantity">
+                    <!-- Populated dynamically -->
+                </div>
             </div>
-            <div class="form-group">
-                <label for="size">Size</label>
-                <select id="size" name="size">
-                    <option value="3.5x2 inches">3.5x2 inches</option>
-                    <option value="Custom">Custom</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="paper-quality">Paper Quality</label>
-                <select id="paper-quality" name="paper_quality">
-                    <option value="Matte">Matte</option>
-                    <option value="Glossy">Glossy</option>
-                    <option value="Premium">Premium</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="finishing">Finishing</label>
-                <select id="finishing" name="finishing">
-                    <option value="None">None</option>
-                    <option value="Lamination">Lamination</option>
-                    <option value="Spot UV">Spot UV</option>
-                </select>
-            </div>
-            <button class="whatsapp-btn" onclick="addToCart()">Add to Cart</button>
+            <div id="price-display" class="modal-price" style="margin-top: 1rem; display: none;">Price: ₹0</div>
+            <button id="add-to-cart-btn" class="whatsapp-btn" onclick="addToCart()">Add to Cart</button>
+            <a href="#" class="whatsapp-btn" onclick="openCart(); return false;" style="margin-top: 1rem;">Go to Cart</a>
         </div>
         <div class="service-images">
             <div class="service-image">
-                <img src="https://images.unsplash.com/photo-1581299517000-2974d7a1a3e7?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Example Visiting Card">
-                <p>Example of a professional visiting card with modern design.</p>
+                <img src="https://images.unsplash.com/photo-1591123120675-6f7f1a4b8?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Example Visiting Card">
+                <p>Example of a professional visiting card.</p>
             </div>
         </div>
     </section>
@@ -711,7 +721,7 @@
                 "label-quantity-books": "Quantity (Books)",
                 "label-quantity-sheets": "Quantity (Sheets)",
                 "label-card-category": "Card Category",
-                "label-printing-sides": "Printing",
+                "label-printing": "Printing",
                 "label-name": "Your Name"
             }
         };
@@ -722,7 +732,41 @@
         const modalPriceDisplay = document.getElementById('modal-price-display');
         const cartModal = document.getElementById('cart-modal');
         const checkoutForm = document.getElementById('checkout-form');
+        const addToCartBtn = document.getElementById('add-to-cart-btn');
         let cart = [];
+        let selectedOptions = {
+            'card-category': null,
+            'printing': null,
+            'lamination': null,
+            'quantity': null
+        };
+
+        const priceData = {
+            'Normal Visiting Card': {
+                '1 Side': { 100: 130, 200: 200, 500: 400, 1000: 600 },
+                '2 Sides': { 100: 180, 200: 350, 500: 650, 950: 1100 }
+            },
+            'UV Visiting Card': {
+                '1 Side': { 1000: 2000, 2000: 3500 },
+                '2 Sides': { 1000: 2300, 2000: 4500 }
+            },
+            'Gloss Laminated Card': {
+                '1 side printing + 1 side lamination': { 100: 220, 200: 350, 500: 550, 1000: 600, 2000: 1150, 5000: 2500, 10000: 4500 },
+                '2 side printing + 2 side lamination': { 100: 350, 200: 450, 500: 650, 1000: 950 }
+            },
+            'Plastic Visiting Card': {
+                'with lamination': { 1000: 800, 2000: 1500 },
+                'without lamination': { 1000: 750, 2000: 1450 }
+            },
+            'Texture + Lamination Visiting Card': {
+                '1 Side': { 1000: 1500, 2000: 2800 },
+                '2 Sides': { 1000: 1700, 2000: 3200 }
+            },
+            'Gold Foil Visiting Card': {
+                '1 Side': { 500: 2300, 1000: 3400 },
+                '2 Sides': { 500: 2700, 1000: 3900 }
+            }
+        };
 
         try {
             const storedCart = localStorage.getItem('cart');
@@ -743,6 +787,7 @@
         document.addEventListener('DOMContentLoaded', () => {
             console.log('DOM loaded, updating cart display');
             updateCartDisplay();
+            initializeButtons();
             if (!checkoutForm) {
                 console.error('Checkout form not found');
             }
@@ -771,6 +816,131 @@
             });
         } else {
             console.error('Checkout form not found in DOM');
+        }
+
+        function initializeButtons() {
+            const cardCategory = document.getElementById('card-category');
+            if (cardCategory) {
+                cardCategory.querySelectorAll('.option-btn').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        cardCategory.querySelectorAll('.option-btn').forEach(b => b.classList.remove('active'));
+                        btn.classList.add('active');
+                        selectedOptions['card-category'] = btn.getAttribute('data-value');
+                        updateOptions();
+                        console.log('Card category selected:', selectedOptions['card-category']);
+                    });
+                });
+            } else {
+                console.error('Element with id card-category not found');
+            }
+        }
+
+        function updateOptions() {
+            const category = selectedOptions['card-category'];
+            const printingGroup = document.getElementById('printing-group');
+            const laminationGroup = document.getElementById('lamination-group');
+            const quantityGroup = document.getElementById('quantity-group');
+            const priceDisplay = document.getElementById('price-display');
+
+            if (printingGroup && laminationGroup && quantityGroup && priceDisplay) {
+                printingGroup.style.display = 'none';
+                laminationGroup.style.display = 'none';
+                quantityGroup.style.display = 'none';
+                priceDisplay.style.display = 'none';
+                selectedOptions['printing'] = null;
+                selectedOptions['lamination'] = null;
+                selectedOptions['quantity'] = null;
+
+                if (category) {
+                    if (category === 'Normal Visiting Card' || category === 'UV Visiting Card' || category === 'Texture + Lamination Visiting Card' || category === 'Gold Foil Visiting Card') {
+                        updateDynamicButtons('printing', { '1 Side': '1 Side', '2 Sides': '2 Sides' });
+                        printingGroup.style.display = 'block';
+                        laminationGroup.style.display = 'none';
+                    } else if (category === 'Plastic Visiting Card') {
+                        updateDynamicButtons('lamination', { 'with lamination': 'with lamination', 'without lamination': 'without lamination' });
+                        laminationGroup.style.display = 'block';
+                        printingGroup.style.display = 'none';
+                        const printingContainer = document.getElementById('printing');
+                        if (printingContainer) {
+                            printingContainer.innerHTML = '<p>Printing: 1 Side</p>';
+                            selectedOptions['printing'] = '1 Side';
+                        }
+                    } else if (category === 'Gloss Laminated Card') {
+                        updateDynamicButtons('printing', { '1 side printing + 1 side lamination': '1 side printing + 1 side lamination', '2 side printing + 2 side lamination': '2 side printing + 2 side lamination' });
+                        printingGroup.style.display = 'block';
+                        laminationGroup.style.display = 'none';
+                    }
+
+                    const quantities = {
+                        'Normal Visiting Card': [100, 200, 500, 1000],
+                        'UV Visiting Card': [1000, 2000],
+                        'Gloss Laminated Card': [100, 200, 500, 1000, 2000, 5000, 10000],
+                        'Plastic Visiting Card': [1000, 2000],
+                        'Texture + Lamination Visiting Card': [1000, 2000],
+                        'Gold Foil Visiting Card': [500, 1000]
+                    }[category] || [];
+                    updateQuantityButtons(quantities);
+                    quantityGroup.style.display = 'block';
+                    priceDisplay.style.display = 'block';
+                    updatePrice();
+                }
+            } else {
+                console.error('Option groups or price display not found');
+            }
+        }
+
+        function updateDynamicButtons(containerId, options) {
+            const container = document.getElementById(containerId + '-group');
+            const optionGrid = document.getElementById(containerId);
+            if (container && optionGrid) {
+                optionGrid.innerHTML = '';
+                Object.keys(options).forEach(option => {
+                    const btn = document.createElement('button');
+                    btn.className = 'option-btn';
+                    btn.setAttribute('data-value', option);
+                    btn.textContent = option;
+                    btn.addEventListener('click', () => {
+                        optionGrid.querySelectorAll('.option-btn').forEach(b => b.classList.remove('active'));
+                        btn.classList.add('active');
+                        if (containerId === 'printing') {
+                            selectedOptions['printing'] = option;
+                        } else if (containerId === 'lamination') {
+                            selectedOptions['lamination'] = option;
+                        }
+                        updatePrice();
+                        console.log(`${containerId} selected:`, option);
+                    });
+                    optionGrid.appendChild(btn);
+                });
+                container.style.display = 'block';
+            } else {
+                console.error(`Element with id ${containerId}-group or ${containerId} not found`);
+            }
+        }
+
+        function updateQuantityButtons(quantities) {
+            const container = document.getElementById('quantity-group');
+            const optionGrid = document.getElementById('quantity');
+            if (container && optionGrid) {
+                optionGrid.innerHTML = '';
+                quantities.forEach(qty => {
+                    const btn = document.createElement('button');
+                    btn.className = 'option-btn';
+                    btn.setAttribute('data-value', qty);
+                    btn.textContent = qty;
+                    btn.addEventListener('click', () => {
+                        optionGrid.querySelectorAll('.option-btn').forEach(b => b.classList.remove('active'));
+                        btn.classList.add('active');
+                        selectedOptions['quantity'] = qty;
+                        updatePrice();
+                        console.log('Quantity selected:', qty);
+                    });
+                    optionGrid.appendChild(btn);
+                });
+                container.style.display = 'block';
+            } else {
+                console.error('Element with id quantity-group or quantity not found');
+            }
         }
 
         function openModal() {
@@ -845,10 +1015,11 @@
 
                 cart.forEach((item, index) => {
                     try {
+                        const options = JSON.parse(item.options || '{}');
                         itemsHTML += `
                             <div class="cart-item">
                                 <h4>${item.service || 'Unknown Service'}</h4>
-                                <p>${formatOptions(JSON.parse(item.options || '{}'))}</p>
+                                <p>${formatOptions(options)}</p>
                                 <p>Price: ₹${item.price || 0}</p>
                                 <button onclick="removeFromCart(${index})">Remove</button>
                             </div>
@@ -883,45 +1054,60 @@
 
         function updatePrice() {
             try {
-                const priceRange = document.getElementById('price-range').value;
-                const quantity = document.getElementById('quantity').value;
-                const basePrice = parseInt(priceRange.split('-')[0]) || 0;
-                const totalPrice = basePrice * parseInt(quantity);
-                modalPriceDisplay.textContent = `Price: ₹${totalPrice}`;
-                console.log('Price updated:', totalPrice);
+                const category = selectedOptions['card-category'];
+                const printing = selectedOptions['printing'];
+                const lamination = selectedOptions['lamination'];
+                const quantity = selectedOptions['quantity'];
+                const priceDisplay = document.getElementById('price-display');
+
+                if (category && quantity && (printing || lamination)) {
+                    let price = 0;
+                    if (category === 'Plastic Visiting Card') {
+                        price = priceData[category][lamination][quantity] || 0;
+                    } else {
+                        price = priceData[category][printing][quantity] || 0;
+                    }
+                    if (priceDisplay) {
+                        priceDisplay.textContent = `Price: ₹${price}`;
+                    }
+                } else if (priceDisplay) {
+                    priceDisplay.textContent = 'Price: Select all options';
+                }
+                console.log('Price updated:', priceDisplay ? priceDisplay.textContent : 'Price display not found');
             } catch (e) {
                 console.error('Error in updatePrice:', e);
-                modalPriceDisplay.textContent = 'Price: Error';
+                const priceDisplay = document.getElementById('price-display');
+                if (priceDisplay) priceDisplay.textContent = 'Price: Error';
             }
         }
 
-        ['price-range', 'quantity'].forEach(id => {
-            const element = document.getElementById(id);
-            if (element) {
-                element.addEventListener('change', updatePrice);
-            } else {
-                console.error(`Element with id ${id} not found`);
-            }
-        });
-
         function addToCart() {
             try {
-                const priceRange = document.getElementById('price-range').value;
-                const quantity = document.getElementById('quantity').value;
-                const size = document.getElementById('size').value;
-                const paperQuality = document.getElementById('paper-quality').value;
-                const finishing = document.getElementById('finishing').value;
-                const price = parseInt(priceRange.split('-')[0]) || 0;
+                if (Object.values(selectedOptions).some(val => val === null)) {
+                    alert('Please select all options before adding to cart.');
+                    return;
+                }
+
+                const category = selectedOptions['card-category'];
+                const printing = selectedOptions['printing'];
+                const lamination = selectedOptions['lamination'];
+                const quantity = selectedOptions['quantity'];
+                let price = 0;
+
+                if (category === 'Plastic Visiting Card') {
+                    price = priceData[category][lamination][quantity] || 0;
+                } else {
+                    price = priceData[category][printing][quantity] || 0;
+                }
 
                 const cartItem = {
                     service: 'Visiting Card Printing',
-                    options: JSON.stringify({ 'price_range': priceRange, 'quantity': quantity, 'size': size, 'paper_quality': paperQuality, 'finishing': finishing }),
-                    price: price * parseInt(quantity)
+                    options: JSON.stringify({ 'card-category': category, 'printing': printing, 'lamination': lamination, 'quantity': quantity }),
+                    price: price
                 };
 
                 cart.push(cartItem);
                 localStorage.setItem('cart', JSON.stringify(cart));
-                closeModal();
                 updateCartDisplay();
                 alert('Item added to cart!');
                 console.log('Item added to cart:', cartItem);
