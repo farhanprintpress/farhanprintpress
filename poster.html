@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Design your high-quality posters with Farhan Printing Press.">
-    <meta name="keywords" content="posters, printing services Siddharth Nagar">
+    <meta name="description" content="Professional poster printing services by Farhan Printing Press.">
+    <meta name="keywords" content="poster printing, printing services Siddharth Nagar">
     <meta name="author" content="Farhan Printing Press">
     <title>Poster Printing</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
@@ -218,25 +218,44 @@
             font-weight: 600;
         }
 
-        .service-options .form-group {
-            margin-bottom: 1rem;
+        .form-group {
+            margin-bottom: 1.5rem;
             text-align: left;
         }
 
-        .service-options label {
+        .form-group label {
             font-weight: 600;
             color: #2c3e50;
             display: block;
             margin-bottom: 0.5rem;
         }
 
-        .service-options select {
-            width: 100%;
-            padding: 0.5rem;
+        .option-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 0.5rem;
+        }
+
+        .option-btn {
+            padding: 0.5rem 1rem;
             border: 1px solid #dfe6e9;
             border-radius: 6px;
-            font-size: 0.9rem;
             background: #f9f9f9;
+            text-align: center;
+            cursor: pointer;
+            transition: background-color 0.3s, border-color 0.3s;
+            white-space: normal;
+            word-wrap: break-word;
+        }
+
+        .option-btn.active {
+            background-color: #3498db;
+            color: white;
+            border-color: #3498db;
+        }
+
+        .option-btn:hover {
+            background-color: #ecf0f1;
         }
 
         .service-options .whatsapp-btn {
@@ -520,6 +539,7 @@
             cursor: pointer;
             font-size: 0.8rem;
             transition: background 0.3s;
+            margin-right: 0.5rem;
         }
 
         .cart-item button:hover {
@@ -603,59 +623,56 @@
     </nav>
     <section class="hero">
         <h2>Poster Printing</h2>
-        <p>Create striking and high-quality posters for any event.</p>
+        <p>High-quality posters tailored to your needs.</p>
         <button class="cta-btn" onclick="openModal()">Order Now</button>
     </section>
     <section class="service-content">
         <div class="service-options">
             <h2>Poster Options</h2>
             <div class="form-group">
-                <label for="price-range">Price Range (per unit)</label>
-                <select id="price-range" name="price_range">
-                    <option value="50-100 rupees">50-100 rupees</option>
-                    <option value="100-150 rupees">100-150 rupees</option>
-                    <option value="150-200 rupees">150-200 rupees</option>
-                </select>
+                <label for="poster-category">Poster Category</label>
+                <div class="option-grid" id="poster-category">
+                    <button class="option-btn" data-value="Poster">Poster</button>
+                </div>
             </div>
-            <div class="form-group">
-                <label for="quantity">Quantity</label>
-                <select id="quantity" name="quantity">
-                    <option value="1">1</option>
-                    <option value="5">5</option>
-                    <option value="10">10</option>
-                    <option value="20">20</option>
-                </select>
+            <div class="form-group" id="color-group" style="display: none;">
+                <label for="color">Color</label>
+                <div class="option-grid" id="color">
+                    <button class="option-btn" data-value="1 color">1 color</button>
+                    <button class="option-btn" data-value="2 color">2 color</button>
+                    <button class="option-btn" data-value="multicolor (4 color)">multicolor (4 color)</button>
+                </div>
             </div>
-            <div class="form-group">
+            <div class="form-group" id="size-group" style="display: none;">
                 <label for="size">Size</label>
-                <select id="size" name="size">
-                    <option value="A3">A3</option>
-                    <option value="A2">A2</option>
-                    <option value="Custom">Custom</option>
-                </select>
+                <div class="option-grid" id="size">
+                    <button class="option-btn" data-value="A4">A4</button>
+                    <button class="option-btn" data-value="A3">A3</button>
+                    <button class="option-btn" data-value="10 x 15">10 x 15</button>
+                    <button class="option-btn" data-value="15 x 20">15 x 20</button>
+                    <button class="option-btn" data-value="18 x 22">18 x 22</button>
+                </div>
             </div>
-            <div class="form-group">
-                <label for="paper-quality">Paper Quality</label>
-                <select id="paper-quality" name="paper_quality">
-                    <option value="Standard">Standard</option>
-                    <option value="Glossy">Glossy</option>
-                    <option value="Matte">Matte</option>
-                </select>
+            <div class="form-group" id="quantity-group" style="display: none;">
+                <label for="quantity">Quantity</label>
+                <div class="option-grid" id="quantity">
+                    <button class="option-btn" data-value="100">100</button>
+                    <button class="option-btn" data-value="200">200</button>
+                    <button class="option-btn" data-value="500">500</button>
+                    <button class="option-btn" data-value="1000">1000</button>
+                    <button class="option-btn" data-value="2000">2000</button>
+                    <button class="option-btn" data-value="4000">4000</button>
+                    <button class="option-btn" data-value="8000">8000</button>
+                </div>
             </div>
-            <div class="form-group">
-                <label for="lamination">Lamination</label>
-                <select id="lamination" name="lamination">
-                    <option value="None">None</option>
-                    <option value="Glossy">Glossy</option>
-                    <option value="Matte">Matte</option>
-                </select>
-            </div>
-            <button class="whatsapp-btn" onclick="addToCart()">Add to Cart</button>
+            <div id="price-display" class="modal-price" style="margin-top: 1rem; display: none;">Price: ₹0</div>
+            <button id="add-to-cart-btn" class="whatsapp-btn" onclick="addToCart()">Add to Cart</button>
+            <a href="#" class="whatsapp-btn" onclick="openCart(); return false;" style="margin-top: 1rem;">Go to Cart</a>
         </div>
         <div class="service-images">
             <div class="service-image">
                 <img src="https://images.unsplash.com/photo-1591123120675-6f7f1a4b8?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Example Poster">
-                <p>Example of a high-quality poster with glossy lamination.</p>
+                <p>Example of a professional poster.</p>
             </div>
         </div>
     </section>
@@ -711,7 +728,7 @@
                 "label-quantity-books": "Quantity (Books)",
                 "label-quantity-sheets": "Quantity (Sheets)",
                 "label-card-category": "Card Category",
-                "label-printing-sides": "Printing",
+                "label-printing": "Printing",
                 "label-name": "Your Name"
             }
         };
@@ -722,7 +739,40 @@
         const modalPriceDisplay = document.getElementById('modal-price-display');
         const cartModal = document.getElementById('cart-modal');
         const checkoutForm = document.getElementById('checkout-form');
+        const addToCartBtn = document.getElementById('add-to-cart-btn');
         let cart = [];
+        let selectedOptions = {
+            'poster-category': null,
+            'color': null,
+            'size': null,
+            'quantity': null
+        };
+
+        const priceData = {
+            'Poster': {
+                '1 color': {
+                    'A4': { 100: 150, 200: 250, 500: 550, 1000: 1000, 2000: 1800, 4000: 3400, 8000: 6500 },
+                    'A3': { 100: 200, 200: 350, 500: 700, 1000: 1300, 2000: 2400, 4000: 4500, 8000: 8500 },
+                    '10 x 15': { 100: 180, 200: 300, 500: 600, 1000: 1100, 2000: 2000, 4000: 3800, 8000: 7200 },
+                    '15 x 20': { 100: 250, 200: 400, 500: 800, 1000: 1500, 2000: 2800, 4000: 5200, 8000: 9800 },
+                    '18 x 22': { 100: 300, 200: 500, 500: 900, 1000: 1700, 2000: 3200, 4000: 6000, 8000: 11200 }
+                },
+                '2 color': {
+                    'A4': { 100: 200, 200: 350, 500: 700, 1000: 1300, 2000: 2400, 4000: 4500, 8000: 8500 },
+                    'A3': { 100: 250, 200: 400, 500: 800, 1000: 1500, 2000: 2800, 4000: 5200, 8000: 9800 },
+                    '10 x 15': { 100: 230, 200: 380, 500: 750, 1000: 1400, 2000: 2600, 4000: 4800, 8000: 9000 },
+                    '15 x 20': { 100: 300, 200: 500, 500: 900, 1000: 1700, 2000: 3200, 4000: 6000, 8000: 11200 },
+                    '18 x 22': { 100: 350, 200: 600, 500: 1000, 1000: 1900, 2000: 3600, 4000: 6800, 8000: 12800 }
+                },
+                'multicolor (4 color)': {
+                    'A4': { 100: 300, 200: 500, 500: 900, 1000: 1700, 2000: 3200, 4000: 6000, 8000: 11200 },
+                    'A3': { 100: 350, 200: 600, 500: 1000, 1000: 1900, 2000: 3600, 4000: 6800, 8000: 12800 },
+                    '10 x 15': { 100: 280, 200: 450, 500: 850, 1000: 1600, 2000: 3000, 4000: 5600, 8000: 10500 },
+                    '15 x 20': { 100: 400, 200: 700, 500: 1200, 1000: 2200, 2000: 4200, 4000: 8000, 8000: 15000 },
+                    '18 x 22': { 100: 450, 200: 800, 500: 1400, 1000: 2500, 2000: 4800, 4000: 9000, 8000: 17000 }
+                }
+            }
+        };
 
         try {
             const storedCart = localStorage.getItem('cart');
@@ -743,6 +793,7 @@
         document.addEventListener('DOMContentLoaded', () => {
             console.log('DOM loaded, updating cart display');
             updateCartDisplay();
+            initializeButtons();
             if (!checkoutForm) {
                 console.error('Checkout form not found');
             }
@@ -771,6 +822,108 @@
             });
         } else {
             console.error('Checkout form not found in DOM');
+        }
+
+        function initializeButtons() {
+            const posterCategory = document.getElementById('poster-category');
+            if (posterCategory) {
+                posterCategory.querySelectorAll('.option-btn').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        posterCategory.querySelectorAll('.option-btn').forEach(b => b.classList.remove('active'));
+                        btn.classList.add('active');
+                        selectedOptions['poster-category'] = btn.getAttribute('data-value');
+                        updateOptions();
+                        console.log('Poster category selected:', selectedOptions['poster-category']);
+                    });
+                });
+            } else {
+                console.error('Element with id poster-category not found');
+            }
+        }
+
+        function updateOptions() {
+            const category = selectedOptions['poster-category'];
+            const colorGroup = document.getElementById('color-group');
+            const sizeGroup = document.getElementById('size-group');
+            const quantityGroup = document.getElementById('quantity-group');
+            const priceDisplay = document.getElementById('price-display');
+
+            if (colorGroup && sizeGroup && quantityGroup && priceDisplay) {
+                colorGroup.style.display = 'none';
+                sizeGroup.style.display = 'none';
+                quantityGroup.style.display = 'none';
+                priceDisplay.style.display = 'none';
+                selectedOptions['color'] = null;
+                selectedOptions['size'] = null;
+                selectedOptions['quantity'] = null;
+
+                if (category) {
+                    updateDynamicButtons('color', { '1 color': '1 color', '2 color': '2 color', 'multicolor (4 color)': 'multicolor (4 color)' });
+                    colorGroup.style.display = 'block';
+                    updateDynamicButtons('size', { 'A4': 'A4', 'A3': 'A3', '10 x 15': '10 x 15', '15 x 20': '15 x 20', '18 x 22': '18 x 22' });
+                    sizeGroup.style.display = 'block';
+                    updateQuantityButtons([100, 200, 500, 1000, 2000, 4000, 8000]);
+                    quantityGroup.style.display = 'block';
+                    priceDisplay.style.display = 'block';
+                    updatePrice();
+                }
+            } else {
+                console.error('Option groups or price display not found');
+            }
+        }
+
+        function updateDynamicButtons(containerId, options) {
+            const container = document.getElementById(containerId + '-group');
+            const optionGrid = document.getElementById(containerId);
+            if (container && optionGrid) {
+                optionGrid.innerHTML = '';
+                Object.keys(options).forEach(option => {
+                    const btn = document.createElement('button');
+                    btn.className = 'option-btn';
+                    btn.setAttribute('data-value', option);
+                    btn.textContent = option;
+                    btn.addEventListener('click', () => {
+                        optionGrid.querySelectorAll('.option-btn').forEach(b => b.classList.remove('active'));
+                        btn.classList.add('active');
+                        if (containerId === 'color') {
+                            selectedOptions['color'] = option;
+                        } else if (containerId === 'size') {
+                            selectedOptions['size'] = option;
+                        }
+                        updatePrice();
+                        console.log(`${containerId} selected:`, option);
+                    });
+                    optionGrid.appendChild(btn);
+                });
+                container.style.display = 'block';
+            } else {
+                console.error(`Element with id ${containerId}-group or ${containerId} not found`);
+            }
+        }
+
+        function updateQuantityButtons(quantities) {
+            const container = document.getElementById('quantity-group');
+            const optionGrid = document.getElementById('quantity');
+            if (container && optionGrid) {
+                optionGrid.innerHTML = '';
+                quantities.forEach(qty => {
+                    const btn = document.createElement('button');
+                    btn.className = 'option-btn';
+                    btn.setAttribute('data-value', qty);
+                    btn.textContent = qty;
+                    btn.addEventListener('click', () => {
+                        optionGrid.querySelectorAll('.option-btn').forEach(b => b.classList.remove('active'));
+                        btn.classList.add('active');
+                        selectedOptions['quantity'] = qty;
+                        updatePrice();
+                        console.log('Quantity selected:', qty);
+                    });
+                    optionGrid.appendChild(btn);
+                });
+                container.style.display = 'block';
+            } else {
+                console.error('Element with id quantity-group or quantity not found');
+            }
         }
 
         function openModal() {
@@ -845,10 +998,11 @@
 
                 cart.forEach((item, index) => {
                     try {
+                        const options = JSON.parse(item.options || '{}');
                         itemsHTML += `
                             <div class="cart-item">
                                 <h4>${item.service || 'Unknown Service'}</h4>
-                                <p>${formatOptions(JSON.parse(item.options || '{}'))}</p>
+                                <p>${formatOptions(options)}</p>
                                 <p>Price: ₹${item.price || 0}</p>
                                 <button onclick="removeFromCart(${index})">Remove</button>
                             </div>
@@ -883,45 +1037,49 @@
 
         function updatePrice() {
             try {
-                const priceRange = document.getElementById('price-range').value;
-                const quantity = document.getElementById('quantity').value;
-                const basePrice = parseInt(priceRange.split('-')[0]) || 0;
-                const totalPrice = basePrice * parseInt(quantity);
-                modalPriceDisplay.textContent = `Price: ₹${totalPrice}`;
-                console.log('Price updated:', totalPrice);
+                const category = selectedOptions['poster-category'];
+                const color = selectedOptions['color'];
+                const size = selectedOptions['size'];
+                const quantity = selectedOptions['quantity'];
+                const priceDisplay = document.getElementById('price-display');
+
+                if (category && color && size && quantity) {
+                    const price = priceData[category][color][size][quantity] || 0;
+                    if (priceDisplay) {
+                        priceDisplay.textContent = `Price: ₹${price}`;
+                    }
+                } else if (priceDisplay) {
+                    priceDisplay.textContent = 'Price: Select all options';
+                }
+                console.log('Price updated:', priceDisplay ? priceDisplay.textContent : 'Price display not found');
             } catch (e) {
                 console.error('Error in updatePrice:', e);
-                modalPriceDisplay.textContent = 'Price: Error';
+                const priceDisplay = document.getElementById('price-display');
+                if (priceDisplay) priceDisplay.textContent = 'Price: Error';
             }
         }
 
-        ['price-range', 'quantity', 'size', 'paper-quality', 'lamination'].forEach(id => {
-            const element = document.getElementById(id);
-            if (element) {
-                element.addEventListener('change', updatePrice);
-            } else {
-                console.error(`Element with id ${id} not found`);
-            }
-        });
-
         function addToCart() {
             try {
-                const priceRange = document.getElementById('price-range').value;
-                const quantity = document.getElementById('quantity').value;
-                const size = document.getElementById('size').value;
-                const paperQuality = document.getElementById('paper-quality').value;
-                const lamination = document.getElementById('lamination').value;
-                const price = parseInt(priceRange.split('-')[0]) || 0;
+                if (Object.values(selectedOptions).some(val => val === null)) {
+                    alert('Please select all options before adding to cart.');
+                    return;
+                }
+
+                const category = selectedOptions['poster-category'];
+                const color = selectedOptions['color'];
+                const size = selectedOptions['size'];
+                const quantity = selectedOptions['quantity'];
+                const price = priceData[category][color][size][quantity] || 0;
 
                 const cartItem = {
                     service: 'Poster Printing',
-                    options: JSON.stringify({ 'price_range': priceRange, 'quantity': quantity, 'size': size, 'paper_quality': paperQuality, 'lamination': lamination }),
-                    price: price * parseInt(quantity)
+                    options: JSON.stringify({ 'poster-category': category, 'color': color, 'size': size, 'quantity': quantity }),
+                    price: price
                 };
 
                 cart.push(cartItem);
                 localStorage.setItem('cart', JSON.stringify(cart));
-                closeModal();
                 updateCartDisplay();
                 alert('Item added to cart!');
                 console.log('Item added to cart:', cartItem);
