@@ -744,41 +744,7 @@
     <section id="services" class="services">
         <h2>Our Services</h2>
         <div class="service-grid">
-            <div class="service-card" onclick="window.location.href='wedding_card.html'">
-                <i class="fas fa-ring"></i>
-                <h3>Wedding Card Printing</h3>
-                <p>Elegant and customizable wedding cards.</p>
-            </div>
-            <div class="service-card" onclick="window.location.href='visiting_card.html'">
-                <i class="fas fa-address-card"></i>
-                <h3>Visiting Card</h3>
-                <p>Professional visiting cards for lasting impressions.</p>
-            </div>
-            <div class="service-card" onclick="window.location.href='bill_book.html'">
-                <i class="fas fa-file-invoice"></i>
-                <h3>Bill Book Printing</h3>
-                <p>Customized bill books for your business.</p>
-            </div>
-            <div class="service-card" onclick="window.location.href='letter_pad.html'">
-                <i class="fas fa-file-alt"></i>
-                <h3>Letter Pad Printing</h3>
-                <p>Personalized letter pads with your logo.</p>
-            </div>
-            <div class="service-card" onclick="window.location.href='handbill_pamphlet.html'">
-                <i class="fas fa-newspaper"></i>
-                <h3>Handbill/Pamphlet</h3>
-                <p>Promotional handbills and pamphlets.</p>
-            </div>
-            <div class="service-card" onclick="window.location.href='poster.html'">
-                <i class="fas fa-image"></i>
-                <h3>Poster</h3>
-                <p>Eye-catching posters for promotions.</p>
-            </div>
-            <div class="service-card" onclick="window.location.href='envelope.html'">
-                <i class="fas fa-envelope"></i>
-                <h3>Envelope Printing</h3>
-                <p>Customized envelopes for your business.</p>
-            </div>
+            <!-- Services will be populated dynamically by Firebase -->
         </div>
     </section>
     <section id="track-order" class="services">
@@ -1081,6 +1047,32 @@
                 alert('Error during checkout');
             }
         }
+
+        // Firebase integration with your config
+        const firebaseConfig = {
+          apiKey: "AIzaSyAW3kvRMa5E4iRRyNJ3CHowyXNQ-bp7SCc",
+          authDomain: "farhanprintpress-1e28d.firebaseapp.com",
+          projectId: "farhanprintpress-1e28d",
+          storageBucket: "farhanprintpress-1e28d.firebasestorage.app",
+          messagingSenderId: "215876285144",
+          appId: "1:215876285144:web:9e68d823b42ec5171f1dad",
+          measurementId: "G-EVQV35M38L"
+        };
+
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+
+        db.collection("services").onSnapshot((snapshot) => {
+            const services = snapshot.docs.map(doc => doc.data());
+            const grid = document.querySelector('.service-grid');
+            grid.innerHTML = services.map(s => `
+                <div class="service-card" onclick="window.location.href='${s.name.toLowerCase().replace(/ /g, '_')}.html'">
+                    <i class="fas fa-print"></i>
+                    <h3>${s.name}</h3>
+                    <p>${s.price} INR</p>
+                </div>
+            `).join('');
+        });
     </script>
 </body>
 
