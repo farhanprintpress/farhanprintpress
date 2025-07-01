@@ -805,275 +805,280 @@
         target="_blank" class="whatsapp-chat">
         <i class="fab fa-whatsapp"></i>
     </a>
-    <script>
-        const translations = {
-            en: {
-                "label-price-range": "Price Range (per unit)",
-                "label-quantity": "Quantity",
-                "label-size": "Size",
-                "label-paper-quality": "Paper Quality",
-                "label-design-style": "Design Style",
-                "label-finishing": "Finishing",
-                "label-orientation": "Orientation",
-                "label-lamination": "Lamination",
-                "label-printing-location": "Printing Location",
-                "label-material": "Material",
-                "label-binding": "Binding Type",
-                "label-sheets-per-book": "Sheets per Book",
-                "label-quantity-books": "Quantity (Books)",
-                "label-quantity-sheets": "Quantity (Sheets)",
-                "label-card-category": "Card Category",
-                "label-printing-sides": "Printing",
-                "label-name": "Your Name"
-            }
-        };
+    <script src="https://www.gstatic.com/firebasejs/11.10.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js"></script>
+<script>
+  // Your web app's Firebase configuration
+  const firebaseConfig = {
+    apiKey: "AIzaSyAW3kvRMa5E4iRRyNJ3CHowyXNQ-bp7SCc",
+    authDomain: "farhanprintpress-1e28d.firebaseapp.com",
+    projectId: "farhanprintpress-1e28d",
+    storageBucket: "farhanprintpress-1e28d.firebasestorage.app",
+    messagingSenderId: "215876285144",
+    appId: "1:215876285144:web:9e68d823b42ec5171f1dad",
+    measurementId: "G-EVQV35M38L"
+  };
 
-        const modal = document.getElementById('modal');
-        const modalTitle = document.getElementById('modal-title');
-        const modalDescription = document.getElementById('modal-description');
-        const modalPriceDisplay = document.getElementById('modal-price-display');
-        const cartModal = document.getElementById('cart-modal');
-        const checkoutForm = document.getElementById('checkout-form');
-        let cart = [];
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  const db = firebase.firestore();
 
-        // Initialize cart from localStorage with error handling
+  // Load services dynamically
+  db.collection("services").onSnapshot((snapshot) => {
+    const services = snapshot.docs.map(doc => doc.data());
+    const grid = document.querySelector('.service-grid');
+    grid.innerHTML = services.map(s => `
+      <div class="service-card" onclick="window.location.href='${s.name.toLowerCase().replace(/ /g, '_')}.html'">
+        <i class="fas fa-print"></i>
+        <h3>${s.name}</h3>
+        <p>${s.price} INR</p>
+      </div>
+    `).join('');
+  });
+
+  // Existing cart and checkout functionality (rest of your script)
+  const translations = {
+    en: {
+      "label-price-range": "Price Range (per unit)",
+      "label-quantity": "Quantity",
+      "label-size": "Size",
+      "label-paper-quality": "Paper Quality",
+      "label-design-style": "Design Style",
+      "label-finishing": "Finishing",
+      "label-orientation": "Orientation",
+      "label-lamination": "Lamination",
+      "label-printing-location": "Printing Location",
+      "label-material": "Material",
+      "label-binding": "Binding Type",
+      "label-sheets-per-book": "Sheets per Book",
+      "label-quantity-books": "Quantity (Books)",
+      "label-quantity-sheets": "Quantity (Sheets)",
+      "label-card-category": "Card Category",
+      "label-printing-sides": "Printing",
+      "label-name": "Your Name"
+    }
+  };
+
+  const modal = document.getElementById('modal');
+  const modalTitle = document.getElementById('modal-title');
+  const modalDescription = document.getElementById('modal-description');
+  const modalPriceDisplay = document.getElementById('modal-price-display');
+  const cartModal = document.getElementById('cart-modal');
+  const checkoutForm = document.getElementById('checkout-form');
+  let cart = [];
+
+  // Initialize cart from localStorage with error handling
+  try {
+    const storedCart = localStorage.getItem('cart');
+    if (storedCart) {
+      cart = JSON.parse(storedCart);
+      if (!Array.isArray(cart)) {
+        console.error('Invalid cart data in localStorage, resetting cart');
+        cart = [];
+        localStorage.setItem('cart', JSON.stringify(cart));
+      }
+    }
+  } catch (e) {
+    console.error('Error parsing cart from localStorage:', e);
+    cart = [];
+    localStorage.setItem('cart', JSON.stringify(cart));
+  }
+
+  // Update cart display on page load
+  document.addEventListener('DOMContentLoaded', () => {
+    console.log('DOM loaded, updating cart display');
+    updateCartDisplay();
+    if (!checkoutForm) {
+      console.error('Checkout form not found');
+    }
+  });
+
+  // Handle checkout form submission
+  if (checkoutForm) {
+    checkoutForm.addEventListener('submit', (e) => {
+      console.log('Checkout form submitted');
+      e.preventDefault();
+      const nameInput = document.getElementById('checkout-name');
+      const phoneInput = document.getElementById('checkout-phone');
+      if (!nameInput || !phoneInput) {
+        console.error('Checkout form inputs not found');
+        alert('Form elements are missing. Please contact support.');
+        return;
+      }
+      const name = nameInput.value.trim();
+      const phone = phoneInput.value.trim();
+      console.log('Name:', name, 'Phone:', phone);
+
+      if (name && phone) {
+        checkout(name, phone);
+      } else {
+        alert('Please enter both name and phone number.');
+      }
+    });
+  } else {
+    console.error('Checkout form not found in DOM');
+  }
+
+  function openModal() {
+    console.log('Modal functionality removed from index.html');
+  }
+
+  function closeModal() {
+    try {
+      if (modal) {
+        modal.style.display = 'none';
+        console.log('Modal closed');
+      }
+    } catch (e) {
+      console.error('Error in closeModal:', e);
+    }
+  }
+
+  function openCart() {
+    try {
+      if (!cartModal) {
+        console.error('Cart modal not found');
+        return;
+      }
+      updateCartDisplay();
+      cartModal.style.display = 'flex';
+      console.log('Cart modal opened');
+    } catch (e) {
+      console.error('Error in openCart:', e);
+    }
+  }
+
+  function closeCart() {
+    try {
+      if (cartModal) {
+        cartModal.style.display = 'none';
+        console.log('Cart modal closed');
+      }
+    } catch (e) {
+      console.error('Error in closeCart:', e);
+    }
+  }
+
+  function updateCartDisplay() {
+    try {
+      const cartItemsEl = document.getElementById('cart-items');
+      const cartCountEl = document.querySelector('.cart-count');
+      const cartTotalEl = document.getElementById('cart-total');
+
+      if (!cartItemsEl || !cartCountEl || !cartTotalEl) {
+        console.error('Cart display elements not found');
+        return;
+      }
+
+      if (!cart || cart.length === 0) {
+        cartItemsEl.innerHTML = '<p>Your cart is empty</p>';
+        cartTotalEl.textContent = '';
+        cartCountEl.textContent = '0';
+        console.log('Cart is empty');
+        return;
+      }
+
+      let itemsHTML = '';
+      let total = 0;
+
+      cart.forEach((item, index) => {
         try {
-            const storedCart = localStorage.getItem('cart');
-            if (storedCart) {
-                cart = JSON.parse(storedCart);
-                if (!Array.isArray(cart)) {
-                    console.error('Invalid cart data in localStorage, resetting cart');
-                    cart = [];
-                    localStorage.setItem('cart', JSON.stringify(cart));
-                }
-            }
+          itemsHTML += `
+            <div class="cart-item">
+              <h4>${item.service || 'Unknown Service'}</h4>
+              <p>${formatOptions(JSON.parse(item.options || '{}'))}</p>
+              <p>Price: ₹${item.price || 0}</p>
+              <button onclick="removeFromCart(${index})">Remove</button>
+            </div>
+          `;
+          total += item.price || 0;
         } catch (e) {
-            console.error('Error parsing cart from localStorage:', e);
-            cart = [];
-            localStorage.setItem('cart', JSON.stringify(cart));
+          console.error(`Error rendering cart item ${index}:`, e);
         }
+      });
 
-        // Update cart display on page load
-        document.addEventListener('DOMContentLoaded', () => {
-            console.log('DOM loaded, updating cart display');
-            updateCartDisplay();
-            if (!checkoutForm) {
-                console.error('Checkout form not found');
-            }
-        });
+      cartItemsEl.innerHTML = itemsHTML;
+      cartTotalEl.textContent = `Total: ₹${total}`;
+      cartCountEl.textContent = cart.length;
+      console.log('Cart updated:', cart);
+    } catch (e) {
+      console.error('Error in updateCartDisplay:', e);
+    }
+  }
 
-        // Handle checkout form submission
-        if (checkoutForm) {
-            checkoutForm.addEventListener('submit', (e) => {
-                console.log('Checkout form submitted');
-                e.preventDefault();
-                const nameInput = document.getElementById('checkout-name');
-                const phoneInput = document.getElementById('checkout-phone');
-                if (!nameInput || !phoneInput) {
-                    console.error('Checkout form inputs not found');
-                    alert('Form elements are missing. Please contact support.');
-                    return;
-                }
-                const name = nameInput.value.trim();
-                const phone = phoneInput.value.trim();
-                console.log('Name:', name, 'Phone:', phone);
+  function formatOptions(options) {
+    try {
+      let formatted = '';
+      for (const [key, value] of Object.entries(options)) {
+        formatted += `${key.replace(/_/g, ' ')}: ${value}<br>`;
+      }
+      return formatted || 'No options selected';
+    } catch (e) {
+      console.error('Error in formatOptions:', e);
+      return 'Error formatting options';
+    }
+  }
 
-                if (name && phone) {
-                    checkout(name, phone);
-                } else {
-                    alert('Please enter both name and phone number.');
-                }
-            });
-        } else {
-            console.error('Checkout form not found in DOM');
+  function addToCart() {
+    console.log('Add to cart functionality moved to service pages');
+  }
+
+  function removeFromCart(index) {
+    try {
+      if (index >= 0 && index < cart.length) {
+        console.log('Removing cart item at index:', index);
+        cart.splice(index, 1);
+        localStorage.setItem('cart', JSON.stringify(cart));
+        updateCartDisplay();
+      } else {
+        console.error('Invalid cart index:', index);
+      }
+    } catch (e) {
+      console.error('Error in removeFromCart:', e);
+    }
+  }
+
+  function checkout(name, phone) {
+    try {
+      if (!cart.length) {
+        alert('Your cart is empty!');
+        console.log('Checkout attempted with empty cart');
+        return;
+      }
+
+      // Store customer details in localStorage
+      localStorage.setItem('customer', JSON.stringify({ name, phone }));
+
+      // Generate WhatsApp message
+      let message = "Hello, I would like to place the following order:\n\n";
+      message += `Customer Name: ${name}\n`;
+      message += `Phone: ${phone}\n\n`;
+      message += `Order Details:\n`;
+
+      cart.forEach(item => {
+        try {
+          message += `\nService: ${item.service || 'Unknown Service'}\n`;
+          message += `Options:\n${formatOptions(JSON.parse(item.options || '{}'))}\n`;
+          message += `Price: ₹${item.price || 0}\n`;
+        } catch (e) {
+          console.error('Error formatting cart item in checkout:', e);
         }
+      });
 
-        function openModal() {
-            console.log('Modal functionality removed from index.html');
-        }
+      const total = cart.reduce((sum, item) => sum + (item.price || 0), 0);
+      message += `\nTotal Amount: ₹${total}\n\nPlease confirm my order.`;
 
-        function closeModal() {
-            try {
-                if (modal) {
-                    modal.style.display = 'none';
-                    console.log('Modal closed');
-                }
-            } catch (e) {
-                console.error('Error in closeModal:', e);
-            }
-        }
+      // Open WhatsApp link in a new tab
+      window.open(`https://wa.me/+919838644687?text=${encodeURIComponent(message)}`, '_blank');
 
-        function openCart() {
-            try {
-                if (!cartModal) {
-                    console.error('Cart modal not found');
-                    return;
-                }
-                updateCartDisplay();
-                cartModal.style.display = 'flex';
-                console.log('Cart modal opened');
-            } catch (e) {
-                console.error('Error in openCart:', e);
-            }
-        }
-
-        function closeCart() {
-            try {
-                if (cartModal) {
-                    cartModal.style.display = 'none';
-                    console.log('Cart modal closed');
-                }
-            } catch (e) {
-                console.error('Error in closeCart:', e);
-            }
-        }
-
-        function updateCartDisplay() {
-            try {
-                const cartItemsEl = document.getElementById('cart-items');
-                const cartCountEl = document.querySelector('.cart-count');
-                const cartTotalEl = document.getElementById('cart-total');
-
-                if (!cartItemsEl || !cartCountEl || !cartTotalEl) {
-                    console.error('Cart display elements not found');
-                    return;
-                }
-
-                if (!cart || cart.length === 0) {
-                    cartItemsEl.innerHTML = '<p>Your cart is empty</p>';
-                    cartTotalEl.textContent = '';
-                    cartCountEl.textContent = '0';
-                    console.log('Cart is empty');
-                    return;
-                }
-
-                let itemsHTML = '';
-                let total = 0;
-
-                cart.forEach((item, index) => {
-                    try {
-                        itemsHTML += `
-                            <div class="cart-item">
-                                <h4>${item.service || 'Unknown Service'}</h4>
-                                <p>${formatOptions(JSON.parse(item.options || '{}'))}</p>
-                                <p>Price: ₹${item.price || 0}</p>
-                                <button onclick="removeFromCart(${index})">Remove</button>
-                            </div>
-                        `;
-                        total += item.price || 0;
-                    } catch (e) {
-                        console.error(`Error rendering cart item ${index}:`, e);
-                    }
-                });
-
-                cartItemsEl.innerHTML = itemsHTML;
-                cartTotalEl.textContent = `Total: ₹${total}`;
-                cartCountEl.textContent = cart.length;
-                console.log('Cart updated:', cart);
-            } catch (e) {
-                console.error('Error in updateCartDisplay:', e);
-            }
-        }
-
-        function formatOptions(options) {
-            try {
-                let formatted = '';
-                for (const [key, value] of Object.entries(options)) {
-                    formatted += `${key.replace(/_/g, ' ')}: ${value}<br>`;
-                }
-                return formatted || 'No options selected';
-            } catch (e) {
-                console.error('Error in formatOptions:', e);
-                return 'Error formatting options';
-            }
-        }
-
-        function addToCart() {
-            console.log('Add to cart functionality moved to service pages');
-        }
-
-        function removeFromCart(index) {
-            try {
-                if (index >= 0 && index < cart.length) {
-                    console.log('Removing cart item at index:', index);
-                    cart.splice(index, 1);
-                    localStorage.setItem('cart', JSON.stringify(cart));
-                    updateCartDisplay();
-                } else {
-                    console.error('Invalid cart index:', index);
-                }
-            } catch (e) {
-                console.error('Error in removeFromCart:', e);
-            }
-        }
-
-        function checkout(name, phone) {
-            try {
-                if (!cart.length) {
-                    alert('Your cart is empty!');
-                    console.log('Checkout attempted with empty cart');
-                    return;
-                }
-
-                // Store customer details in localStorage
-                localStorage.setItem('customer', JSON.stringify({ name, phone }));
-
-                // Generate WhatsApp message
-                let message = "Hello, I would like to place the following order:\n\n";
-                message += `Customer Name: ${name}\n`;
-                message += `Phone: ${phone}\n\n`;
-                message += `Order Details:\n`;
-
-                cart.forEach(item => {
-                    try {
-                        message += `\nService: ${item.service || 'Unknown Service'}\n`;
-                        message += `Options:\n${formatOptions(JSON.parse(item.options || '{}'))}\n`;
-                        message += `Price: ₹${item.price || 0}\n`;
-                    } catch (e) {
-                        console.error('Error formatting cart item in checkout:', e);
-                    }
-                });
-
-                const total = cart.reduce((sum, item) => sum + (item.price || 0), 0);
-                message += `\nTotal Amount: ₹${total}\n\nPlease confirm my order.`;
-
-                // Open WhatsApp link in a new tab
-                window.open(`https://wa.me/+919838644687?text=${encodeURIComponent(message)}`, '_blank');
-
-                // Redirect to invoice page
-                window.location.href = 'invoice.html';
-            } catch (e) {
-                console.error('Error in checkout:', e);
-                alert('Error during checkout');
-            }
-        }
-
-        // Firebase integration with your config
-        const firebaseConfig = {
-          apiKey: "AIzaSyAW3kvRMa5E4iRRyNJ3CHowyXNQ-bp7SCc",
-          authDomain: "farhanprintpress-1e28d.firebaseapp.com",
-          projectId: "farhanprintpress-1e28d",
-          storageBucket: "farhanprintpress-1e28d.firebasestorage.app",
-          messagingSenderId: "215876285144",
-          appId: "1:215876285144:web:9e68d823b42ec5171f1dad",
-          measurementId: "G-EVQV35M38L"
-        };
-
-        firebase.initializeApp(firebaseConfig);
-        const db = firebase.firestore();
-
-        db.collection("services").onSnapshot((snapshot) => {
-            const services = snapshot.docs.map(doc => doc.data());
-            const grid = document.querySelector('.service-grid');
-            grid.innerHTML = services.map(s => `
-                <div class="service-card" onclick="window.location.href='${s.name.toLowerCase().replace(/ /g, '_')}.html'">
-                    <i class="fas fa-print"></i>
-                    <h3>${s.name}</h3>
-                    <p>${s.price} INR</p>
-                </div>
-            `).join('');
-        });
-    </script>
+      // Redirect to invoice page
+      window.location.href = 'invoice.html';
+    } catch (e) {
+      console.error('Error in checkout:', e);
+      alert('Error during checkout');
+    }
+  }
+</script>
 </body>
 
 </html>
