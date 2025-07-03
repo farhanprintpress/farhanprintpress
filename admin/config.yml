@@ -1,7 +1,7 @@
 backend:
   name: github
   branch: main
-  repo: farhanprintpress/farhanprintpress # Format: <your-github-username>/<repo>
+  repo: farhanprintpress/farhanprintpress
 
 media_folder: "images"
 public_folder: "/images"
