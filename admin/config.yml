@@ -1,6 +1,7 @@
 backend:
-  name: git-gateway
+  name: github
   branch: main  # Your default branch
+  repo: farhanprintpress/farhanprintpress  # Format: <username>/<repo>
 
 media_folder: "images"  # Folder for uploaded images
 public_folder: "/images"
@@ -8,8 +9,8 @@ public_folder: "/images"
 collections:
   - name: "services"
     label: "Services"
-    folder: "_data/services"  # Where content is stored
-    create: true  # Allow new entries
+    folder: "_data/services"
+    create: true
     fields:
       - { name: "title", label: "Service Name", widget: "string" }
       - { name: "price", label: "Price", widget: "string" }
