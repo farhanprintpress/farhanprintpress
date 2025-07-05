@@ -632,7 +632,9 @@
             <div class="form-group">
                 <label for="handbill-category">Handbill/Pamphlet Category</label>
                 <div class="option-grid" id="handbill-category">
-                    <button class="option-btn" data-value="Handbill/Pamphlet">Handbill/Pamphlet</button>
+                    <button class="option-btn" data-value="Single Color Handbill">Single Color Handbill</button>
+                    <button class="option-btn" data-value="2 Color Handbill">2 Color Handbill</button>
+                    <button class="option-btn" data-value="Multi Color Handbill">Multi Color Handbill</button>
                 </div>
             </div>
             <div class="form-group" id="printing-group" style="display: none;">
@@ -640,14 +642,6 @@
                 <div class="option-grid" id="printing">
                     <button class="option-btn" data-value="1 side">1 side</button>
                     <button class="option-btn" data-value="2 side">2 side</button>
-                </div>
-            </div>
-            <div class="form-group" id="color-group" style="display: none;">
-                <label for="color">Color</label>
-                <div class="option-grid" id="color">
-                    <button class="option-btn" data-value="1 color">1 color</button>
-                    <button class="option-btn" data-value="2 color">2 color</button>
-                    <button class="option-btn" data-value="multicolor (4 color)">multicolor (4 color)</button>
                 </div>
             </div>
             <div class="form-group" id="size-group" style="display: none;">
@@ -745,40 +739,39 @@
         let selectedOptions = {
             'handbill-category': null,
             'printing': null,
-            'color': null,
             'size': null,
             'quantity': null
         };
 
         const priceData = {
-            'Handbill/Pamphlet': {
+            'Single Color Handbill': {
                 '1 side': {
-                    '1 color': {
-                        '10x8 inch': { 1000: 1200, 2000: 2200, 4000: 4000, 8000: 7500 },
-                        '5 x 8 inch': { 1000: 1000, 2000: 1800, 4000: 3200, 8000: 6000 }
-                    },
-                    '2 color': {
-                        '10x8 inch': { 1000: 1500, 2000: 2800, 4000: 5200, 8000: 9800 },
-                        '5 x 8 inch': { 1000: 1300, 2000: 2400, 4000: 4400, 8000: 8200 }
-                    },
-                    'multicolor (4 color)': {
-                        '10x8 inch': { 1000: 2000, 2000: 3800, 4000: 7200, 8000: 13800 },
-                        '5 x 8 inch': { 1000: 1800, 2000: 3400, 4000: 6400, 8000: 12000 }
-                    }
+                    '10x8 inch': { 1000: 1200, 2000: 2200, 4000: 4000, 8000: 7500 },
+                    '5 x 8 inch': { 1000: 1000, 2000: 1800, 4000: 3200, 8000: 6000 }
                 },
                 '2 side': {
-                    '1 color': {
-                        '10x8 inch': { 1000: 1800, 2000: 3400, 4000: 6400, 8000: 12000 },
-                        '5 x 8 inch': { 1000: 1500, 2000: 2800, 4000: 5200, 8000: 9800 }
-                    },
-                    '2 color': {
-                        '10x8 inch': { 1000: 2200, 2000: 4200, 4000: 8000, 8000: 15200 },
-                        '5 x 8 inch': { 1000: 1900, 2000: 3600, 4000: 6800, 8000: 12800 }
-                    },
-                    'multicolor (4 color)': {
-                        '10x8 inch': { 1000: 3000, 2000: 5800, 4000: 11200, 8000: 21800 },
-                        '5 x 8 inch': { 1000: 2600, 2000: 5000, 4000: 9600, 8000: 18000 }
-                    }
+                    '10x8 inch': { 1000: 1800, 2000: 3400, 4000: 6400, 8000: 12000 },
+                    '5 x 8 inch': { 1000: 1500, 2000: 2800, 4000: 5200, 8000: 9800 }
+                }
+            },
+            '2 Color Handbill': {
+                '1 side': {
+                    '10x8 inch': { 1000: 1500, 2000: 2800, 4000: 5200, 8000: 9800 },
+                    '5 x 8 inch': { 1000: 1300, 2000: 2400, 4000: 4400, 8000: 8200 }
+                },
+                '2 side': {
+                    '10x8 inch': { 1000: 2200, 2000: 4200, 4000: 8000, 8000: 15200 },
+                    '5 x 8 inch': { 1000: 1900, 2000: 3600, 4000: 6800, 8000: 12800 }
+                }
+            },
+            'Multi Color Handbill': {
+                '1 side': {
+                    '10x8 inch': { 1000: 2000, 2000: 3800, 4000: 7200, 8000: 13800 },
+                    '5 x 8 inch': { 1000: 1800, 2000: 3400, 4000: 6400, 8000: 12000 }
+                },
+                '2 side': {
+                    '10x8 inch': { 1000: 3000, 2000: 5800, 4000: 11200, 8000: 21800 },
+                    '5 x 8 inch': { 1000: 2600, 2000: 5000, 4000: 9600, 8000: 18000 }
                 }
             }
         };
@@ -853,27 +846,22 @@
         function updateOptions() {
             const category = selectedOptions['handbill-category'];
             const printingGroup = document.getElementById('printing-group');
-            const colorGroup = document.getElementById('color-group');
             const sizeGroup = document.getElementById('size-group');
             const quantityGroup = document.getElementById('quantity-group');
             const priceDisplay = document.getElementById('price-display');
 
-            if (printingGroup && colorGroup && sizeGroup && quantityGroup && priceDisplay) {
+            if (printingGroup && sizeGroup && quantityGroup && priceDisplay) {
                 printingGroup.style.display = 'none';
-                colorGroup.style.display = 'none';
                 sizeGroup.style.display = 'none';
                 quantityGroup.style.display = 'none';
                 priceDisplay.style.display = 'none';
                 selectedOptions['printing'] = null;
-                selectedOptions['color'] = null;
                 selectedOptions['size'] = null;
                 selectedOptions['quantity'] = null;
 
                 if (category) {
                     updateDynamicButtons('printing', { '1 side': '1 side', '2 side': '2 side' });
                     printingGroup.style.display = 'block';
-                    updateDynamicButtons('color', { '1 color': '1 color', '2 color': '2 color', 'multicolor (4 color)': 'multicolor (4 color)' });
-                    colorGroup.style.display = 'block';
                     updateDynamicButtons('size', { '10x8 inch': '10x8 inch', '5 x 8 inch': '5 x 8 inch' });
                     sizeGroup.style.display = 'block';
                     updateQuantityButtons([1000, 2000, 4000, 8000]);
@@ -901,8 +889,6 @@
                         btn.classList.add('active');
                         if (containerId === 'printing') {
                             selectedOptions['printing'] = option;
-                        } else if (containerId === 'color') {
-                            selectedOptions['color'] = option;
                         } else if (containerId === 'size') {
                             selectedOptions['size'] = option;
                         }
@@ -1055,13 +1041,12 @@
             try {
                 const category = selectedOptions['handbill-category'];
                 const printing = selectedOptions['printing'];
-                const color = selectedOptions['color'];
                 const size = selectedOptions['size'];
                 const quantity = selectedOptions['quantity'];
                 const priceDisplay = document.getElementById('price-display');
 
-                if (category && printing && color && size && quantity) {
-                    const price = priceData[category][printing][color][size][quantity] || 0;
+                if (category && printing && size && quantity) {
+                    const price = priceData[category][printing][size][quantity] || 0;
                     if (priceDisplay) {
                         priceDisplay.textContent = `Price: ₹${price}`;
                     }
@@ -1085,14 +1070,13 @@
 
                 const category = selectedOptions['handbill-category'];
                 const printing = selectedOptions['printing'];
-                const color = selectedOptions['color'];
                 const size = selectedOptions['size'];
                 const quantity = selectedOptions['quantity'];
-                const price = priceData[category][printing][color][size][quantity] || 0;
+                const price = priceData[category][printing][size][quantity] || 0;
 
                 const cartItem = {
                     service: 'Handbill/Pamphlet Printing',
-                    options: JSON.stringify({ 'handbill-category': category, 'printing': printing, 'color': color, 'size': size, 'quantity': quantity }),
+                    options: JSON.stringify({ 'handbill-category': category, 'printing': printing, 'size': size, 'quantity': quantity }),
                     price: price
                 };
 
