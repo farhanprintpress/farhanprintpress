@@ -858,9 +858,9 @@
             }
         };
 
-        // Adjust base prices for binding
+        // Adjust base prices for binding with per-unit cost of ₹0.20
         const bindingAdjustment = {
-            'with binding': qty => Math.ceil(qty / 500) * 20,
+            'with binding': qty => qty * 0.20,
             'loose (without binding)': qty => 0
         };
 
