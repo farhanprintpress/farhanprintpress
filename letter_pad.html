@@ -632,7 +632,9 @@
             <div class="form-group">
                 <label for="letterpad-category">Letter Pad Category</label>
                 <div class="option-grid" id="letterpad-category">
-                    <button class="option-btn" data-value="Letter Pad">Letter Pad</button>
+                    <button class="option-btn" data-value="Single Color">Single Color</button>
+                    <button class="option-btn" data-value="Two Color">Two Color</button>
+                    <button class="option-btn" data-value="Multi Color">Multi Color</button>
                 </div>
             </div>
             <div class="form-group" id="size-group" style="display: none;">
@@ -640,14 +642,6 @@
                 <div class="option-grid" id="size">
                     <button class="option-btn" data-value="A4">A4</button>
                     <button class="option-btn" data-value="A5 (A4/2)">A5 (A4/2)</button>
-                </div>
-            </div>
-            <div class="form-group" id="color-group" style="display: none;">
-                <label for="color">Color</label>
-                <div class="option-grid" id="color">
-                    <button class="option-btn" data-value="Single Color">Single Color</button>
-                    <button class="option-btn" data-value="Two Color">Two Color</button>
-                    <button class="option-btn" data-value="4 Color (Multicolor)">4 Color (Multicolor)</button>
                 </div>
             </div>
             <div class="form-group" id="paper-group" style="display: none;">
@@ -671,7 +665,7 @@
                 <div class="option-grid" id="quantity">
                     <button class="option-btn" data-value="100">100</button>
                     <button class="option-btn" data-value="200">200</button>
-                     <button class="option-btn" data-value="500">500</button>
+                    <button class="option-btn" data-value="500">500</button>
                     <button class="option-btn" data-value="1000">1000</button>
                     <button class="option-btn" data-value="2000">2000</button>
                     <button class="option-btn" data-value="4000">4000</button>
@@ -746,10 +740,6 @@
             }
         };
 
-        const modal = document.getElementById('modal');
-        const modalTitle = document.getElementById('modal-title');
-        const modalDescription = document.getElementById('modal-description');
-        const modalPriceDisplay = document.getElementById('modal-price-display');
         const cartModal = document.getElementById('cart-modal');
         const checkoutForm = document.getElementById('checkout-form');
         const addToCartBtn = document.getElementById('add-to-cart-btn');
@@ -757,103 +747,52 @@
         let selectedOptions = {
             'letterpad-category': null,
             'size': null,
-            'color': null,
             'paper': null,
             'binding': null,
             'quantity': null
         };
 
         const priceData = {
-            'Letter Pad': {
-                'Single Color': {
-                    'A4': {
-                        'Century 75 gsm': { 
-                            100: 200, 200: 350, 500: 800, 1000: 1500, 2000: 2800, 4000: 5200, 5000: 6400 
-                        },
-                        'Century 100 gsm': { 
-                            100: 220, 200: 400, 500: 900, 1000: 1700, 2000: 3200, 4000: 6000, 5000: 7500 
-                        },
-                        'Bond 80 gsm': { 
-                            100: 210, 200: 375, 500: 850, 1000: 1600, 2000: 3000, 4000: 5600, 5000: 7000 
-                        },
-                        'Bond 100 gsm': { 
-                            100: 230, 200: 425, 500: 950, 1000: 1800, 2000: 3400, 4000: 6400, 5000: 8000 
-                        }
-                    },
-                    'A5 (A4/2)': {
-                        'Century 75 gsm': { 
-                            100: 150, 200: 250, 500: 600, 1000: 1100, 2000: 2000, 4000: 3800, 5000: 4700 
-                        },
-                        'Century 100 gsm': { 
-                            100: 170, 200: 300, 500: 700, 1000: 1300, 2000: 2400, 4000: 4500, 5000: 5600 
-                        },
-                        'Bond 80 gsm': { 
-                            100: 160, 200: 275, 500: 650, 1000: 1200, 2000: 2200, 4000: 4000, 5000: 5000 
-                        },
-                        'Bond 100 gsm': { 
-                            100: 180, 200: 325, 500: 750, 1000: 1400, 2000: 2600, 4000: 4800, 5000: 6000 
-                        }
-                    }
+            'Single Color': {
+                'A4': {
+                    'Century 75 gsm': { 100: 200, 200: 350, 500: 800, 1000: 1500, 2000: 2800, 4000: 5200, 5000: 6400 },
+                    'Century 100 gsm': { 100: 220, 200: 400, 500: 900, 1000: 1700, 2000: 3200, 4000: 6000, 5000: 7500 },
+                    'Bond 80 gsm': { 100: 210, 200: 375, 500: 850, 1000: 1600, 2000: 3000, 4000: 5600, 5000: 7000 },
+                    'Bond 100 gsm': { 100: 230, 200: 425, 500: 950, 1000: 1800, 2000: 3400, 4000: 6400, 5000: 8000 }
                 },
-                'Two Color': {
-                    'A4': {
-                        'Century 75 gsm': { 
-                            100: 250, 200: 450, 500: 1000, 1000: 1900, 2000: 3600, 4000: 6800, 5000: 8400 
-                        },
-                        'Century 100 gsm': { 
-                            100: 275, 200: 500, 500: 1100, 1000: 2100, 2000: 4000, 4000: 7500, 5000: 9300 
-                        },
-                        'Bond 80 gsm': { 
-                            100: 260, 200: 475, 500: 1050, 1000: 2000, 2000: 3800, 4000: 7000, 5000: 8700 
-                        },
-                        'Bond 100 gsm': { 
-                            100: 290, 200: 525, 500: 1150, 1000: 2200, 2000: 4200, 4000: 7800, 5000: 9700 
-                        }
-                    },
-                    'A5 (A4/2)': {
-                        'Century 75 gsm': { 
-                            100: 200, 200: 350, 500: 800, 1000: 1500, 2000: 2800, 4000: 5200, 5000: 6400 
-                        },
-                        'Century 100 gsm': { 
-                            100: 220, 200: 400, 500: 900, 1000: 1700, 2000: 3200, 4000: 6000, 5000: 7500 
-                        },
-                        'Bond 80 gsm': { 
-                            100: 210, 200: 375, 500: 850, 1000: 1600, 2000: 3000, 4000: 5600, 5000: 7000 
-                        },
-                        'Bond 100 gsm': { 
-                            100: 230, 200: 425, 500: 950, 1000: 1800, 2000: 3400, 4000: 6400, 5000: 8000 
-                        }
-                    }
+                'A5 (A4/2)': {
+                    'Century 75 gsm': { 100: 150, 200: 250, 500: 600, 1000: 1100, 2000: 2000, 4000: 3800, 5000: 4700 },
+                    'Century 100 gsm': { 100: 170, 200: 300, 500: 700, 1000: 1300, 2000: 2400, 4000: 4500, 5000: 5600 },
+                    'Bond 80 gsm': { 100: 160, 200: 275, 500: 650, 1000: 1200, 2000: 2200, 4000: 4000, 5000: 5000 },
+                    'Bond 100 gsm': { 100: 180, 200: 325, 500: 750, 1000: 1400, 2000: 2600, 4000: 4800, 5000: 6000 }
+                }
+            },
+            'Two Color': {
+                'A4': {
+                    'Century 75 gsm': { 100: 250, 200: 450, 500: 1000, 1000: 1900, 2000: 3600, 4000: 6800, 5000: 8400 },
+                    'Century 100 gsm': { 100: 275, 200: 500, 500: 1100, 1000: 2100, 2000: 4000, 4000: 7500, 5000: 9300 },
+                    'Bond 80 gsm': { 100: 260, 200: 475, 500: 1050, 1000: 2000, 2000: 3800, 4000: 7000, 5000: 8700 },
+                    'Bond 100 gsm': { 100: 290, 200: 525, 500: 1150, 1000: 2200, 2000: 4200, 4000: 7800, 5000: 9700 }
                 },
-                '4 Color (Multicolor)': {
-                    'A4': {
-                        'Century 75 gsm': { 
-                            100: 300, 200: 550, 500: 1300, 1000: 2500, 2000: 4800, 4000: 9000, 5000: 11200 
-                        },
-                        'Century 100 gsm': { 
-                            100: 325, 200: 600, 500: 1400, 1000: 2700, 2000: 5200, 4000: 9800, 5000: 12200 
-                        },
-                        'Bond 80 gsm': { 
-                            100: 310, 200: 575, 500: 1350, 1000: 2600, 2000: 5000, 4000: 9400, 5000: 11700 
-                        },
-                        'Bond 100 gsm': { 
-                            100: 340, 200: 625, 500: 1450, 1000: 2800, 2000: 5400, 4000: 10000, 5000: 12500 
-                        }
-                    },
-                    'A5 (A4/2)': {
-                        'Century 75 gsm': { 
-                            100: 250, 200: 450, 500: 1000, 1000: 1900, 2000: 3600, 4000: 6800, 5000: 8400 
-                        },
-                        'Century 100 gsm': { 
-                            100: 275, 200: 500, 500: 1100, 1000: 2100, 2000: 4000, 4000: 7500, 5000: 9300 
-                        },
-                        'Bond 80 gsm': { 
-                            100: 260, 200: 475, 500: 1050, 1000: 2000, 2000: 3800, 4000: 7000, 5000: 8700 
-                        },
-                        'Bond 100 gsm': { 
-                            100: 290, 200: 525, 500: 1150, 1000: 2200, 2000: 4200, 4000: 7800, 5000: 9700 
-                        }
-                    }
+                'A5 (A4/2)': {
+                    'Century 75 gsm': { 100: 200, 200: 350, 500: 800, 1000: 1500, 2000: 2800, 4000: 5200, 5000: 6400 },
+                    'Century 100 gsm': { 100: 220, 200: 400, 500: 900, 1000: 1700, 2000: 3200, 4000: 6000, 5000: 7500 },
+                    'Bond 80 gsm': { 100: 210, 200: 375, 500: 850, 1000: 1600, 2000: 3000, 4000: 5600, 5000: 7000 },
+                    'Bond 100 gsm': { 100: 230, 200: 425, 500: 950, 1000: 1800, 2000: 3400, 4000: 6400, 5000: 8000 }
+                }
+            },
+            'Multi Color': {
+                'A4': {
+                    'Century 75 gsm': { 100: 300, 200: 550, 500: 1300, 1000: 2500, 2000: 4800, 4000: 9000, 5000: 11200 },
+                    'Century 100 gsm': { 100: 325, 200: 600, 500: 1400, 1000: 2700, 2000: 5200, 4000: 9800, 5000: 12200 },
+                    'Bond 80 gsm': { 100: 310, 200: 575, 500: 1350, 1000: 2600, 2000: 5000, 4000: 9400, 5000: 11700 },
+                    'Bond 100 gsm': { 100: 340, 200: 625, 500: 1450, 1000: 2800, 2000: 5400, 4000: 10000, 5000: 12500 }
+                },
+                'A5 (A4/2)': {
+                    'Century 75 gsm': { 100: 250, 200: 450, 500: 1000, 1000: 1900, 2000: 3600, 4000: 6800, 5000: 8400 },
+                    'Century 100 gsm': { 100: 275, 200: 500, 500: 1100, 1000: 2100, 2000: 4000, 4000: 7500, 5000: 9300 },
+                    'Bond 80 gsm': { 100: 260, 200: 475, 500: 1050, 1000: 2000, 2000: 3800, 4000: 7000, 5000: 8700 },
+                    'Bond 100 gsm': { 100: 290, 200: 525, 500: 1150, 1000: 2200, 2000: 4200, 4000: 7800, 5000: 9700 }
                 }
             }
         };
@@ -934,21 +873,18 @@
         function updateOptions() {
             const category = selectedOptions['letterpad-category'];
             const sizeGroup = document.getElementById('size-group');
-            const colorGroup = document.getElementById('color-group');
             const paperGroup = document.getElementById('paper-group');
             const bindingGroup = document.getElementById('binding-group');
             const quantityGroup = document.getElementById('quantity-group');
             const priceDisplay = document.getElementById('price-display');
 
-            if (sizeGroup && colorGroup && paperGroup && bindingGroup && quantityGroup && priceDisplay) {
+            if (sizeGroup && paperGroup && bindingGroup && quantityGroup && priceDisplay) {
                 sizeGroup.style.display = 'none';
-                colorGroup.style.display = 'none';
                 paperGroup.style.display = 'none';
                 bindingGroup.style.display = 'none';
                 quantityGroup.style.display = 'none';
                 priceDisplay.style.display = 'none';
                 selectedOptions['size'] = null;
-                selectedOptions['color'] = null;
                 selectedOptions['paper'] = null;
                 selectedOptions['binding'] = null;
                 selectedOptions['quantity'] = null;
@@ -956,8 +892,6 @@
                 if (category) {
                     updateDynamicButtons('size', { 'A4': 'A4', 'A5 (A4/2)': 'A5 (A4/2)' });
                     sizeGroup.style.display = 'block';
-                    updateDynamicButtons('color', { 'Single Color': 'Single Color', 'Two Color': 'Two Color', '4 Color (Multicolor)': '4 Color (Multicolor)' });
-                    colorGroup.style.display = 'block';
                     updateDynamicButtons('paper', { 'Century 75 gsm': 'Century 75 gsm', 'Century 100 gsm': 'Century 100 gsm', 'Bond 80 gsm': 'Bond 80 gsm', 'Bond 100 gsm': 'Bond 100 gsm' });
                     paperGroup.style.display = 'block';
                     updateDynamicButtons('binding', { 'with binding': 'with binding', 'loose (without binding)': 'loose (without binding)' });
@@ -987,8 +921,6 @@
                         btn.classList.add('active');
                         if (containerId === 'size') {
                             selectedOptions['size'] = option;
-                        } else if (containerId === 'color') {
-                            selectedOptions['color'] = option;
                         } else if (containerId === 'paper') {
                             selectedOptions['paper'] = option;
                         } else if (containerId === 'binding') {
@@ -1032,8 +964,8 @@
 
         function openModal() {
             try {
-                if (modal) {
-                    modal.style.display = 'flex';
+                if (cartModal) {
+                    cartModal.style.display = 'flex';
                     updatePrice();
                     console.log('Modal opened');
                 }
@@ -1044,8 +976,8 @@
 
         function closeModal() {
             try {
-                if (modal) {
-                    modal.style.display = 'none';
+                if (cartModal) {
+                    cartModal.style.display = 'none';
                     console.log('Modal closed');
                 }
             } catch (e) {
@@ -1055,13 +987,13 @@
 
         function openCart() {
             try {
-                if (!cartModal) {
+                if (cartModal) {
+                    updateCartDisplay();
+                    cartModal.style.display = 'flex';
+                    console.log('Cart modal opened');
+                } else {
                     console.error('Cart modal not found');
-                    return;
                 }
-                updateCartDisplay();
-                cartModal.style.display = 'flex';
-                console.log('Cart modal opened');
             } catch (e) {
                 console.error('Error in openCart:', e);
             }
@@ -1143,14 +1075,13 @@
             try {
                 const category = selectedOptions['letterpad-category'];
                 const size = selectedOptions['size'];
-                const color = selectedOptions['color'];
                 const paper = selectedOptions['paper'];
                 const binding = selectedOptions['binding'];
                 const quantity = selectedOptions['quantity'];
                 const priceDisplay = document.getElementById('price-display');
 
-                if (category && size && color && paper && binding && quantity) {
-                    let basePrice = priceData[category][color][size][paper][quantity] || 0;
+                if (category && size && paper && binding && quantity) {
+                    let basePrice = priceData[category][size][paper][quantity] || 0;
                     const bindingCost = bindingAdjustment[binding](quantity);
                     const totalPrice = basePrice + bindingCost;
                     if (priceDisplay) {
@@ -1176,17 +1107,16 @@
 
                 const category = selectedOptions['letterpad-category'];
                 const size = selectedOptions['size'];
-                const color = selectedOptions['color'];
                 const paper = selectedOptions['paper'];
                 const binding = selectedOptions['binding'];
                 const quantity = selectedOptions['quantity'];
-                let basePrice = priceData[category][color][size][paper][quantity] || 0;
+                let basePrice = priceData[category][size][paper][quantity] || 0;
                 const bindingCost = bindingAdjustment[binding](quantity);
                 const totalPrice = basePrice + bindingCost;
 
                 const cartItem = {
                     service: 'Letter Pad Printing',
-                    options: JSON.stringify({ 'letterpad-category': category, 'size': size, 'color': color, 'paper': paper, 'binding': binding, 'quantity': quantity }),
+                    options: JSON.stringify({ 'letterpad-category': category, 'size': size, 'paper': paper, 'binding': binding, 'quantity': quantity }),
                     price: totalPrice
                 };
 
