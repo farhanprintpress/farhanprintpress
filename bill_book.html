@@ -632,7 +632,9 @@
             <div class="form-group">
                 <label for="billbook-category">Bill Book Category</label>
                 <div class="option-grid" id="billbook-category">
-                    <button class="option-btn" data-value="Bill Book">Bill Book</button>
+                    <button class="option-btn" data-value="Bill Book - 1 page no carbon">Bill Book - 1 page no carbon</button>
+                    <button class="option-btn" data-value="Bill Book - 2 page - 1 page bill and 1 page carbon">Bill Book - 2 page - 1 page bill and 1 page carbon</button>
+                    <button class="option-btn" data-value="Bill Book - 3 page - 1 page bill and 2 page carbon">Bill Book - 3 page - 1 page bill and 2 page carbon</button>
                 </div>
             </div>
             <div class="form-group" id="size-group" style="display: none;">
@@ -643,14 +645,6 @@
                     <button class="option-btn" data-value="10 x 8 inch">10 x 8 inch</button>
                     <button class="option-btn" data-value="8.5 x 7 inch">8.5 x 7 inch</button>
                     <button class="option-btn" data-value="8 x 5 inch">8 x 5 inch</button>
-                </div>
-            </div>
-            <div class="form-group" id="page-group" style="display: none;">
-                <label for="page">Page Option</label>
-                <div class="option-grid" id="page">
-                    <button class="option-btn" data-value="1 page no carbon">1 page no carbon</button>
-                    <button class="option-btn" data-value="2 page - 1 page bill and 1 page carbon">2 page - 1 page bill and 1 page carbon</button>
-                    <button class="option-btn" data-value="3 page - 1 page bill and 2 page carbon">3 page - 1 page bill and 2 page carbon</button>
                 </div>
             </div>
             <div class="form-group" id="quantity-group" style="display: none;">
@@ -742,33 +736,30 @@
         let selectedOptions = {
             'billbook-category': null,
             'size': null,
-            'page': null,
             'quantity': null
         };
 
         const priceData = {
-            'Bill Book': {
-                '1 page no carbon': {
-                    '9.5x6.5 inch approx': { 100: 300, 200: 550, 500: 1200, 1000: 2200, 2000: 4000 },
-                    '6.5x4 inch': { 100: 250, 200: 450, 500: 1000, 1000: 1800, 2000: 3400 },
-                    '10 x 8 inch': { 100: 350, 200: 600, 500: 1300, 1000: 2400, 2000: 4500 },
-                    '8.5 x 7 inch': { 100: 320, 200: 550, 500: 1200, 1000: 2200, 2000: 4000 },
-                    '8 x 5 inch': { 100: 280, 200: 500, 500: 1100, 1000: 2000, 2000: 3800 }
-                },
-                '2 page - 1 page bill and 1 page carbon': {
-                    '9.5x6.5 inch approx': { 100: 450, 200: 800, 500: 1800, 1000: 3400, 2000: 6500 },
-                    '6.5x4 inch': { 100: 400, 200: 700, 500: 1500, 1000: 2800, 2000: 5400 },
-                    '10 x 8 inch': { 100: 500, 200: 900, 500: 2000, 1000: 3800, 2000: 7200 },
-                    '8.5 x 7 inch': { 100: 470, 200: 850, 500: 1900, 1000: 3500, 2000: 6700 },
-                    '8 x 5 inch': { 100: 430, 200: 750, 500: 1700, 1000: 3200, 2000: 6000 }
-                },
-                '3 page - 1 page bill and 2 page carbon': {
-                    '9.5x6.5 inch approx': { 100: 600, 200: 1100, 500: 2500, 1000: 4800, 2000: 9000 },
-                    '6.5x4 inch': { 100: 550, 200: 1000, 500: 2200, 1000: 4200, 2000: 8000 },
-                    '10 x 8 inch': { 100: 650, 200: 1200, 500: 2700, 1000: 5000, 2000: 9500 },
-                    '8.5 x 7 inch': { 100: 620, 200: 1150, 500: 2600, 1000: 4900, 2000: 9200 },
-                    '8 x 5 inch': { 100: 580, 200: 1050, 500: 2400, 1000: 4600, 2000: 8700 }
-                }
+            'Bill Book - 1 page no carbon': {
+                '9.5x6.5 inch approx': { 100: 300, 200: 550, 500: 1200, 1000: 2200, 2000: 4000 },
+                '6.5x4 inch': { 100: 250, 200: 450, 500: 1000, 1000: 1800, 2000: 3400 },
+                '10 x 8 inch': { 100: 350, 200: 600, 500: 1300, 1000: 2400, 2000: 4500 },
+                '8.5 x 7 inch': { 100: 320, 200: 550, 500: 1200, 1000: 2200, 2000: 4000 },
+                '8 x 5 inch': { 100: 280, 200: 500, 500: 1100, 1000: 2000, 2000: 3800 }
+            },
+            'Bill Book - 2 page - 1 page bill and 1 page carbon': {
+                '9.5x6.5 inch approx': { 100: 450, 200: 800, 500: 1800, 1000: 3400, 2000: 6500 },
+                '6.5x4 inch': { 100: 400, 200: 700, 500: 1500, 1000: 2800, 2000: 5400 },
+                '10 x 8 inch': { 100: 500, 200: 900, 500: 2000, 1000: 3800, 2000: 7200 },
+                '8.5 x 7 inch': { 100: 470, 200: 850, 500: 1900, 1000: 3500, 2000: 6700 },
+                '8 x 5 inch': { 100: 430, 200: 750, 500: 1700, 1000: 3200, 2000: 6000 }
+            },
+            'Bill Book - 3 page - 1 page bill and 2 page carbon': {
+                '9.5x6.5 inch approx': { 100: 600, 200: 1100, 500: 2500, 1000: 4800, 2000: 9000 },
+                '6.5x4 inch': { 100: 550, 200: 1000, 500: 2200, 1000: 4200, 2000: 8000 },
+                '10 x 8 inch': { 100: 650, 200: 1200, 500: 2700, 1000: 5000, 2000: 9500 },
+                '8.5 x 7 inch': { 100: 620, 200: 1150, 500: 2600, 1000: 4900, 2000: 9200 },
+                '8 x 5 inch': { 100: 580, 200: 1050, 500: 2400, 1000: 4600, 2000: 8700 }
             }
         };
 
@@ -842,24 +833,19 @@
         function updateOptions() {
             const category = selectedOptions['billbook-category'];
             const sizeGroup = document.getElementById('size-group');
-            const pageGroup = document.getElementById('page-group');
             const quantityGroup = document.getElementById('quantity-group');
             const priceDisplay = document.getElementById('price-display');
 
-            if (sizeGroup && pageGroup && quantityGroup && priceDisplay) {
+            if (sizeGroup && quantityGroup && priceDisplay) {
                 sizeGroup.style.display = 'none';
-                pageGroup.style.display = 'none';
                 quantityGroup.style.display = 'none';
                 priceDisplay.style.display = 'none';
                 selectedOptions['size'] = null;
-                selectedOptions['page'] = null;
                 selectedOptions['quantity'] = null;
 
                 if (category) {
                     updateDynamicButtons('size', { '9.5x6.5 inch approx': '9.5x6.5 inch approx', '6.5x4 inch': '6.5x4 inch', '10 x 8 inch': '10 x 8 inch', '8.5 x 7 inch': '8.5 x 7 inch', '8 x 5 inch': '8 x 5 inch' });
                     sizeGroup.style.display = 'block';
-                    updateDynamicButtons('page', { '1 page no carbon': '1 page no carbon', '2 page - 1 page bill and 1 page carbon': '2 page - 1 page bill and 1 page carbon', '3 page - 1 page bill and 2 page carbon': '3 page - 1 page bill and 2 page carbon' });
-                    pageGroup.style.display = 'block';
                     updateQuantityButtons([100, 200, 500, 1000, 2000]);
                     quantityGroup.style.display = 'block';
                     priceDisplay.style.display = 'block';
@@ -885,8 +871,6 @@
                         btn.classList.add('active');
                         if (containerId === 'size') {
                             selectedOptions['size'] = option;
-                        } else if (containerId === 'page') {
-                            selectedOptions['page'] = option;
                         }
                         updatePrice();
                         console.log(`${containerId} selected:`, option);
@@ -1037,12 +1021,11 @@
             try {
                 const category = selectedOptions['billbook-category'];
                 const size = selectedOptions['size'];
-                const page = selectedOptions['page'];
                 const quantity = selectedOptions['quantity'];
                 const priceDisplay = document.getElementById('price-display');
 
-                if (category && size && page && quantity) {
-                    const price = priceData[category][page][size][quantity] || 0;
+                if (category && size && quantity) {
+                    const price = priceData[category][size][quantity] || 0;
                     if (priceDisplay) {
                         priceDisplay.textContent = `Price: ₹${price}`;
                     }
@@ -1066,13 +1049,12 @@
 
                 const category = selectedOptions['billbook-category'];
                 const size = selectedOptions['size'];
-                const page = selectedOptions['page'];
                 const quantity = selectedOptions['quantity'];
-                const price = priceData[category][page][size][quantity] || 0;
+                const price = priceData[category][size][quantity] || 0;
 
                 const cartItem = {
                     service: 'Bill Book Printing',
-                    options: JSON.stringify({ 'billbook-category': category, 'size': size, 'page': page, 'quantity': quantity }),
+                    options: JSON.stringify({ 'billbook-category': category, 'size': size, 'quantity': quantity }),
                     price: price
                 };
 
