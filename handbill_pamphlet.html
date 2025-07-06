@@ -258,6 +258,18 @@
             background-color: #ecf0f1;
         }
 
+        .option-btn.out-of-stock {
+            background-color: #e74c3c;
+            color: white;
+            border-color: #e74c3c;
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+
+        .option-btn.out-of-stock:hover {
+            background-color: #c0392b;
+        }
+
         .service-options .whatsapp-btn {
             display: block;
             margin-top: 1rem;
@@ -633,7 +645,7 @@
                 <label for="handbill-category">Handbill/Pamphlet Category</label>
                 <div class="option-grid" id="handbill-category">
                     <button class="option-btn" data-value="Single Color Handbill">Single Color Handbill</button>
-                    <button class="option-btn" data-value="2 Color Handbill">2 Color Handbill</button>
+                    <button class="option-btn out-of-stock" data-value="2 Color Handbill" disabled>2 Color Handbill (Out of Stock)</button>
                     <button class="option-btn" data-value="Multi Color Handbill">Multi Color Handbill</button>
                 </div>
             </div>
@@ -642,6 +654,13 @@
                 <div class="option-grid" id="printing">
                     <button class="option-btn" data-value="1 side">1 side</button>
                     <button class="option-btn" data-value="2 side">2 side</button>
+                </div>
+            </div>
+            <div class="form-group" id="paper-quality-group" style="display: none;">
+                <label for="paper-quality">Paper Quality</label>
+                <div class="option-grid" id="paper-quality">
+                    <button class="option-btn" data-value="Art Paper">Art Paper</button>
+                    <button class="option-btn" data-value="Maplitho Paper">Maplitho Paper</button>
                 </div>
             </div>
             <div class="form-group" id="size-group" style="display: none;">
@@ -728,10 +747,6 @@
             }
         };
 
-        const modal = document.getElementById('modal');
-        const modalTitle = document.getElementById('modal-title');
-        const modalDescription = document.getElementById('modal-description');
-        const modalPriceDisplay = document.getElementById('modal-price-display');
         const cartModal = document.getElementById('cart-modal');
         const checkoutForm = document.getElementById('checkout-form');
         const addToCartBtn = document.getElementById('add-to-cart-btn');
@@ -739,6 +754,7 @@
         let selectedOptions = {
             'handbill-category': null,
             'printing': null,
+            'paper-quality': null,
             'size': null,
             'quantity': null
         };
@@ -766,12 +782,24 @@
             },
             'Multi Color Handbill': {
                 '1 side': {
-                    '10x8 inch': { 1000: 2000, 2000: 3800, 4000: 7200, 8000: 13800 },
-                    '5 x 8 inch': { 1000: 1800, 2000: 3400, 4000: 6400, 8000: 12000 }
+                    'Art Paper': {
+                        '10x8 inch': { 1000: 2600, 2000: 4800, 4000: 9200, 8000: 17500 },
+                        '5 x 8 inch': { 1000: 2300, 2000: 4300, 4000: 8200, 8000: 15300 }
+                    },
+                    'Maplitho Paper': {
+                        '10x8 inch': { 1000: 2100, 2000: 3900, 4000: 7400, 8000: 14100 },
+                        '5 x 8 inch': { 1000: 1900, 2000: 3500, 4000: 6600, 8000: 12300 }
+                    }
                 },
                 '2 side': {
-                    '10x8 inch': { 1000: 3000, 2000: 5800, 4000: 11200, 8000: 21800 },
-                    '5 x 8 inch': { 1000: 2600, 2000: 5000, 4000: 9600, 8000: 18000 }
+                    'Art Paper': {
+                        '10x8 inch': { 1000: 3600, 2000: 6800, 4000: 13200, 8000: 25500 },
+                        '5 x 8 inch': { 1000: 3200, 2000: 6100, 4000: 11800, 8000: 22300 }
+                    },
+                    'Maplitho Paper': {
+                        '10x8 inch': { 1000: 3100, 2000: 5900, 4000: 11400, 8000: 22100 },
+                        '5 x 8 inch': { 1000: 2700, 2000: 5100, 4000: 9800, 8000: 18300 }
+                    }
                 }
             }
         };
@@ -831,6 +859,10 @@
             if (handbillCategory) {
                 handbillCategory.querySelectorAll('.option-btn').forEach(btn => {
                     btn.addEventListener('click', () => {
+                        if (btn.classList.contains('out-of-stock')) {
+                            alert('This category is currently out of stock.');
+                            return;
+                        }
                         handbillCategory.querySelectorAll('.option-btn').forEach(b => b.classList.remove('active'));
                         btn.classList.add('active');
                         selectedOptions['handbill-category'] = btn.getAttribute('data-value');
@@ -846,22 +878,29 @@
         function updateOptions() {
             const category = selectedOptions['handbill-category'];
             const printingGroup = document.getElementById('printing-group');
+            const paperQualityGroup = document.getElementById('paper-quality-group');
             const sizeGroup = document.getElementById('size-group');
             const quantityGroup = document.getElementById('quantity-group');
             const priceDisplay = document.getElementById('price-display');
 
-            if (printingGroup && sizeGroup && quantityGroup && priceDisplay) {
+            if (printingGroup && paperQualityGroup && sizeGroup && quantityGroup && priceDisplay) {
                 printingGroup.style.display = 'none';
+                paperQualityGroup.style.display = 'none';
                 sizeGroup.style.display = 'none';
                 quantityGroup.style.display = 'none';
                 priceDisplay.style.display = 'none';
                 selectedOptions['printing'] = null;
+                selectedOptions['paper-quality'] = null;
                 selectedOptions['size'] = null;
                 selectedOptions['quantity'] = null;
 
                 if (category) {
                     updateDynamicButtons('printing', { '1 side': '1 side', '2 side': '2 side' });
                     printingGroup.style.display = 'block';
+                    if (category === 'Multi Color Handbill') {
+                        updateDynamicButtons('paper-quality', { 'Art Paper': 'Art Paper', 'Maplitho Paper': 'Maplitho Paper' });
+                        paperQualityGroup.style.display = 'block';
+                    }
                     updateDynamicButtons('size', { '10x8 inch': '10x8 inch', '5 x 8 inch': '5 x 8 inch' });
                     sizeGroup.style.display = 'block';
                     updateQuantityButtons([1000, 2000, 4000, 8000]);
@@ -889,6 +928,8 @@
                         btn.classList.add('active');
                         if (containerId === 'printing') {
                             selectedOptions['printing'] = option;
+                        } else if (containerId === 'paper-quality') {
+                            selectedOptions['paper-quality'] = option;
                         } else if (containerId === 'size') {
                             selectedOptions['size'] = option;
                         }
@@ -930,8 +971,8 @@
 
         function openModal() {
             try {
-                if (modal) {
-                    modal.style.display = 'flex';
+                if (cartModal) {
+                    cartModal.style.display = 'flex';
                     updatePrice();
                     console.log('Modal opened');
                 }
@@ -942,8 +983,8 @@
 
         function closeModal() {
             try {
-                if (modal) {
-                    modal.style.display = 'none';
+                if (cartModal) {
+                    cartModal.style.display = 'none';
                     console.log('Modal closed');
                 }
             } catch (e) {
@@ -953,13 +994,13 @@
 
         function openCart() {
             try {
-                if (!cartModal) {
+                if (cartModal) {
+                    updateCartDisplay();
+                    cartModal.style.display = 'flex';
+                    console.log('Cart modal opened');
+                } else {
                     console.error('Cart modal not found');
-                    return;
                 }
-                updateCartDisplay();
-                cartModal.style.display = 'flex';
-                console.log('Cart modal opened');
             } catch (e) {
                 console.error('Error in openCart:', e);
             }
@@ -1041,19 +1082,32 @@
             try {
                 const category = selectedOptions['handbill-category'];
                 const printing = selectedOptions['printing'];
+                const paperQuality = selectedOptions['paper-quality'];
                 const size = selectedOptions['size'];
                 const quantity = selectedOptions['quantity'];
                 const priceDisplay = document.getElementById('price-display');
 
+                if (!priceDisplay) {
+                    console.error('Price display element not found');
+                    return;
+                }
+
                 if (category && printing && size && quantity) {
-                    const price = priceData[category][printing][size][quantity] || 0;
-                    if (priceDisplay) {
-                        priceDisplay.textContent = `Price: ₹${price}`;
+                    let price = 0;
+                    if (category === 'Multi Color Handbill') {
+                        if (!paperQuality) {
+                            priceDisplay.textContent = 'Price: Select Paper Quality';
+                            return;
+                        }
+                        price = priceData[category][printing][paperQuality][size][quantity] || 0;
+                    } else {
+                        price = priceData[category][printing][size][quantity] || 0;
                     }
-                } else if (priceDisplay) {
+                    priceDisplay.textContent = `Price: ₹${price}`;
+                } else {
                     priceDisplay.textContent = 'Price: Select all options';
                 }
-                console.log('Price updated:', priceDisplay ? priceDisplay.textContent : 'Price display not found');
+                console.log('Price updated:', priceDisplay.textContent);
             } catch (e) {
                 console.error('Error in updatePrice:', e);
                 const priceDisplay = document.getElementById('price-display');
@@ -1070,13 +1124,19 @@
 
                 const category = selectedOptions['handbill-category'];
                 const printing = selectedOptions['printing'];
+                const paperQuality = selectedOptions['paper-quality'];
                 const size = selectedOptions['size'];
                 const quantity = selectedOptions['quantity'];
-                const price = priceData[category][printing][size][quantity] || 0;
+                let price = 0;
+                if (category === 'Multi Color Handbill' && paperQuality) {
+                    price = priceData[category][printing][paperQuality][size][quantity] || 0;
+                } else {
+                    price = priceData[category][printing][size][quantity] || 0;
+                }
 
                 const cartItem = {
                     service: 'Handbill/Pamphlet Printing',
-                    options: JSON.stringify({ 'handbill-category': category, 'printing': printing, 'size': size, 'quantity': quantity }),
+                    options: JSON.stringify({ 'handbill-category': category, 'printing': printing, 'paper-quality': paperQuality, 'size': size, 'quantity': quantity }),
                     price: price
                 };
 
