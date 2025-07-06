@@ -256,9 +256,14 @@
             background-color: #ecf0f1;
         }
 
-        .service-options .whatsapp-btn {
-            display: block;
+        .button-container {
+            display: flex;
+            gap: 1rem;
             margin-top: 1rem;
+        }
+
+        .service-options .whatsapp-btn {
+            display: inline-block;
             padding: 0.75rem 1.5rem;
             background-color: #25D366;
             color: white;
@@ -456,8 +461,8 @@
         }
 
         .whatsapp-btn {
-            display: block;
-            margin: 1rem 0 0;
+            display: inline-block;
+            margin: 0;
             padding: 0.75rem 1.5rem;
             background-color: #25D366;
             color: white;
@@ -558,33 +563,6 @@
             font-size: 1rem;
         }
 
-        .quantity-controls {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            margin-top: 1rem;
-        }
-
-        .quantity-controls button {
-            background: #3498db;
-            color: white;
-            border: none;
-            padding: 0.3rem 0.6rem;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 0.8rem;
-            transition: background 0.3s;
-        }
-
-        .quantity-controls button:hover {
-            background: #2980b9;
-        }
-
-        .quantity-controls span {
-            font-weight: 600;
-            color: #2c3e50;
-        }
-
         @media (max-width: 768px) {
             .service-content {
                 flex-direction: column;
@@ -621,6 +599,11 @@
 
             .logo i {
                 font-size: 1.3rem;
+            }
+
+            .button-container {
+                flex-direction: column;
+                gap: 0.5rem;
             }
         }
     </style>
@@ -679,8 +662,10 @@
                     <button class="option-btn" data-value="500">500</button>
                 </div>
             </div>
-            <button id="add-to-cart-btn" class="whatsapp-btn" onclick="addToCart()">Add to Cart</button>
-            <a href="#" class="whatsapp-btn" onclick="openCart(); return false;" style="margin-top: 1rem;">Go to Cart</a>
+            <div class="button-container">
+                <button id="add-to-cart-btn" class="whatsapp-btn" onclick="addToCart()">Add to Cart</button>
+                <a href="#" class="whatsapp-btn" onclick="openCart(); return false;">Go to Cart</a>
+            </div>
         </div>
         <div class="service-images">
             <div class="service-image">
@@ -758,7 +743,6 @@
             'price-range': null,
             'quantity': null
         };
-        let currentCartIndex = -1;
 
         try {
             const storedCart = localStorage.getItem('cart');
@@ -971,79 +955,17 @@
                 const cartItem = {
                     service: 'Wedding Card Printing',
                     options: JSON.stringify({ 'price-range': priceRange, 'quantity': quantity }),
-                    price: price,
-                    initialQuantity: parseInt(quantity)
+                    price: price
                 };
 
                 cart.push(cartItem);
                 localStorage.setItem('cart', JSON.stringify(cart));
-                currentCartIndex = cart.length - 1;
                 updateCartDisplay();
-                updateAddToCartButton();
                 alert('Item added to cart!');
                 console.log('Item added to cart:', cartItem);
             } catch (e) {
                 console.error('Error in addToCart:', e);
                 alert('Error adding item to cart');
-            }
-        }
-
-        function updateAddToCartButton() {
-            try {
-                if (currentCartIndex >= 0 && currentCartIndex < cart.length) {
-                    addToCartBtn.innerHTML = '';
-                    const quantityControls = document.createElement('div');
-                    quantityControls.className = 'quantity-controls';
-                    quantityControls.innerHTML = `
-                        <button onclick="decreaseQuantity()">-</button>
-                        <span id="current-quantity">${cart[currentCartIndex].initialQuantity}</span>
-                        <button onclick="increaseQuantity()">+</button>
-                    `;
-                    addToCartBtn.appendChild(quantityControls);
-                } else {
-                    addToCartBtn.textContent = 'Add to Cart';
-                    addToCartBtn.onclick = addToCart;
-                }
-            } catch (e) {
-                console.error('Error in updateAddToCartButton:', e);
-            }
-        }
-
-        function increaseQuantity() {
-            try {
-                if (currentCartIndex >= 0 && currentCartIndex < cart.length) {
-                    cart[currentCartIndex].initialQuantity += 50;
-                    const basePrice = parseInt(cart[currentCartIndex].options['price-range'].split('-')[0]) || 0;
-                    cart[currentCartIndex].price = (basePrice * cart[currentCartIndex].initialQuantity) / 100;
-                    localStorage.setItem('cart', JSON.stringify(cart));
-                    document.getElementById('current-quantity').textContent = cart[currentCartIndex].initialQuantity;
-                    updateCartDisplay();
-                    console.log('Quantity increased:', cart[currentCartIndex]);
-                }
-            } catch (e) {
-                console.error('Error in increaseQuantity:', e);
-            }
-        }
-
-        function decreaseQuantity() {
-            try {
-                if (currentCartIndex >= 0 && currentCartIndex < cart.length && cart[currentCartIndex].initialQuantity > 50) {
-                    cart[currentCartIndex].initialQuantity -= 50;
-                    const basePrice = parseInt(cart[currentCartIndex].options['price-range'].split('-')[0]) || 0;
-                    cart[currentCartIndex].price = (basePrice * cart[currentCartIndex].initialQuantity) / 100;
-                    localStorage.setItem('cart', JSON.stringify(cart));
-                    document.getElementById('current-quantity').textContent = cart[currentCartIndex].initialQuantity;
-                    updateCartDisplay();
-                    console.log('Quantity decreased:', cart[currentCartIndex]);
-                } else if (cart[currentCartIndex].initialQuantity <= 50) {
-                    removeFromCart(currentCartIndex);
-                    addToCartBtn.textContent = 'Add to Cart';
-                    addToCartBtn.onclick = addToCart;
-                    currentCartIndex = -1;
-                    console.log('Quantity reduced to zero, item removed');
-                }
-            } catch (e) {
-                console.error('Error in decreaseQuantity:', e);
             }
         }
 
@@ -1054,10 +976,6 @@
                     cart.splice(index, 1);
                     localStorage.setItem('cart', JSON.stringify(cart));
                     updateCartDisplay();
-                    if (index === currentCartIndex) {
-                        currentCartIndex = -1;
-                        updateAddToCartButton();
-                    }
                 } else {
                     console.error('Invalid cart index:', index);
                 }
