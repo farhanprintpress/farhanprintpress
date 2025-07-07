@@ -692,8 +692,16 @@
         </div>
         <div class="service-images">
             <div class="service-image">
-                <img id="dynamic-billbook-image" src="https://arrowprintclub.in/uploads/media/2023/Bill_Book_new.png" alt="Example Bill Book">
-                <p id="image-caption">Example of a professional bill book.</p>
+                <img id="single-color-image" src="Single_color_billbook.png" alt="Single Color Bill Book" style="display: block;">
+                <p id="single-color-caption">Example of a single-color bill book.</p>
+            </div>
+            <div class="service-image">
+                <img id="two-color-image" src="Two_color_billbook.png" alt="Two Color Bill Book" style="display: block;">
+                <p id="two-color-caption">Example of a two-color bill book.</p>
+            </div>
+            <div class="service-image">
+                <img id="multi-color-image" src="Multi_color_billbook.png" alt="Multicolor Bill Book" style="display: block;">
+                <p id="multi-color-caption">Example of a multicolor bill book.</p>
             </div>
         </div>
     </section>
@@ -1212,24 +1220,40 @@
 
         function updateImage() {
             const category = selectedOptions['billbook-category'];
-            const imageElement = document.getElementById('dynamic-billbook-image');
-            const captionElement = document.getElementById('image-caption');
-            if (imageElement && captionElement) {
+            const singleColorImage = document.getElementById('single-color-image');
+            const twoColorImage = document.getElementById('two-color-image');
+            const multiColorImage = document.getElementById('multi-color-image');
+            const singleColorCaption = document.getElementById('single-color-caption');
+            const twoColorCaption = document.getElementById('two-color-caption');
+            const multiColorCaption = document.getElementById('multi-color-caption');
+
+            if (singleColorImage && twoColorImage && multiColorImage && singleColorCaption && twoColorCaption && multiColorCaption) {
+                singleColorImage.style.display = 'none';
+                twoColorImage.style.display = 'none';
+                multiColorImage.style.display = 'none';
+                singleColorCaption.style.display = 'none';
+                twoColorCaption.style.display = 'none';
+                multiColorCaption.style.display = 'none';
+
                 if (category === 'Single Color') {
-                    imageElement.src = 'Single_color_billbook.png';
-                    captionElement.textContent = 'Example of a single-color bill book.';
+                    singleColorImage.style.display = 'block';
+                    singleColorCaption.style.display = 'block';
                 } else if (category === 'Two Color') {
-                    imageElement.src = 'Two_color_billbook.png';
-                    captionElement.textContent = 'Example of a two-color bill book.';
+                    twoColorImage.style.display = 'block';
+                    twoColorCaption.style.display = 'block';
                 } else if (category === 'Multicolor') {
-                    imageElement.src = 'Multi_color_billbook.png';
-                    captionElement.textContent = 'Example of a multicolor bill book.';
+                    multiColorImage.style.display = 'block';
+                    multiColorCaption.style.display = 'block';
                 } else {
-                    imageElement.src = 'https://arrowprintclub.in/uploads/media/2023/Bill_Book_new.png';
-                    captionElement.textContent = 'Example of a professional bill book.';
+                    singleColorImage.style.display = 'block';
+                    twoColorImage.style.display = 'block';
+                    multiColorImage.style.display = 'block';
+                    singleColorCaption.style.display = 'block';
+                    twoColorCaption.style.display = 'block';
+                    multiColorCaption.style.display = 'block';
                 }
             } else {
-                console.error('Image or caption element not found');
+                console.error('Image or caption elements not found');
             }
         }
     </script>
