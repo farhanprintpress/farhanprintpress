@@ -692,8 +692,8 @@
         </div>
         <div class="service-images">
             <div class="service-image">
-                <img src="https://arrowprintclub.in/uploads/media/2023/Bill_Book_new.png" alt="Example Bill Book">
-                <p>Example of a professional bill book.</p>
+                <img id="dynamic-billbook-image" src="https://arrowprintclub.in/uploads/media/2023/Bill_Book_new.png" alt="Example Bill Book">
+                <p id="image-caption">Example of a professional bill book.</p>
             </div>
         </div>
     </section>
@@ -935,6 +935,7 @@
                     quantityGroup.style.display = 'block';
                     priceDisplay.style.display = 'block';
                     updatePrice();
+                    updateImage();
                 }
             } else {
                 console.error('Option groups or price display not found');
@@ -1206,6 +1207,29 @@
             } catch (e) {
                 console.error('Error in checkout:', e);
                 alert('Error during checkout');
+            }
+        }
+
+        function updateImage() {
+            const category = selectedOptions['billbook-category'];
+            const imageElement = document.getElementById('dynamic-billbook-image');
+            const captionElement = document.getElementById('image-caption');
+            if (imageElement && captionElement) {
+                if (category === 'Single Color') {
+                    imageElement.src = 'Single_color_billbook.png';
+                    captionElement.textContent = 'Example of a single-color bill book.';
+                } else if (category === 'Two Color') {
+                    imageElement.src = 'Two_color_billbook.png';
+                    captionElement.textContent = 'Example of a two-color bill book.';
+                } else if (category === 'Multicolor') {
+                    imageElement.src = 'Multi_color_billbook.png';
+                    captionElement.textContent = 'Example of a multicolor bill book.';
+                } else {
+                    imageElement.src = 'https://arrowprintclub.in/uploads/media/2023/Bill_Book_new.png';
+                    captionElement.textContent = 'Example of a professional bill book.';
+                }
+            } else {
+                console.error('Image or caption element not found');
             }
         }
     </script>
